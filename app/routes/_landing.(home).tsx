@@ -2,7 +2,6 @@ import type { MetaFunction } from "@remix-run/node";
 import {
   Button,
   Container,
-  createColoring,
   Group,
   Icon,
   Input,
@@ -14,7 +13,7 @@ import {
 import Faq from "src/components/composite/Faq";
 
 import { link } from "src/constants/link";
-import { zkSyncThemes } from "src/zksync/components/layout/themes";
+import config from "../../merkl.config";
 
 export const meta: MetaFunction = () => {
   return [
@@ -58,7 +57,7 @@ export function Hero() {
                 look="bold"
                 mode="dark"
                 className="!rounded-full"
-                coloring={zkSyncThemes.igniteWarm.base}
+                coloring={config.themes.igniteWarm.base}
               >
                 <Icon remix="RiArrowRightLine" className="text-main-11" />
                 Subscribe
@@ -99,7 +98,7 @@ export function Hero() {
 export function CountdownSection() {
   return (
     <section className="counter py-xl*2 bg-accent-10 w-full">
-      <OverrideTheme coloring={zkSyncThemes.igniteWarm.base} mode="light">
+      <OverrideTheme coloring={config.themes.igniteWarm.base} mode="light">
         <Container>
           <Group className="gap-xl*2 lg:!gap-0 my-[4rem] items-center flex-wrap-reverse">
             <Group className="lg:w-1/3">
@@ -112,7 +111,7 @@ export function CountdownSection() {
                 look="bold"
                 mode="dark"
                 className="!rounded-full"
-                coloring={zkSyncThemes.igniteWarm.base}
+                coloring={config.themes.igniteWarm.base}
               >
                 Join the program now!
               </Button>
