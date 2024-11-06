@@ -6,7 +6,7 @@ import { zksync } from "viem/zksync";
 import { coinbaseWallet, walletConnect } from "wagmi/connectors";
 
 export default createConfig({
-  appName: "Merkl",
+  appName: "ZKsync Ignite",
   wagmi: {
     chains: [zksync, optimism],
     connectors: [
@@ -15,8 +15,8 @@ export default createConfig({
         customStoragePrefix: "wagmi",
         projectId: "26c912aadd2132cd869a5edc00aeea0f",
         metadata: {
-          name: "Merkl Lite",
-          description: "Merkl Lite",
+          name: "ZKSync Ignite",
+          description: "Incentive Program for the ZKsync chain",
           url: "https://app.merkl.xyz.com",
           icons: [],
         },
