@@ -1,5 +1,5 @@
 FROM oven/bun:1.1.24-debian
-ARG GITHUB_REGISTRY_TOKEN
+ARG SDK_READ_ACCESS_TOKEN
 
 RUN apt-get -y update
 RUN apt-get -y install python3 make g++ ca-certificates curl
@@ -8,6 +8,7 @@ WORKDIR /app
 
 COPY bunfig.toml .
 COPY package.json .
+COPY packages packages
 COPY bun.lockb .
 RUN bun install
 
@@ -18,6 +19,12 @@ COPY postcss.config.js ./
 
 COPY tsconfig.json ./
 
-COPY ./ ./
+COPY app app
+COPY src src
+COPY public public
 
-CMD ["bun", "dev"]
+RUN bun run build
+
+EXPOSE 5173
+
+CMD ["bun", "serve"]

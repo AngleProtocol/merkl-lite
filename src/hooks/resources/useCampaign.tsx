@@ -6,13 +6,13 @@ import Time from "packages/dappkit/src/components/primitives/Time";
 import { type ReactNode, useMemo } from "react";
 import { formatUnits } from "viem";
 
-export default function useCampaign(campaign: Opportunity["campaigns"][number]) {
+export default function useCampaign(campaign: Campaign) {
   const amount = useMemo(() => {
     return Number.parseFloat(formatUnits(BigInt(campaign.amount), campaign.rewardToken.decimals));
   }, [campaign?.amount, campaign?.rewardToken?.decimals]);
 
   const time = useMemo(() => {
-    return <Time timestamp={Number(campaign.endTimestamp) * 1000}/>;
+    return <Time timestamp={Number(campaign.endTimestamp) * 1000} />;
   }, [campaign.endTimestamp]);
 
   const profile = useMemo(() => {

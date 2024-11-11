@@ -8,8 +8,8 @@ export const [ClaimRewardsTokenTable, ClaimRewardsTokenRow, claimRewardsTokenCol
     className: "justify-start",
     main: true,
   },
-  amount: {
-    name: "AMOUNT",
+  value: {
+    name: "VALUE",
     size: "minmax(min-content,150px)",
     compactSize: "minmax(min-content,200px)",
     className: "justify-center",
@@ -31,7 +31,7 @@ export type Rewards = {
         symbol: string;
         amount: number;
         price: number;
-      }
-    }
-  }
-}
+      };
+    };
+  };
+};

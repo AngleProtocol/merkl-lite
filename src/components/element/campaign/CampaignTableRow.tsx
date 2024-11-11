@@ -27,7 +27,11 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
           <Token token={campaign.rewardToken} amount={dailyRewards} />
         </Group>
       }
-      timeRemainingColumn={<Group className="py-xl"><Text>{time}</Text></Group>}
+      timeRemainingColumn={
+        <Group className="py-xl">
+          <Text>{time}</Text>
+        </Group>
+      }
       restrictionsColumn={[]}
       profileColumn={profile}
       arrowColumn={<Icon remix={!open ? "RiArrowDownSLine" : "RiArrowUpSLine"} />}>
@@ -41,7 +45,7 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
             <Group>
               <Text size="sm">id:</Text>
               <Hash size="sm" format="short" copy>
-                {campaign.campaignId}
+                {campaign.id}
               </Hash>
             </Group>
           </Group>
