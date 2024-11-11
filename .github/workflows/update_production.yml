@@ -13,7 +13,7 @@ jobs:
   tag-image:
     runs-on: ubuntu-latest
     env:
-      IMAGE_URL: europe-west1-docker.pkg.dev/angle-artifacts/angle-docker-registry/merkl-app
+      IMAGE_URL: europe-west1-docker.pkg.dev/angle-artifacts/angle-docker-registry/merkl-zksync
     steps:
       - uses: 'google-github-actions/auth@v0'
         with:
@@ -45,12 +45,12 @@ jobs:
           cd deployments
 
           export VERSION=${GITHUB_REF#refs/tags/}
-          yq -i '.merkl-app.version = strenv(VERSION)' ./config.production.yaml
+          yq -i '.merkl-zksync.version = strenv(VERSION)' ./config.production.yaml
 
           git config --global user.email "baptiste@angle.money"
           git config --global user.name "BaptistG"
 
           git add ./config.production.yaml
-          git commit -m "Update config.production.yaml with merkl-app version $VERSION"
+          git commit -m "Update config.production.yaml with merkl-zksync version $VERSION"
 
           git push
