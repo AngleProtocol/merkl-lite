@@ -4,12 +4,10 @@
 
 ## Installation
 
-1. Go to `cd packages/dappkit`
-2. `git submodule init`
-3. `git submodule update`
-4. `bun i`
-5. `bun dev`
-
+1. `git submodule init`
+2. `git submodule update`
+3. `bun i`
+4. `bun dev`
 
 ## Development
 
