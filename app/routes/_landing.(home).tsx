@@ -4,16 +4,16 @@ import {
   Container,
   Group,
   Icon,
-  Input,
-  OverrideTheme,
   Text,
   Title,
   Countdown,
 } from "dappkit";
+import Faq from "src/components/composite/Faq";
+import heroWebm from "src/assets/video/hero.webm";
+import heroMp4 from "src/assets/video/hero.mp4";
 
-import Faq from "src/zksync/components/element/Faq";
-import { link } from "src/zksync/constants/link";
-import config from "../../merkl.config";
+import { link } from "src/constants/link";
+import { motion } from "motion/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -22,32 +22,74 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const container = {
+  hidden: { y: 0 },
+  visible: {
+    y: 0,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: "100%" },
+  visible: {
+    y: 0,
+  },
+};
+
 export function Hero() {
   return (
-    <section className="hero py-xl*2 md:py-xl*4 lg:py-[8rem] bg-accent-10 w-full">
-      <OverrideTheme
-        mode="light"
+    <section className="hero flex flex-col bg-accent-10 w-full min-h-screen relative">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="flex-1 object-cover z-0 pointer-events-none"
       >
-        <Container>
-          <Group className="mb-xl*2 justify-center">
-            <div className="relative">
-              <Title
-                h={1}
-                size="display1"
-                className="text-center md:text-left !text-accent-1"
-              >
-                ZK<span className="font-normal">sync</span> Ignite
-              </Title>
-              <Title
-                h={5}
-                className="absolute right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 -bottom-8 md:-bottom-4 text-main-12"
-              >
-                Powered by <span className="text-accent-1">Merkl</span>
-              </Title>
-            </div>
-          </Group>
-          <Group className="lg:w-1/2 xl:w-1/3 mx-auto flex-col items-center md:items-end gap-xl mt-xl*4 md:mt-0">
-            <Group className="justify-center items-stretch w-full my-xl gap-xl">
+        <source src={heroWebm} type="video/webm" />
+        <source src={heroMp4} type="video/mp4" />
+      </video>
+      <Container className="absolute flex flex-wrap items-center h-full z-10">
+        <Group className="w-10/12 mx-auto gap-xl*2">
+          <Title
+            h={1}
+            size="display1"
+            className="text-center md:text-left !text-main-12"
+          >
+            <motion.div variants={container} initial="hidden" animate="visible">
+              <div className="overflow-y-hidden">
+                <motion.div variants={item}>Ready to ignite</motion.div>
+              </div>
+
+              <div className="overflow-y-hidden">
+                <motion.div variants={item}>your protocol?</motion.div>
+              </div>
+            </motion.div>
+          </Title>
+
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.7, duration: 0.3 }}
+          >
+            <Button
+              external
+              size="xl"
+              look="hype"
+              className="!rounded-full"
+              to={link.programForm}
+            >
+              {/* <Icon remix="RiArrowRightLine" /> */}
+              Join the program now!
+            </Button>
+          </motion.div>
+        </Group>
+        {/* <Group className="justify-center items-stretch w-full my-xl gap-xl">
               <Input
                 className="!flex-1 w-full !rounded-full !px-xl !text-main-9 inline-flex items-center placeholder:!text-main-9 !bg-main-1 min-w-[300px]"
                 placeholder="Enter your email for updates"
@@ -57,78 +99,34 @@ export function Hero() {
                 look="bold"
                 mode="dark"
                 className="!rounded-full"
-                coloring={config.themes.igniteWarm.base}
+                coloring={zkSyncThemes.igniteWarm.base}
               >
                 <Icon remix="RiArrowRightLine" className="text-main-11" />
                 Subscribe
               </Button>
-            </Group>
-            <Group className="md:justify-end items-center gap-xl">
-              <Title h={5}>Follow us on</Title>
-              <Group>
-                <Button
-                  className="transition-opacity hover:opacity-70 !rounded-full !p-md !text-main-12 !bg-main-1"
-                  external
-                  to={link.x}
-                >
-                  <Icon
-                    className="!h-xl*1.5 w-lg*2 lg:w-xl*1.5"
-                    remix="RiTwitterXFill"
-                  />
-                </Button>
-                <Button
-                  className="transition-opacity hover:opacity-70 !rounded-full !p-md !text-main-12 !bg-main-1"
-                  external
-                  to={link.telegram}
-                >
-                  <Icon
-                    className="!h-xl*1.5 w-lg*2 lg:w-xl*1.5"
-                    remix="RiTelegram2Fill"
-                  />
-                </Button>
-              </Group>
-            </Group>
-          </Group>
-        </Container>
-      </OverrideTheme>
+            </Group> */}
+      </Container>
     </section>
   );
 }
 
 export function CountdownSection() {
   return (
-    <section className="counter py-xl*2 bg-accent-10 w-full">
-      <OverrideTheme coloring={config.themes.igniteWarm.base} mode="light">
-        <Container>
-          <Group className="gap-xl*2 lg:!gap-0 my-[4rem] items-center flex-wrap-reverse">
-            <Group className="lg:w-1/3">
-              <Title h={3} className="text-gray-12">
-                Ready to ignite your protocol?
-              </Title>
+    <section className="counter py-xl*2 bg-accent-11 w-full">
+      <Container>
+        <Group className="gap-xl*2 lg:!gap-0 my-lg md:my-xl*2 lg:my-xl*4 items-center flex-wrap-reverse justify-center">
+          <Group className="text-gray-12 text-xl justify-center items-center gap-y-xl lg:gap-x-xl*2">
+            <Countdown targetDate={new Date("2024-12-01T12:00:00")} />
 
-              <Button
-                size="xl"
-                look="bold"
-                mode="dark"
-                className="!rounded-full"
-                coloring={config.themes.igniteWarm.base}
-              >
-                Join the program now!
-              </Button>
-            </Group>
-            <Group className="lg:w-2/3 text-gray-12 text-xl lg:justify-end items-center gap-y-lg">
-              <Countdown targetDate={new Date("2024-12-01T12:00:00")} />
-
-              <Text
-                size="md"
-                className="w-full md:w-auto text-right md:text-left md:ml-lg text-main-12 !font-bold"
-              >
-                left before ignition
-              </Text>
-            </Group>
+            <Text
+              size={5}
+              className="w-full md:w-auto text-center md:text-left !text-main-1"
+            >
+              left before ignition
+            </Text>
           </Group>
-        </Container>
-      </OverrideTheme>
+        </Group>
+      </Container>
     </section>
   );
 }

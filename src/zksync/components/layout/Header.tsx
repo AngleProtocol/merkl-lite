@@ -1,44 +1,87 @@
-import { Group, Button, Text, Container } from "dappkit";
-import zksyncLogoMob from "../../../assets/images/zksync-logo-mob.svg";
-import zksyncLogo from "../../../assets/images/zksync-logo.svg";
+import { Group, Button, Container, Title, Icon } from "dappkit";
+import igniteLogo from "../../../assets/images/ignite.svg";
 import Image from "../../../../packages/dappkit/src/components/primitives/Image";
-import SCREENS from "../../../../packages/dappkit/src/constants/SCREENS.json";
-import { useMediaQuery } from "react-responsive";
+import { link } from "src/constants/link";
+import { motion } from "motion/react";
+
+const container = {
+  hidden: { opacity: 0, y: 0 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: "-100%" },
+  visible: {
+    y: 0,
+  },
+};
 
 export default function Header() {
-  const isScreenSmall = useMediaQuery({ maxWidth: SCREENS.lg });
-
   return (
-    <header className="w-full">
+    <motion.header
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      className="w-full fixed top-0 z-20"
+    >
       <Container className="py-xl">
-        <Group className="justify-between">
-          <Button to="/" look="text">
-            {isScreenSmall ? (
+        <Group className="justify-between items-center">
+          <motion.div variants={item}>
+            <Button to="/" look="text">
               <Image
-                className="w-[50px]"
+                className="w-[160px] md:w-[200px]"
                 alt="zkSync logo"
-                src={zksyncLogoMob}
+                src={igniteLogo}
               />
-            ) : (
-              <Image className="w-[165px]" alt="zkSync logo" src={zksyncLogo} />
-            )}
-          </Button>
-
-          <Group className="gap-xl*2">
-            <Button look="text" to="/faq" className="text-accent-9">
-              <Text size={5} className="!text-accent-11">
-                FAQ
-              </Text>
             </Button>
-            <Button
+          </motion.div>
+
+          <motion.div variants={item}>
+            <Group className="gap-xl*2">
+              <Group className="md:justify-end items-center gap-xl">
+                <Title h={5} className="hidden md:block">
+                  Follow us on
+                </Title>
+                <Group>
+                  <Button
+                    className="transition-opacity hover:opacity-70 !rounded-full !p-md !text-main-1 !bg-main-12"
+                    external
+                    to={link.x}
+                  >
+                    <Icon
+                      className="!h-xl*1.5 w-lg*2 lg:w-xl*1.5"
+                      remix="RiTwitterXFill"
+                    />
+                  </Button>
+                  <Button
+                    className="transition-opacity hover:opacity-70 !rounded-full !p-md !text-main-1 !bg-main-12"
+                    external
+                    to={link.telegram}
+                  >
+                    <Icon
+                      className="!h-xl*1.5 w-lg*2 lg:w-xl*1.5"
+                      remix="RiTelegram2Fill"
+                    />
+                  </Button>
+                </Group>
+              </Group>
+
+              {/* <Button
               className="!p-lg !rounded-full transition-all duration-300 bg-accent-11 text-accent-1 hover:bg-accent-12 hover:text-main-1 active:bg-main-3 focus-visible:border-main-9"
               to="/app"
             >
               You're a protocol?
-            </Button>
-          </Group>
+            </Button> */}
+            </Group>
+          </motion.div>
         </Group>
       </Container>
-    </header>
+    </motion.header>
   );
 }
