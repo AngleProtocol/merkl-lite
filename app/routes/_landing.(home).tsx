@@ -1,13 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import {
-  Button,
-  Container,
-  Group,
-  Icon,
-  Text,
-  Title,
-  Countdown,
-} from "dappkit";
+import { Button, Container, Group, Text, Title, Countdown } from "dappkit";
 import Faq from "src/components/composite/Faq";
 import heroWebm from "src/assets/video/hero.webm";
 import heroMp4 from "src/assets/video/hero.mp4";
@@ -19,7 +11,8 @@ export const meta: MetaFunction = () => {
   return [
     { title: "ZKsync Ignite" },
     { name: "description", content: "Welcome to ZKsync Ignite!" },
-  ];p
+  ];
+  p;
 };
 
 const container = {
@@ -138,9 +131,9 @@ export default function Index() {
       <CountdownSection />
       <Faq
         faqs={[
-          "How to participate?",
-          "What's zkSync Ignite?",
-          "Why join the program?",
+          "What is ZKsync Ignite?",
+          "When will ZKsync Ignite go live?",
+          "How can I participate?",
         ]}
       />
     </>

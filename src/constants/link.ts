@@ -4,5 +4,5 @@ export const link = {
   telegram: "https://t.me/+2T0RNabX2ANkMzAx",
   x: "https://x.com/zksyncignite",
   github: "https://github.com/matter-labs",
-  programForm:"https://tally.so/r/w4oMBA"
+  programForm: "https://zksyncignite.xyz",
 };

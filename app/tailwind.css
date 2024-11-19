@@ -63,3 +63,17 @@ body {
   font-variation-settings: "wght" 700;
   font-weight: 400;
 }
+
+.underline {
+  @apply underline-offset-4;
+}
+
+@screen lg {
+  .dim {
+    transition: opacity 0.2s ease;
+    @apply opacity-100;
+  }
+  .dim:hover {
+    @apply opacity-70;
+  }
+}
