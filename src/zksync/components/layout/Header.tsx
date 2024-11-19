@@ -2,7 +2,7 @@ import { Group, Button, Container, Title, Icon } from "dappkit";
 import igniteLogo from "../../../assets/images/ignite.svg";
 import Image from "../../../../packages/dappkit/src/components/primitives/Image";
 import { link } from "src/constants/link";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 const container = {
   hidden: { opacity: 0, y: 0 },

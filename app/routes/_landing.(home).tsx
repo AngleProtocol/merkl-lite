@@ -13,13 +13,13 @@ import heroWebm from "src/assets/video/hero.webm";
 import heroMp4 from "src/assets/video/hero.mp4";
 
 import { link } from "src/constants/link";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 export const meta: MetaFunction = () => {
   return [
     { title: "ZKsync Ignite" },
     { name: "description", content: "Welcome to ZKsync Ignite!" },
-  ];
+  ];p
 };
 
 const container = {
