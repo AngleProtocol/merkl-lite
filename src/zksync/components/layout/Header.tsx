@@ -45,12 +45,9 @@ export default function Header() {
           <motion.div variants={item}>
             <Group className="gap-xl*2">
               <Group className="md:justify-end items-center gap-xl">
-                <Title h={5} className="hidden md:block">
-                  Follow us on
-                </Title>
                 <Group>
                   <Button
-                    className="transition-opacity hover:opacity-70 !rounded-full !p-md !text-main-1 !bg-main-12"
+                    className="dim !rounded-full !p-md !text-main-12 hover:bg-transparent bg-transparent"
                     external
                     to={link.x}
                   >
@@ -60,7 +57,7 @@ export default function Header() {
                     />
                   </Button>
                   <Button
-                    className="transition-opacity hover:opacity-70 !rounded-full !p-md !text-main-1 !bg-main-12"
+                    className="dim !rounded-full !p-md !text-main-12 hover:bg-transparent bg-transparent"
                     external
                     to={link.telegram}
                   >
@@ -72,12 +69,13 @@ export default function Header() {
                 </Group>
               </Group>
 
-              {/* <Button
-              className="!p-lg !rounded-full transition-all duration-300 bg-accent-11 text-accent-1 hover:bg-accent-12 hover:text-main-1 active:bg-main-3 focus-visible:border-main-9"
-              to="/app"
-            >
-              You're a protocol?
-            </Button> */}
+              <Button
+                className="!p-lg !rounded-full transition-all duration-300 bg-accent-11 text-accent-1 hover:bg-accent-12 hover:text-main-1 active:bg-main-3 focus-visible:border-main-9"
+                to="/app"
+                disabled
+              >
+                Enter App
+              </Button>
             </Group>
           </motion.div>
         </Group>
