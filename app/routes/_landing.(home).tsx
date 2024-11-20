@@ -37,15 +37,15 @@ const item = {
 
 export function Hero() {
   return (
-    <section className="hero flex flex-col bg-accent-10 w-full min-h-screen relative overflow-hidden">
+    <section className="hero flex flex-col bg-main-2 w-full min-h-screen relative overflow-hidden">
       <video
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
-        className="z-0 pointer-events-none absolute right-0 top-0 w-full"
-        // className="flex-1 object-contain z-0 pointer-events-none"
+        // className="z-0 pointer-events-none absolute inset-0 w-full h-full object-cover"
+        className="z-0 pointer-events-none absolute inset-0 w-full h-full object-right object-none"
       >
         <source src={heroMp4} type="video/mp4" />
       </video>
@@ -56,7 +56,7 @@ export function Hero() {
               <motion.div variants={item}>
                 <Image
                   src={zksync}
-                  className="block w-[6rem] ml-lg/2 mb-xl*2 "
+                  className="block w-[6rem] md:w-[8rem] ml-lg/2 mb-xl md:mb-xl*2"
                 />
               </motion.div>
             </div>
