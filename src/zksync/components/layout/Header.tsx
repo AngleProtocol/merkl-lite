@@ -28,7 +28,7 @@ export default function Header() {
       variants={container}
       initial="hidden"
       whileInView="visible"
-      className="w-full fixed top-0 z-20"
+      className="w-full fixed top-0 z-20 backdrop-blur"
     >
       <Container className="py-xl">
         <Group className="justify-between items-center">
@@ -43,7 +43,7 @@ export default function Header() {
           </motion.div>
 
           <motion.div variants={item}>
-            <Group className="gap-xl*2">
+            <Group className="gap-xl">
               <Group className="md:justify-end items-center gap-xl">
                 <Group>
                   <Button
@@ -70,7 +70,8 @@ export default function Header() {
               </Group>
 
               <Button
-                className="!p-lg !rounded-full transition-all duration-300 bg-accent-11 text-accent-1 hover:bg-accent-12 hover:text-main-1 active:bg-main-3 focus-visible:border-main-9"
+                className="!rounded-full transition-all duration-300 bg-main-11 text-accent-1 text-md hover:bg-main-10 hover:text-main-1 active:bg-main-3 focus-visible:border-main-9"
+                size="lg"
                 to="/app"
                 disabled
               >
