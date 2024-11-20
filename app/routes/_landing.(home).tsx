@@ -1,12 +1,10 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Button, Container, Group, Text, Title, Countdown } from "dappkit";
+import { Container, Group, Text, Countdown } from "dappkit";
 import Faq from "src/components/composite/Faq";
 import heroMp4 from "src/assets/video/hero.mp4";
 import zksync from "src/assets/images/zksync.svg";
 import igniteBig from "src/assets/images/ignite_big.svg";
 import Image from "../../packages/dappkit/src/components/primitives/Image";
-
-import { link } from "src/constants/link";
 import { motion } from "framer-motion";
 
 export const meta: MetaFunction = () => {
@@ -44,7 +42,7 @@ export function Hero() {
         muted
         playsInline
         preload="auto"
-        // className="z-0 pointer-events-none absolute inset-0 w-full h-full object-cover"
+        // className="z-0 pointer-events-none absolute inset-0 w-full h-full rotate-90"
         className="z-0 pointer-events-none absolute inset-0 w-full h-full object-right object-none"
       >
         <source src={heroMp4} type="video/mp4" />
@@ -67,22 +65,6 @@ export function Hero() {
             </div>
           </motion.div>
         </Group>
-        {/* <Group className="justify-center items-stretch w-full my-xl gap-xl">
-              <Input
-                className="!flex-1 w-full !rounded-full !px-xl !text-main-9 inline-flex items-center placeholder:!text-main-9 !bg-main-1 min-w-[300px]"
-                placeholder="Enter your email for updates"
-              />
-              <Button
-                size="xl"
-                look="bold"
-                mode="dark"
-                className="!rounded-full"
-                coloring={zkSyncThemes.igniteWarm.base}
-              >
-                <Icon remix="RiArrowRightLine" className="text-main-11" />
-                Subscribe
-              </Button>
-            </Group> */}
       </Container>
     </section>
   );

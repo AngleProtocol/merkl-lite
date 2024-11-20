@@ -20,7 +20,7 @@ export default function Footer() {
       </video>
       <Container className="z-10 relative">
         <Group className="gap-xl*2 lg:!gap-0 my-lg md:my-lg*2 lg:my-xl*4 py-xl*2 lg:py-xl*4 items-center flex justify-center">
-          <Title className="mx-auto" h={3} size={3}>
+          <Title className="mx-auto italic" h={3} size={2}>
             Fuel a new Era of DeFi
           </Title>
         </Group>
