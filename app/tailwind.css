@@ -40,6 +40,22 @@
   font-display: swap;
 }
 
+:root {
+  --gradient-fire: linear-gradient(
+    90deg,
+    #dca00f 20.05%,
+    #e47e10 49.16%,
+    #e73235 129.38%
+  );
+
+  --gradient-blue: linear-gradient(
+    87deg,
+    #182140 -24.71%,
+    #1755f4 52.39%,
+    #00afb9 129.5%
+  );
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -55,6 +71,11 @@ body {
   min-height: 100vh;
 }
 
+.ease {
+  transition: all 0.2s ease-in-out;
+}
+
+
 .font-mulish.font-semibold {
   font-variation-settings: "wght" 600;
   font-weight: 400;
@@ -62,4 +83,44 @@ body {
 .font-mulish.font-bold {
   font-variation-settings: "wght" 700;
   font-weight: 400;
+}
+
+.underline {
+  @apply underline-offset-4;
+}
+
+@screen lg {
+  .dim {
+    transition: opacity 0.2s ease;
+    @apply opacity-100;
+  }
+  .dim:hover {
+    @apply opacity-70;
+  }
+}
+
+.gradient-blue {
+  background: var(--gradient-blue);
+}
+
+.gradient-fire {
+  background: var(--gradient-fire);
+}
+
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+}
+
+:disabled,
+.disabled {
+  @apply opacity-60 pointer-events-none;
+}
+
+.faq-item__trigger[data-state="open"] > * {
+  background: var(--gradient-fire);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
 }

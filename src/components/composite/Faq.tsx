@@ -11,14 +11,14 @@ export type FAQ = {
   key: string;
 };
 
-const FaqQuestions = faqList.map(faq => faq.question);
+const FaqQuestions = faqList.map((faq) => faq.question);
 
 export type FaqQuestion = (typeof FaqQuestions)[number];
 
 // Utility function to get specific FAQs by question
 export function getFaqsByQuestions(questions: FaqQuestion[]): FAQ[] {
   return questions.reduce<FAQ[]>((acc, question) => {
-    const faq = faqList.find(faq => faq.question === question);
+    const faq = faqList.find((faq) => faq.question === question);
     if (faq) {
       acc.push(faq);
     }
@@ -31,23 +31,26 @@ const Faq: FC<{
 }> = ({ faqs }) => {
   const faqData = getFaqsByQuestions(faqs);
 
-  const accordionItems = faqData.map(faq => ({
+  const accordionItems = faqData.map((faq) => ({
     trigger: faq.question,
     content: faq.answer,
     key: faq.key,
   }));
 
   return (
-    <section className="faq py-xl*4">
+    <section className="faq py-xl*4 bg-main-3">
       <Container>
         <Group className="gap-xl lg:gap-0 !items-start">
           <Group className="w-full lg:w-1/4">
-            <Title h={2} className="!text-accent-10">
+            <Title h={2} className="gradient-text gradient-blue">
               FAQ
             </Title>
           </Group>
           <Group className="w-full lg:w-3/4">
-            <Accordion items={accordionItems} className="w-full flex flex-col" />
+            <Accordion
+              items={accordionItems}
+              className="w-full flex flex-col"
+            />
           </Group>
         </Group>
       </Container>

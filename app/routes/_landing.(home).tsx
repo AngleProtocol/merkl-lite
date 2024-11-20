@@ -1,25 +1,18 @@
 import type { MetaFunction } from "@remix-run/node";
-import {
-  Button,
-  Container,
-  Group,
-  Icon,
-  Text,
-  Title,
-  Countdown,
-} from "dappkit";
+import { Container, Group, Text, Countdown } from "dappkit";
 import Faq from "src/components/composite/Faq";
-import heroWebm from "src/assets/video/hero.webm";
 import heroMp4 from "src/assets/video/hero.mp4";
-
-import { link } from "src/constants/link";
+import zksync from "src/assets/images/zksync.svg";
+import igniteBig from "src/assets/images/ignite_big.svg";
+import Image from "../../packages/dappkit/src/components/primitives/Image";
 import { motion } from "framer-motion";
 
 export const meta: MetaFunction = () => {
   return [
     { title: "ZKsync Ignite" },
     { name: "description", content: "Welcome to ZKsync Ignite!" },
-  ];p
+  ];
+  p;
 };
 
 const container = {
@@ -42,69 +35,36 @@ const item = {
 
 export function Hero() {
   return (
-    <section className="hero flex flex-col bg-accent-10 w-full min-h-screen relative">
+    <section className="hero flex flex-col bg-main-2 w-full min-h-screen relative overflow-hidden">
       <video
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
-        className="flex-1 object-cover z-0 pointer-events-none"
+        // className="z-0 pointer-events-none absolute inset-0 w-full h-full rotate-90"
+        className="z-0 pointer-events-none absolute inset-0 w-full h-full object-right object-none"
       >
-        <source src={heroWebm} type="video/webm" />
         <source src={heroMp4} type="video/mp4" />
       </video>
       <Container className="absolute flex flex-wrap items-center h-full z-10">
-        <Group className="w-10/12 mx-auto gap-xl*2">
-          <Title
-            h={1}
-            size="display1"
-            className="text-center md:text-left !text-main-12"
-          >
-            <motion.div variants={container} initial="hidden" animate="visible">
-              <div className="overflow-y-hidden">
-                <motion.div variants={item}>Ready to ignite</motion.div>
-              </div>
-
-              <div className="overflow-y-hidden">
-                <motion.div variants={item}>your protocol?</motion.div>
-              </div>
-            </motion.div>
-          </Title>
-
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7, duration: 0.3 }}
-          >
-            <Button
-              external
-              size="xl"
-              look="hype"
-              className="!rounded-full"
-              to={link.programForm}
-            >
-              {/* <Icon remix="RiArrowRightLine" /> */}
-              Join the program now!
-            </Button>
+        <Group className="w-10/12 mx-auto gap-xl*2 flex flex-col">
+          <motion.div variants={container} initial="hidden" animate="visible">
+            <div className="overflow-y-hidden">
+              <motion.div variants={item}>
+                <Image
+                  src={zksync}
+                  className="block w-[6rem] md:w-[8rem] ml-lg/2 mb-xl md:mb-xl*2"
+                />
+              </motion.div>
+            </div>
+            <div className="overflow-y-hidden">
+              <motion.div variants={item}>
+                <Image src={igniteBig} className="block w-[60vw]" />
+              </motion.div>
+            </div>
           </motion.div>
         </Group>
-        {/* <Group className="justify-center items-stretch w-full my-xl gap-xl">
-              <Input
-                className="!flex-1 w-full !rounded-full !px-xl !text-main-9 inline-flex items-center placeholder:!text-main-9 !bg-main-1 min-w-[300px]"
-                placeholder="Enter your email for updates"
-              />
-              <Button
-                size="xl"
-                look="bold"
-                mode="dark"
-                className="!rounded-full"
-                coloring={zkSyncThemes.igniteWarm.base}
-              >
-                <Icon remix="RiArrowRightLine" className="text-main-11" />
-                Subscribe
-              </Button>
-            </Group> */}
       </Container>
     </section>
   );
@@ -135,12 +95,11 @@ export default function Index() {
   return (
     <>
       <Hero />
-      <CountdownSection />
       <Faq
         faqs={[
-          "How to participate?",
-          "What's zkSync Ignite?",
-          "Why join the program?",
+          "What is ZKsync Ignite?",
+          "When will ZKsync Ignite go live?",
+          "How can I participate?",
         ]}
       />
     </>
