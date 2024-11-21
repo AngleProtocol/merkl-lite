@@ -12,7 +12,6 @@ export const meta: MetaFunction = () => {
     { title: "ZKsync Ignite" },
     { name: "description", content: "Welcome to ZKsync Ignite!" },
   ];
-  p;
 };
 
 const container = {
