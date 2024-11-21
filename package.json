@@ -10,7 +10,9 @@
     "serve": "remix-serve ./build/server/index.js",
     "typecheck": "tsc"
   },
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@angleprotocol/merkl-api": "0.9.92",
     "@ariakit/react": "^0.4.12",
