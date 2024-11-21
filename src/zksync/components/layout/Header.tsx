@@ -1,9 +1,8 @@
-import { Group, Button, Container, Title, Icon } from "dappkit";
+import { Group, Button, Container, Icon } from "dappkit";
 import igniteLogo from "../../../assets/images/ignite.svg";
 import Image from "../../../../packages/dappkit/src/components/primitives/Image";
 import { link } from "src/constants/link";
 import { motion } from "framer-motion";
-import Tooltip from "packages/dappkit/src/components/primitives/Tooltip";
 import { useState } from "react";
 
 const container = {
