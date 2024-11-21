@@ -42,8 +42,7 @@ export function Hero() {
         muted
         playsInline
         preload="auto"
-        // className="z-0 pointer-events-none absolute inset-0 w-full h-full rotate-90"
-        className="z-0 pointer-events-none absolute inset-0 w-full h-full object-right object-none"
+        className="z-0 pointer-events-none absolute inset-0 w-full h-full object-cover"
       >
         <source src={heroMp4} type="video/mp4" />
       </video>
@@ -54,7 +53,7 @@ export function Hero() {
               <motion.div variants={item}>
                 <Image
                   src={zksync}
-                  className="block w-[6rem] md:w-[8rem] ml-lg/2 mb-xl md:mb-xl*2"
+                  className="block w-[6rem] md:w-[8rem] ml-lg mb-xl md:mb-xl*2"
                 />
               </motion.div>
             </div>

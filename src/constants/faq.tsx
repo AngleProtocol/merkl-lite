@@ -30,8 +30,8 @@ export const faqList = [
         >
           introduced
         </a>{" "}
-        to the ZKsync governance forum in October, 2024. <br /> In November, the
-        ZKsync Governance System{" "}
+        to the ZKsync governance forum in October, 2024. In November, the ZKsync
+        Governance System{" "}
         <a
           className="underline dim"
           target="_blank"
@@ -40,13 +40,12 @@ export const faqList = [
         >
           formally passed
         </a>{" "}
-        the proposal. <br />
-        The elected DeFi Steering Committee is currently reviewing applications.
-        <br />
+        the proposal. The elected DeFi Steering Committee is currently reviewing
+        applications.
+        <br /> <br />
         Once the selected protocols have fully integrated with ZKsync Ignite,
         the program will go live for DeFi users to participate and earn rewards.
-        <br />
-        We expect this to be mid-December.{" "}
+        We expect this to be in the coming weeks.{" "}
       </>
     ),
     key: crypto.randomUUID(),
