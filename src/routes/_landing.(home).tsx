@@ -28,11 +28,11 @@ export const meta: MetaFunction<typeof loader> = ({data}) => {
     },
     {
       property: "og:image:height",
-      content: "675"
+      content: "630"
     },
     {
       property: "og:image:width",
-      content: "1201"
+      content: "1200"
     },
     {
       property: "twitter:card",
