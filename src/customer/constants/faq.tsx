@@ -1,61 +1,77 @@
-import { link } from "./link";
+import { link } from "src/customer/constants/link";
 
 export const faqList = [
   {
-    question: "What's zkSync Ignite?",
+    question: "What is ZKsync Ignite?",
     answer: (
       <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. <br />
+        ZKsync Ignite is designed to turn ZKsync Era into a liquidity hub for
+        the Elastic Chain by streaming 300M ZK tokens over 9 months to DeFi
+        users.
         <br />
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        ipsum
+        <br />
+        Split into 3 seasons, ZKsync Ignite will allocate ZK tokens to DeFi
+        users that provide liquidity for key token pairs, supply to lending
+        markets, and trade on selected DeFi protocols.
       </>
     ),
     key: crypto.randomUUID(),
   },
   {
-    question: "Why join the program?",
+    question: "When will ZKsync Ignite go live?",
     answer: (
       <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. <br />
-        <br />
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        ipsum
-      </>
-    ),
-    key: crypto.randomUUID(),
-  },
-  {
-    question: "How to participate?",
-    answer: (
-      <>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. <br />
-        <br />{" "}
+        ZKsync Ignite was originally{" "}
         <a
-          className="underlined"
-          href={link.discord}
+          className="underline dim"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://forum.zknation.io/t/tpp-001-zksync-ignite-program-the-ignite-program/168"
+        >
+          introduced
+        </a>{" "}
+        to the ZKsync governance forum in October, 2024. In November, the ZKsync
+        Governance System{" "}
+        <a
+          className="underline dim"
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://vote.zknation.io/dao/proposal/61143334896738427838139044418897411872404555684850233057602201527014096413671?govId=eip155:324:0x10560f8B7eE37571AD7E3702EEb12Bc422036E89"
+        >
+          formally passed
+        </a>{" "}
+        the proposal. The elected DeFi Steering Committee is currently reviewing
+        applications.
+        <br /> <br />
+        Once the selected protocols have fully integrated with ZKsync Ignite,
+        the program will go live for DeFi users to participate and earn rewards.
+        We expect this to be in the coming weeks.{" "}
+      </>
+    ),
+    key: crypto.randomUUID(),
+  },
+  {
+    question: "How can I participate?",
+    answer: (
+      <>
+        DeFi users can participate once the program is live through a
+        custom-build web application hosted on{" "}
+        <a
+          className="underline dim"
+          href={link.programForm}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Discord invitation
-        </a>{" "}
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        ipsum
+          zksyncignite.xyz
+        </a>
+        . <br />
+        This web app will allow DeFi users to browse participating protocols and
+        incentivized pools, view a personal dashboard to claim rewards, and
+        one-click gasless deposits.
+        <br />
+        <br />
+        Alternatively, DeFi users can interact directly with participating
+        protocols and collect rewards from the web app.
       </>
     ),
     key: crypto.randomUUID(),

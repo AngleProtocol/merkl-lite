@@ -112,9 +112,9 @@ export default function Index() {
       <Hero />
       <Faq
         faqs={[
-          "What's zkSync Ignite?",
-          "Why join the program?",
-          "How to participate?",
+          "What is ZKsync Ignite?",
+          "When will ZKsync Ignite go live?",
+          "How can I participate?",
         ]}
       />
     </>

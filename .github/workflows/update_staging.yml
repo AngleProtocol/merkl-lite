@@ -14,7 +14,7 @@ jobs:
   build-image:
     runs-on: ubuntu-latest
     env:
-      IMAGE_URL: europe-west1-docker.pkg.dev/angle-artifacts/angle-docker-registry/merkl-app
+      IMAGE_URL: europe-west1-docker.pkg.dev/angle-artifacts/angle-docker-registry/merkl-zksync
     steps:
       - uses: actions/checkout@v3
         with:
@@ -57,12 +57,12 @@ jobs:
 
           export SHORT_SHA=${GITHUB_SHA:0:7}
 
-          yq -i '.merkl-app.version = strenv(SHORT_SHA)' ./config.staging.yaml
+          yq -i '.merkl-zksync.version = strenv(SHORT_SHA)' ./config.staging.yaml
 
           git config --global user.email "baptiste@angle.money"
           git config --global user.name "BaptistG"
 
           git add ./config.staging.yaml
-          git commit -m "Update config.staging.yaml with merkl-app version $SHORT_SHA"
+          git commit -m "Update config.staging.yaml with merkl-zksync version $SHORT_SHA"
 
           git push
