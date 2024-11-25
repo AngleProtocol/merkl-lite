@@ -1,5 +1,6 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, json, useLoaderData } from "@remix-run/react";
+import "./index.css";
 import { DAppProvider } from "dappkit";
 import config from "../merkl.config";
 import styles from "./index.css?url";
