@@ -1,0 +1,29 @@
+:root {
+  --gradient-fire: linear-gradient(
+    90deg,
+    #dca00f 20.05%,
+    #e47e10 49.16%,
+    #e73235 129.38%
+  );
+
+  --gradient-blue: linear-gradient(
+    87deg,
+    #182140 -24.71%,
+    #1755f4 52.39%,
+    #00afb9 129.5%
+  );
+}
+
+.gradient-blue {
+    background: var(--gradient-blue);
+}
+  
+.gradient-fire {
+    background: var(--gradient-fire);
+}
+  
+.gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
