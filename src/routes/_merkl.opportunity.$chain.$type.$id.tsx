@@ -17,7 +17,7 @@ export async function loader({ params: { id, type, chain: chainId } }: LoaderFun
   if (!chain) throw new Response(`Chain ${chainId} could not be found`, { status: 404 });
 
   const { data: opportunity, status } = await api.v4.opportunities({ id: `${chain.id}-${type}-${id}` }).get();
-  throw new Response("Opportunity not found", { status });
+
   if (status === 404) throw new Response("Opportunity not found", { status });
   if (status === 500) throw new Response("Opportunity unavailable", { status });
   if (!opportunity) throw new Response("Opportunity unavailable", { status });
