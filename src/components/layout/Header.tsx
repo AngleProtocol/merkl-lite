@@ -6,7 +6,7 @@ import SearchBar from "../element/functions/SearchBar";
 
 import { motion } from "framer-motion";
 import config from "merkl.config";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import SCREENS from "../../../packages/dappkit/src/constants/SCREENS.json";
 import { LayerMenu } from "./LayerMenu";
@@ -33,6 +33,7 @@ export default function Header() {
   const { mode, toggleMode } = useTheme();
   const [open, setOpen] = useState<boolean>(false);
   const mdScreens = useMediaQuery({ maxWidth: SCREENS.lg });
+  const canSwitchModes = useMemo(() => !(!config.modes || config.modes?.length === 1), []);
 
   return (
     <motion.header
@@ -83,9 +84,9 @@ export default function Header() {
                   <SearchBar />
                 </>
               )}
-              <Button look="base" onClick={toggleMode}>
+              {canSwitchModes && <Button look="base" onClick={toggleMode}>
                 <Icon size="sm" remix={mode === "dark" ? "RiMoonClearLine" : "RiSunLine"} />
-              </Button>
+              </Button>}
               <WalletButton />
             </Group>
           </motion.div>

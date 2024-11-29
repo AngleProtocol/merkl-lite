@@ -1,11 +1,12 @@
 import { type LoaderFunctionArgs, type MetaFunction, json } from "@remix-run/node";
-import { Meta, Outlet, isRouteErrorResponse, useLoaderData, useRouteError } from "@remix-run/react";
+import { Meta, Outlet, useLoaderData } from "@remix-run/react";
 import { api } from "src/api/index.server";
 import Heading from "src/components/composite/Heading";
 
 import { Container } from "dappkit";
 import Tag from "src/components/element/Tag";
 import useOpportunity from "src/hooks/resources/useOpportunity";
+import { ErrorHeading } from "src/components/layout/ErrorHeading";
 
 export async function loader({ params: { id, type, chain: chainId } }: LoaderFunctionArgs) {
   if (!chainId || !id || !type) throw "";
@@ -13,17 +14,19 @@ export async function loader({ params: { id, type, chain: chainId } }: LoaderFun
   const { data: chains } = await api.v4.chains.index.get({ query: { search: chainId } });
   const chain = chains?.[0];
 
-  if (!chain) throw "";
+  if (!chain) throw new Response(`Chain ${chainId} could not be found`, { status: 404 });
 
-  const { data: opportunity } = await api.v4.opportunities({ id: `${chain.id}-${type}-${id}` }).get();
-
-  if (!opportunity) throw "Opportunity";
+  const { data: opportunity, status } = await api.v4.opportunities({ id: `${chain.id}-${type}-${id}` }).get();
+  throw new Response("Opportunity not found", { status });
+  if (status === 404) throw new Response("Opportunity not found", { status });
+  if (status === 500) throw new Response("Opportunity unavailable", { status });
+  if (!opportunity) throw new Response("Opportunity unavailable", { status });
 
   return json(opportunity);
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  if (data?.error) return [{ title: "404 on Merkl" }];
+export const meta: MetaFunction<typeof loader> = ({ data,error }) => {
+  if (error) return [{ title: error }];
   return [{ title: `${data?.name} on Merkl` }];
 };
 
@@ -54,27 +57,5 @@ export default function Index() {
 }
 
 export function ErrorBoundary() {
-  const error = useRouteError();
-
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div>
-        <h1>
-          {error.status} {error.statusText}
-        </h1>
-        <p>{error.data}</p>
-      </div>
-    );
-  }
-  if (error instanceof Error) {
-    return (
-      <div>
-        <h1>Error</h1>
-        <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-      </div>
-    );
-  }
-  return <h1>Unknown Error</h1>;
+  return <ErrorHeading/>
 }

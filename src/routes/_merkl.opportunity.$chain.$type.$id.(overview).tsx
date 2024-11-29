@@ -6,6 +6,8 @@ import { Space } from "packages/dappkit/src";
 import { api } from "src/api/index.server";
 import CampaignLibrary from "src/components/element/campaign/CampaignLibrary";
 import Participate from "src/components/element/participate/Participate";
+import { ErrorContent } from "src/components/layout/ErrorContent";
+import { ErrorHeading } from "src/components/layout/ErrorHeading";
 
 export async function loader({ params: { id, type, chain: chainId } }: LoaderFunctionArgs) {
   if (!chainId || !id || !type) throw "";
@@ -15,10 +17,10 @@ export async function loader({ params: { id, type, chain: chainId } }: LoaderFun
   });
   const chain = chains?.[0];
 
-  if (!chain) throw "DSS";
+  if (!chain) throw new Response(`Chain ${chainId} could not be found`, { status: 404 });
 
-  const { data: opportunity } = await api.v4.opportunities({ id: `${chain.id}-${type}-${id}` }).get();
-
+  const { data: opportunity, status } = await api.v4.opportunities({ id: `${chain.id}-${type}-${id}` }).get();
+  if (status !== 200) throw new Response("DSQMDQS", { status })
   if (!opportunity) throw "No Opportunity";
 
   const { data: campaigns } = await api.v4.opportunities({ id: `${chain.id}-${type}-${id}` }).campaigns.get();
@@ -42,4 +44,8 @@ export default function Index() {
       </Group>
     </Group>
   );
+}
+
+export function ErrorBoundary() {
+  return <ErrorContent/>
 }
