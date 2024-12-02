@@ -24,7 +24,7 @@ export async function loader(_args: LoaderFunctionArgs) {
 
   if (!chains) throw new Response("Unable to fetch chains", { status: 500 });
 
-  return json({ ENV: { API_URL: process.env.API_URL }, chains });
+  return json({ ENV: { API_URL: process.env.API_URL, ZYFI_API_KEY: process.env.ZYFI_API_KEY }, chains });
 }
 
 export default function App() {

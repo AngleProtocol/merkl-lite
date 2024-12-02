@@ -1,6 +1,6 @@
 import { createColoring } from "dappkit";
 import { createConfig } from "src/config/type";
-import { http } from "viem";
+import { createClient, custom, http } from "viem";
 import {
   mainnet,
   optimism,
@@ -37,6 +37,7 @@ import {
 } from "viem/chains";
 import { coinbaseWallet, walletConnect } from "wagmi/connectors";
 import hero from "src/customer/assets/images/hero.jpg?url";
+import { eip712WalletActions } from "viem/zksync";
 
 export default createConfig({
   appName: "Merkl",
@@ -156,6 +157,12 @@ export default createConfig({
       taiko,
       scroll,
     ],
+    client({ chain }) {
+
+      if (chain.id === zksync.id) return createClient({ chain, transport: custom(window.ethereum!) }).extend(eip712WalletActions())
+        return createClient({ chain, transport: http() })
+    },
+    ssr: true,
     connectors: [
       coinbaseWallet(),
       walletConnect({
@@ -169,9 +176,5 @@ export default createConfig({
         },
       }),
     ],
-    transports: {
-      [zksync.id]: http(),
-      [optimism.id]: http(),
-    },
   }
 });
