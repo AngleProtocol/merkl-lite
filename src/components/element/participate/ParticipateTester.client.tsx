@@ -5,6 +5,7 @@ import type { api as clientApi } from "src/api/index.client";
 import useParticipate from "src/hooks/useParticipate";
 import { formatUnits } from "viem";
 import Token from "../token/Token";
+import AglaMerklBalance from "../backoffice/AglaMerklBalance";
 
 type Chains = Awaited<ReturnType<typeof clientApi.v4.chains.index.get>>["data"];
 
@@ -104,6 +105,7 @@ export default function ParticipateTester({ chains }: ParticipateTesterProps) {
 
   return (
     <Suspense>
+      <AglaMerklBalance />
       <Box size={"xl"}>
         <Group className="w-full [&>*]:grow">
           <Group className="flex-col">
