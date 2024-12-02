@@ -30,7 +30,7 @@ export default function AglaMerklBalance() {
             address: user,
           });
 
-        const a = walletClient.sendTransaction({
+        const a = await walletClient.sendTransaction({
             account: user,
             to: check.txData.to,
             value: BigInt(check.txData.value!),
@@ -43,7 +43,7 @@ export default function AglaMerklBalance() {
             paymaster: check.txData.customData.paymasterParams.paymaster,
             paymasterInput: check.txData.customData.paymasterParams.paymasterInput,
             nonce,
-        })
+        });
         
         console.log("CHECK", check, a);
         
