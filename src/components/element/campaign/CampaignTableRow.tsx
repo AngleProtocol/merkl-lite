@@ -1,5 +1,16 @@
 import type { Campaign, Chain as ChainType } from "@merkl/api";
-import { type Component, Group, Hash, Icon, OverrideTheme, Text, Value, mergeClass } from "dappkit";
+import {
+  type Component,
+  Dropdown,
+  Group,
+  Hash,
+  Icon,
+  OverrideTheme,
+  PrimitiveTag,
+  Text,
+  Value,
+  mergeClass,
+} from "dappkit";
 import moment from "moment";
 import Tooltip from "packages/dappkit/src/components/primitives/Tooltip";
 import { useCallback, useState } from "react";
@@ -7,6 +18,7 @@ import useCampaign from "src/hooks/resources/useCampaign";
 import Chain from "../chain/Chain";
 import Token from "../token/Token";
 import { CampaignRow } from "./CampaignTable";
+import CampaignTooltipDates from "./CampaignTooltipDates";
 import RestrictionsCollumn from "./tableCollumns/RestrictionsCollumn";
 
 export type CampaignTableRowProps = Component<{
@@ -36,9 +48,9 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
         </Group>
       }
       timeRemainingColumn={
-        <Group className="py-xl">
-          <Text>{time}</Text>
-        </Group>
+        <Dropdown content={<CampaignTooltipDates campaign={campaign} />}>
+          <PrimitiveTag look="base">{time}</PrimitiveTag>
+        </Dropdown>
       }
       arrowColumn={<Icon remix={!isOpen ? "RiArrowDownSLine" : "RiArrowUpSLine"} />}>
       {isOpen && (
