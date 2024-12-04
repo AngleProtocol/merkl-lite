@@ -3,13 +3,15 @@ import { useMemo } from "react";
 import { LeaderboardTable } from "./LeaderboardTable";
 import LeaderboardTableRow from "./LeaderboardTableRow";
 import type { IRewards } from "src/api/services/reward.service";
+import OpportunityPagination from "../opportunity/OpportunityPagination";
 
 export type IProps = {
   leaderboard: IRewards[];
+  count?: number;
 };
 
 export default function LeaderboardLibrary(props: IProps) {
-  const { leaderboard } = props;
+  const { leaderboard, count } = props;
 
   const rows = useMemo(() => {
     return leaderboard?.map((row, index) => (
@@ -20,7 +22,7 @@ export default function LeaderboardLibrary(props: IProps) {
   return (
     <LeaderboardTable
       header={<Text className="w-full">Leaderboard</Text>}
-      footer={"Something"}
+      footer={count !== undefined && <OpportunityPagination count={count} />}
     >
       {!!rows.length ? rows : <Text>No rewarded users</Text>}
     </LeaderboardTable>
