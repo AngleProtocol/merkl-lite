@@ -1,13 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, useLoaderData } from "@remix-run/react";
-import {
-  Container,
-  Group,
-  Select,
-  Space,
-  Text,
-  Value,
-} from "packages/dappkit/src";
+import { Container, Group, Space, Text, Value } from "packages/dappkit/src";
 import Tooltip from "packages/dappkit/src/components/primitives/Tooltip";
 import LeaderboardLibrary from "src/components/element/leaderboard/LeaderboardLibrary";
 import { ChainService } from "src/api/services/chain.service";
@@ -61,7 +54,7 @@ export default function Index() {
         reward?.Token?.decimals
       );
     });
-    console.log({ scaledReward });
+
     const summ = scaledReward.reduce((acc, reward) => {
       return acc + Number(reward);
     });

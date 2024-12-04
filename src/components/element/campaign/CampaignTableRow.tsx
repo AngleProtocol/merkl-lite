@@ -50,7 +50,6 @@ export default function CampaignTableRow({
       className={mergeClass("cursor-pointer", className)}
       onClick={toggleIsOpen}
       chainColumn={<Chain chain={campaign.chain} />}
-      identifierColumn={<Hash format="short">{campaign.identifier}</Hash>}
       restrictionsColumn={<RestrictionsCollumn campaign={campaign} />}
       dailyRewardsColumn={
         <Group className="align-middle items-center">
@@ -102,14 +101,20 @@ export default function CampaignTableRow({
                   </Text>
                 </span>
               </div>
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <Text size="sm">Last snapshot</Text>
-                {/* <Time timestamp={BigInt(campaign.) * BigInt(1000)} /> */}
-              </div>
+                <Time timestamp={BigInt(campaign.) * BigInt(1000)} />
+              </div> */}
               <div className="flex justify-between">
                 <Text size="sm">Campaign creator</Text>
                 <Hash size="sm" format="short">
                   {campaign.creatorAddress}
+                </Hash>
+              </div>
+              <div className="flex justify-between">
+                <Text size="sm">Campaign id</Text>
+                <Hash format="short" size="sm">
+                  {campaign.campaignId}
                 </Hash>
               </div>
             </Group>
