@@ -46,8 +46,10 @@ export default createConfig({
   themes: {
     merkl: {
       base: createColoring(
-        ["#F5F9FF", "#2A35BD", "#FFFFFF"],
-        ["#F5F9FF", "#2A35BD", "#FFFFFF"]
+        ["#2A35BD", "#F5F9FF", "#FFFFFF"],
+        ["#2A35BD", "#F5F9FF", "#FFFFFF"]
+        // ["#F5F9FF", "#2A35BD", "#FFFFFF"],
+        // ["#F5F9FF", "#2A35BD", "#FFFFFF"]
       ),
       info: createColoring(
         ["#2ABDFF", "#2ABDFF", "#131620"],
