@@ -6,7 +6,7 @@ export type IProps = {
   campaign: Campaign;
 };
 
-export default function CampaignTooltip({ campaign }: IProps) {
+export default function CampaignTooltipToken({ campaign }: IProps) {
   const { amount } = useCampaign(campaign);
 
   return (
