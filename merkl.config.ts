@@ -45,11 +45,26 @@ export default createConfig({
   defaultTheme: "merkl",
   themes: {
     merkl: {
-      base: createColoring(["#1F2333", "#B8AAFD", "#131620"], ["#FCF8F5", "#B8AAFD", "white"]),
-      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      base: createColoring(
+        ["#1F2333", "#B8AAFD", "#131620"],
+        ["#FCF8F5", "#B8AAFD", "white"]
+      ),
+      info: createColoring(
+        ["#2ABDFF", "#2ABDFF", "#131620"],
+        ["#FFFFFF", "#40B66B", "white"]
+      ),
+      good: createColoring(
+        ["#40B66B", "#40B66B", "#131620"],
+        ["#FFFFFF", "#40B66B", "white"]
+      ),
+      warn: createColoring(
+        ["#ff9600", "#ff9600", "#131620"],
+        ["#FFFFFF", "#40B66B", "white"]
+      ),
+      harm: createColoring(
+        ["#d22e14", "#d22e14", "#131620"],
+        ["#FFFFFF", "#40B66B", "white"]
+      ),
     },
   },
   sizing: {
@@ -92,6 +107,7 @@ export default createConfig({
     telegram: "https://t.me/+2T0RNabX2ANkMzAx",
     x: "https://x.com/zksyncignite",
     github: "",
+    medium: "",
   },
   links: {
     merkl: "https://merkl.xyz/",
@@ -133,7 +149,10 @@ export default createConfig({
     ],
     client({ chain }) {
       if (chain.id === zksync.id)
-        return createClient({ chain, transport: custom(window.ethereum!) }).extend(eip712WalletActions());
+        return createClient({
+          chain,
+          transport: custom(window.ethereum!),
+        }).extend(eip712WalletActions());
       return createClient({ chain, transport: http() });
     },
     ssr: true,
