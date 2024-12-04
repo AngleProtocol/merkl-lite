@@ -12,13 +12,42 @@ export default function useCampaign(campaign?: Campaign) {
       amount: "",
       time: "",
       profile: "",
-      dailyRewards: 0,
+      dailyRewards: BigInt(0),
       progressBar: "",
       active: false,
     };
+
+  // ─── Campaign Amount Prices ──────────────────────────────────
+
   const amount = useMemo(() => {
     return formatUnits(parseUnits(campaign.amount, 0), campaign.rewardToken.decimals);
   }, [campaign?.amount, campaign?.rewardToken?.decimals]);
+
+  const amountUsd = useMemo(() => {
+    // upscale the rewardToken.price to 18 decimals
+    const dollarTokenPrice = parseUnits(campaign.rewardToken.price?.toString() ?? "0", 18);
+    // downscale the amount to 18 decimals
+    return formatUnits(parseUnits(amount, 0) * dollarTokenPrice, 18);
+  }, [campaign, amount]);
+
+  const dailyRewards = useMemo(() => {
+    const duration = campaign.endTimestamp - campaign.startTimestamp;
+    const oneDayInSeconds = BigInt(3600 * 24);
+    const dayspan = BigInt(duration) / BigInt(oneDayInSeconds) || BigInt(1);
+    const amountInUnits = parseUnits(amount.toString(), 0);
+    const dailyReward = amountInUnits / dayspan;
+
+    return dailyReward;
+  }, [campaign, amount]);
+
+  const dailyRewardsUsd = useMemo(() => {
+    return formatUnits(
+      parseUnits(dailyRewards.toString(), 0) * parseUnits(campaign.rewardToken.price?.toString() ?? "0", 18),
+      18,
+    );
+  }, [campaign, dailyRewards]);
+
+  // ─── Campaign Amount Time displaying ──────────────────────────────────
 
   const time = useMemo(() => {
     return <Time timestamp={Number(campaign.endTimestamp) * 1000} />;
@@ -95,16 +124,18 @@ export default function useCampaign(campaign?: Campaign) {
     );
   }, [campaign.startTimestamp, campaign.endTimestamp]);
 
-  const dailyRewards = useMemo(() => {
-    const duration = Number(campaign.endTimestamp - campaign.startTimestamp);
-    const dayspan = Math.max(duration / (3600 * 24), 1);
-
-    return amount / dayspan;
-  }, [campaign, amount]);
-
   const active = useMemo(() => {
     return Number(campaign.endTimestamp) > moment().unix();
   }, [campaign.endTimestamp]);
 
-  return { amount, time, profile, dailyRewards, progressBar, active };
+  return {
+    amount,
+    amountUsd,
+    dailyRewards,
+    dailyRewardsUsd,
+    time,
+    profile,
+    progressBar,
+    active,
+  };
 }
