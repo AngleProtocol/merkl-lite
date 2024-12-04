@@ -84,7 +84,7 @@ export default function Index() {
       description={
         !_isEditingAddress && address !== "" ? (
           <Group>
-            <Hash size={4} className="text-main-12" format="short" copy>
+            <Hash size={4} bold className="text-main-12" format="short" copy>
               {address}
             </Hash>
             <Button look="soft" onClick={() => setIsEditingAddress(true)}>
@@ -93,12 +93,12 @@ export default function Index() {
           </Group>
         ) : (
           <Group>
-            <Input state={[inputAddress, setInputAddress]} look="soft" />
+            <Input state={[inputAddress, setInputAddress]} look="base" />
             <Button
               onClick={() => (inputAddress ? navigate(`/users/${inputAddress}`) : setIsEditingAddress(false))}
               size="xl"
               look="soft">
-              <Icon remix="RiSendPlane2Fill" />
+              <Icon remix="RiCornerDownRightLine" />
             </Button>
           </Group>
         )
