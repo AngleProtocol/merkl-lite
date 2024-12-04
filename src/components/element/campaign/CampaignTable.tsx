@@ -26,12 +26,6 @@ export const [CampaignTable, CampaignRow, CampaignColumns] = createTable({
     compactSize: "minmax(20px,1fr)",
     className: "justify-center",
   },
-  identifier: {
-    name: "ID",
-    size: "minmax(100px,150px)",
-    compactSize: "minmax(100px,1fr)",
-    className: "justify-start",
-  },
   arrow: {
     name: "",
     size: "20px",
