@@ -1,10 +1,6 @@
 import { createTable } from "dappkit";
 
-export const [
-  ClaimRewardsChainTable,
-  ClaimRewardsChainRow,
-  claimRewardsChainColumns,
-] = createTable({
+export const [ClaimRewardsChainTable, ClaimRewardsChainRow, claimRewardsChainColumns] = createTable({
   chain: {
     name: "Chain",
     size: "minmax(180px,1fr)",

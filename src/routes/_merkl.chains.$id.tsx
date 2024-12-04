@@ -1,8 +1,4 @@
-import {
-  type LoaderFunctionArgs,
-  type MetaFunction,
-  json,
-} from "@remix-run/node";
+import { type LoaderFunctionArgs, type MetaFunction, json } from "@remix-run/node";
 import { Outlet, useLoaderData, useRouteError } from "@remix-run/react";
 import { Group, Title } from "dappkit";
 import { ChainService } from "src/api/services/chain.service";
@@ -48,8 +44,7 @@ export default function Index() {
           link: `/chains/${label?.toLowerCase()}/analytics`,
           key: crypto.randomUUID(),
         },
-      ]}
-    >
+      ]}>
       <Outlet />
     </Hero>
   );

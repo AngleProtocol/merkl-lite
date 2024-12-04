@@ -3,9 +3,7 @@ import { Outlet, useLoaderData } from "@remix-run/react";
 import Hero from "src/components/composite/Hero";
 import { type Action, actions, getAction } from "src/config/actions";
 
-export async function loader({
-  params: { action: _action },
-}: LoaderFunctionArgs) {
+export async function loader({ params: { action: _action } }: LoaderFunctionArgs) {
   const action = getAction(_action ?? "");
 
   if (!action) throw new Error("Unknown action");
@@ -29,8 +27,7 @@ export default function Index() {
           link: `/actions/${action.label?.toLowerCase()}`,
           key: crypto.randomUUID(),
         },
-      ]}
-    >
+      ]}>
       <Outlet />
     </Hero>
   );

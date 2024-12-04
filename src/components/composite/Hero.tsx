@@ -1,16 +1,6 @@
 import type { Opportunity } from "@merkl/api";
 import { useLocation } from "@remix-run/react";
-import {
-  Container,
-  Divider,
-  Group,
-  Icon,
-  type IconProps,
-  Icons,
-  Tabs,
-  Text,
-  Title,
-} from "dappkit";
+import { Container, Divider, Group, Icon, type IconProps, Icons, Tabs, Text, Title } from "dappkit";
 import { Button } from "dappkit";
 import config from "merkl.config";
 import type { PropsWithChildren, ReactNode } from "react";
@@ -26,24 +16,14 @@ export type HeroProps = PropsWithChildren<{
   opportunity?: Opportunity;
 }>;
 
-export default function Hero({
-  navigation,
-  breadcrumbs,
-  icons,
-  title,
-  description,
-  tags,
-  tabs,
-  children,
-}: HeroProps) {
+export default function Hero({ navigation, breadcrumbs, icons, title, description, tags, tabs, children }: HeroProps) {
   const location = useLocation();
 
   return (
     <>
       <Group
         className="flex-row justify-between aspect-[1440/440] bg-cover bg-no-repeat xl:aspect-auto xl:min-h-[400px]"
-        style={{ backgroundImage: `url('${config.images.hero}')` }}
-      >
+        style={{ backgroundImage: `url('${config.images.hero}')` }}>
         <Container>
           <Group className="flex-col h-full py-xl gap-xl lg:gap-xs">
             <Group className="items-center">
@@ -52,15 +32,10 @@ export default function Hero({
               <Button to={navigation?.link} look="soft" size="xs">
                 Home
               </Button>
-              {breadcrumbs?.map((breadcrumb) => {
+              {breadcrumbs?.map(breadcrumb => {
                 if (breadcrumb.component) return breadcrumb.component;
                 return (
-                  <Button
-                    key={breadcrumb.link}
-                    to={breadcrumb.link}
-                    look="soft"
-                    size="xs"
-                  >
+                  <Button key={breadcrumb.link} to={breadcrumb.link} look="soft" size="xs">
                     <Icon remix="RiArrowRightSLine" />
                     {breadcrumb.name}
                   </Button>
@@ -74,14 +49,14 @@ export default function Hero({
                     {!!icons && (
                       <Icons size="lg">
                         {icons?.length > 1
-                          ? icons?.map((icon) => (
+                          ? icons?.map(icon => (
                               <Icon
                                 className="hidden md:block text-main-12 !w-lg*4 !h-lg*4"
                                 key={`${Object.values(icon)}`}
                                 {...icon}
                               />
                             ))
-                          : icons?.map((icon) => (
+                          : icons?.map(icon => (
                               <Icon
                                 className="hidden md:block text-main-12 !w-xl*4 !h-xl*4"
                                 key={`${Object.values(icon)}`}

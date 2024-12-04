@@ -18,11 +18,7 @@ export default function Index() {
       description={
         <Group>
           <Input state={[inputAddress, setInputAddress]} look="soft" />
-          <Button
-            onClick={() => inputAddress && navigate(`/users/${inputAddress}`)}
-            size="xl"
-            look="soft"
-          >
+          <Button onClick={() => inputAddress && navigate(`/users/${inputAddress}`)} size="xl" look="soft">
             <Icon remix="RiSendPlane2Fill" />
           </Button>
         </Group>
@@ -58,8 +54,7 @@ export default function Index() {
           link: `/users/${address}/claims`,
           key: crypto.randomUUID(),
         },
-      ]}
-    >
+      ]}>
       <Outlet />
     </Hero>
   );
