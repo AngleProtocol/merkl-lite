@@ -1,15 +1,17 @@
-import type { Token as TokenType } from "@merkl/api";
+import type { Campaign, Token as TokenType } from "@merkl/api";
 import { Button, Dropdown, Icon, Text, Value } from "packages/dappkit/src";
 import { useMemo } from "react";
+import CampaignTooltip from "../campaign/CampaignTooltip";
 import TokenTooltip from "./TokenTooltip";
 
 export type TokenProps = {
   token: TokenType;
   value?: boolean;
   amount?: number;
+  campaign?: Campaign;
 };
 
-export default function Token({ token, amount, value }: TokenProps) {
+export default function Token({ token, amount, value, campaign }: TokenProps) {
   const display = useMemo(
     () => (
       <Button look="soft">
@@ -27,13 +29,14 @@ export default function Token({ token, amount, value }: TokenProps) {
         )}
       </Button>
     ),
-    [token, amount]
+    [token, amount],
   );
 
+  const renderDropdownContent = useMemo(() => {
+    if (campaign) return <CampaignTooltip campaign={campaign} />;
+    return <TokenTooltip token={token} amount={amount} />;
+  }, [campaign, token, amount]);
+
   if (value) return display;
-  return (
-    <Dropdown content={<TokenTooltip {...{ token, amount }} />}>
-      {display}
-    </Dropdown>
-  );
+  return <Dropdown content={renderDropdownContent}>{display}</Dropdown>;
 }

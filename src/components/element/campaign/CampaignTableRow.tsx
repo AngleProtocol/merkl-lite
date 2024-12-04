@@ -1,19 +1,9 @@
-import type { Campaign } from "@merkl/api";
-import {
-  type Component,
-  Group,
-  Hash,
-  Icon,
-  OverrideTheme,
-  Text,
-  Value,
-  mergeClass,
-} from "dappkit";
+import type { Campaign, Chain as ChainType } from "@merkl/api";
+import { type Component, Group, Hash, Icon, OverrideTheme, Text, Value, mergeClass } from "dappkit";
 import moment from "moment";
 import Tooltip from "packages/dappkit/src/components/primitives/Tooltip";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import useCampaign from "src/hooks/resources/useCampaign";
-import { formatUnits, parseUnits } from "viem";
 import Chain from "../chain/Chain";
 import Token from "../token/Token";
 import { CampaignRow } from "./CampaignTable";
@@ -24,43 +14,25 @@ export type CampaignTableRowProps = Component<{
   startsOpen?: boolean;
 }>;
 
-export default function CampaignTableRow({
-  campaign,
-  startsOpen,
-  className,
-  ...props
-}: CampaignTableRowProps) {
-  const { time, profile, dailyRewards, active } = useCampaign(campaign);
+export default function CampaignTableRow({ campaign, startsOpen, className, ...props }: CampaignTableRowProps) {
+  const { time, profile, dailyRewards, active, amount } = useCampaign(campaign);
   const [isOpen, setIsOpen] = useState(startsOpen);
 
-  const toggleIsOpen = useCallback(() => setIsOpen((o) => !o), []);
-
-  const campaignAmount = useMemo(
-    () =>
-      formatUnits(
-        parseUnits(campaign.amount, 0),
-        campaign.rewardToken.decimals
-      ),
-    [campaign]
-  );
+  const toggleIsOpen = useCallback(() => setIsOpen(o => !o), []);
 
   return (
     <CampaignRow
       {...props}
       className={mergeClass("cursor-pointer", className)}
       onClick={toggleIsOpen}
-      chainColumn={<Chain chain={campaign.chain} />}
+      chainColumn={<Chain chain={campaign.chain as ChainType} />}
       restrictionsColumn={<RestrictionsCollumn campaign={campaign} />}
       dailyRewardsColumn={
         <Group className="align-middle items-center">
           <OverrideTheme accent={"good"}>
-            <Icon
-              className={active ? "text-accent-10" : "text-main-10"}
-              remix="RiCircleFill"
-              size="xs"
-            />
+            <Icon className={active ? "text-accent-10" : "text-main-10"} remix="RiCircleFill" size="xs" />
           </OverrideTheme>
-          <Token token={campaign.rewardToken} amount={dailyRewards} />
+          <Token token={campaign.rewardToken} amount={dailyRewards} campaign={campaign} />
         </Group>
       }
       timeRemainingColumn={
@@ -68,10 +40,7 @@ export default function CampaignTableRow({
           <Text>{time}</Text>
         </Group>
       }
-      arrowColumn={
-        <Icon remix={!isOpen ? "RiArrowDownSLine" : "RiArrowUpSLine"} />
-      }
-    >
+      arrowColumn={<Icon remix={!isOpen ? "RiArrowDownSLine" : "RiArrowUpSLine"} />}>
       {isOpen && (
         <div className="animate-drop">
           <Group className="flex-nowrap" size="lg">
@@ -79,25 +48,16 @@ export default function CampaignTableRow({
               <Text size="md">Campaign information</Text>
               <div className="flex justify-between">
                 <Text size="sm">Total</Text>
-                <Value
-                  className="text-right"
-                  look={campaignAmount === "0" ? "soft" : "base"}
-                  format="$0,0.#"
-                >
-                  {campaignAmount}
+                <Value className="text-right" look={amount === "0" ? "soft" : "base"} format="$0,0.#">
+                  {amount}
                 </Value>
               </div>
               <div className="flex justify-between">
                 <Text size="sm">Dates</Text>
                 <span className="flex">
                   <Text size="sm">
-                    {moment
-                      .unix(Number(campaign.startTimestamp))
-                      .format("DD MMMM YYYY")}
-                    -
-                    {moment
-                      .unix(Number(campaign.endTimestamp))
-                      .format("DD MMMM YYYY")}
+                    {moment.unix(Number(campaign.startTimestamp)).format("DD MMMM YYYY")}-
+                    {moment.unix(Number(campaign.endTimestamp)).format("DD MMMM YYYY")}
                   </Text>
                 </span>
               </div>
@@ -130,16 +90,11 @@ export default function CampaignTableRow({
                   helper={
                     <div>
                       {campaign.params.blacklist.length > 0
-                        ? campaign.params.blacklist.map(
-                            (blacklist: string) => blacklist
-                          )
+                        ? campaign.params.blacklist.map((blacklist: string) => blacklist)
                         : "No address"}
                     </div>
-                  }
-                >
-                  <Text size="sm">
-                    {campaign.params.blacklist.length} address
-                  </Text>
+                  }>
+                  <Text size="sm">{campaign.params.blacklist.length} address</Text>
                 </Tooltip>
               </span>
               <span className="flex justify-between">
@@ -148,16 +103,11 @@ export default function CampaignTableRow({
                   helper={
                     <div>
                       {campaign.params.whitelist.length > 0
-                        ? campaign.params.whitelist.map(
-                            (blacklist: string) => blacklist
-                          )
+                        ? campaign.params.whitelist.map((blacklist: string) => blacklist)
                         : "No address"}
                     </div>
-                  }
-                >
-                  <Text size="sm">
-                    {campaign.params.whitelist.length} address
-                  </Text>
+                  }>
+                  <Text size="sm">{campaign.params.whitelist.length} address</Text>
                 </Tooltip>
               </span>
             </Group>
