@@ -1,15 +1,6 @@
 import type { Opportunity, Token } from "@merkl/api";
 import type { Chain } from "@merkl/api";
-import {
-  Button,
-  Divider,
-  Dropdown,
-  Group,
-  Hash,
-  Icon,
-  PrimitiveTag,
-  Text,
-} from "dappkit";
+import { Button, Divider, Dropdown, Group, Hash, Icon, PrimitiveTag, Text } from "dappkit";
 import type { ButtonProps } from "dappkit";
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
 import { type Action, actions } from "src/config/actions";
@@ -34,11 +25,7 @@ export type TagProps<T extends keyof TagTypes> = ButtonProps & {
   value: TagTypes[T];
 };
 
-export default function Tag<T extends keyof TagTypes>({
-  type,
-  value,
-  ...props
-}: TagProps<T>) {
+export default function Tag<T extends keyof TagTypes>({ type, value, ...props }: TagProps<T>) {
   const { chains } = useWalletContext();
 
   switch (type) {
@@ -67,8 +54,7 @@ export default function Tag<T extends keyof TagTypes>({
                 </Button>
               </Group>
             </Group>
-          }
-        >
+          }>
           <PrimitiveTag look="soft" key={value} {...props}>
             <Icon size={props?.size} {...status.icon} />
             {status?.label}
@@ -101,8 +87,7 @@ export default function Tag<T extends keyof TagTypes>({
                 </Button>
               </Group>
             </Group>
-          }
-        >
+          }>
           <PrimitiveTag look="base" key={value} {...props}>
             <Icon size={props?.size} src={chain?.icon} />
             {chain?.name}
@@ -134,8 +119,7 @@ export default function Tag<T extends keyof TagTypes>({
                 Open
               </Button>
             </Group>
-          }
-        >
+          }>
           <PrimitiveTag look="soft" key={value} {...props}>
             <Icon size={props?.size} {...action.icon} />
             {action?.label}
@@ -173,16 +157,15 @@ export default function Tag<T extends keyof TagTypes>({
                   {token?.symbol} on Merkl
                 </Button>
                 {chains
-                  .find((c) => c.id === token.chainId)
-                  ?.explorers?.map((explorer) => {
+                  .find(c => c.id === token.chainId)
+                  ?.explorers?.map(explorer => {
                     return (
                       <Button
                         key={`${explorer.url}`}
                         to={`${explorer.url}/token/${token.address}`}
                         external
                         size="xs"
-                        look="soft"
-                      >
+                        look="soft">
                         <Icon remix="RiArrowRightLine" />
                         {token?.symbol} on Etherscan
                       </Button>
@@ -190,8 +173,7 @@ export default function Tag<T extends keyof TagTypes>({
                   })}
               </Group>
             </Group>
-          }
-        >
+          }>
           <PrimitiveTag look="base" key={value} {...props}>
             <Icon size={props?.size} src={token.icon} />
             {token?.symbol}
@@ -225,11 +207,7 @@ export default function Tag<T extends keyof TagTypes>({
               <Divider look="soft" horizontal />
               <Group className="flex-col" size="md">
                 {/* <Text size="xs">{token?.description}</Text> */}
-                <Button
-                  to={`/chains/${token.chain?.name}`}
-                  size="sm"
-                  look="soft"
-                >
+                <Button to={`/chains/${token.chain?.name}`} size="sm" look="soft">
                   <Icon remix="RiArrowRightLine" />
                   {token.chain?.name} on Merkl
                 </Button>
@@ -238,16 +216,15 @@ export default function Tag<T extends keyof TagTypes>({
                   {token?.symbol} on Merkl
                 </Button>
                 {chains
-                  .find((c) => c.id === token.chainId)
-                  ?.explorers?.map((explorer) => {
+                  .find(c => c.id === token.chainId)
+                  ?.explorers?.map(explorer => {
                     return (
                       <Button
                         key={`${explorer.url}`}
                         to={`${explorer.url}/token/${token.address}`}
                         external
                         size="xs"
-                        look="soft"
-                      >
+                        look="soft">
                         <Icon remix="RiArrowRightLine" />
                         {token?.symbol} on Etherscan
                       </Button>
@@ -255,8 +232,7 @@ export default function Tag<T extends keyof TagTypes>({
                   })}
               </Group>
             </Group>
-          }
-        >
+          }>
           <PrimitiveTag look="base" key={value} {...props}>
             <Icon size={props?.size} src={token.chain.icon} />
             {token.chain.name}
@@ -282,11 +258,7 @@ export default function Tag<T extends keyof TagTypes>({
               <Divider className="border-main-6" horizontal />
               {/* <Text size="xs">{token?.description}</Text> */}
               <Group className="flex-col" size="md">
-                <Button
-                  to={`/protocols/${protocol?.name}`}
-                  size="xs"
-                  look="soft"
-                >
+                <Button to={`/protocols/${protocol?.name}`} size="xs" look="soft">
                   <Icon remix="RiArrowRightLine" />
                   {protocol?.name} on Merkl
                 </Button>
@@ -296,8 +268,7 @@ export default function Tag<T extends keyof TagTypes>({
                 </Button>
               </Group>
             </Group>
-          }
-        >
+          }>
           <PrimitiveTag look="tint" key={value} {...props}>
             <Icon src={protocol?.icon} />
             {value?.name}
