@@ -1,9 +1,15 @@
-import { type LoaderFunctionArgs, type MetaFunction, json } from "@remix-run/node";
+import {
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  json,
+} from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import Hero from "src/components/composite/Hero";
 import { type Status, getStatus, statuses } from "src/config/status";
 
-export async function loader({ params: { status: _status } }: LoaderFunctionArgs) {
+export async function loader({
+  params: { status: _status },
+}: LoaderFunctionArgs) {
   const status = getStatus(_status ?? "");
 
   if (!status) throw new Error("Unknown status");
@@ -14,7 +20,8 @@ export async function loader({ params: { status: _status } }: LoaderFunctionArgs
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   if (!data?.status) return [{ title: "Merkl" }];
 
-  const status = data.status.charAt(0).toUpperCase() + data.status.slice(1).toLowerCase();
+  const status =
+    data.status.charAt(0).toUpperCase() + data.status.slice(1).toLowerCase();
 
   return [{ title: `${status} opportunities on Merkl` }];
 };
@@ -36,8 +43,10 @@ export default function Index() {
         {
           label: "Opportunities",
           link: `/status/${status.label?.toLowerCase()}`,
+          key: crypto.randomUUID(),
         },
-      ]}>
+      ]}
+    >
       <Outlet />
     </Hero>
   );

@@ -17,7 +17,13 @@ export async function loader({ params: { address } }: LoaderFunctionArgs) {
 
 export const meta: MetaFunction<typeof loader> = ({ data, error }) => {
   if (error) return [{ title: error }];
-  return [{ title: `${data?.address?.substring(0, 6)}…${data?.address.substring(data?.address.length - 4)} on Merkl` }];
+  return [
+    {
+      title: `${data?.address?.substring(0, 6)}…${data?.address.substring(
+        data?.address.length - 4
+      )} on Merkl`,
+    },
+  ];
 };
 
 export default function Index() {
@@ -31,20 +37,27 @@ export default function Index() {
       ({ earned, unclaimed }, chain) => {
         const valueUnclaimed = chain.rewards.reduce((sum, token) => {
           const value =
-            Number.parseFloat(formatUnits(token.amount - token.claimed, token.token.decimals)) *
-            (token.token.price ?? 0);
+            Number.parseFloat(
+              formatUnits(token.amount - token.claimed, token.token.decimals)
+            ) * (token.token.price ?? 0);
 
           return sum + value;
         }, 0);
         const valueEarned = chain.rewards.reduce((sum, token) => {
-          const value = Number.parseFloat(formatUnits(token.claimed, token.token.decimals)) * (token.token.price ?? 0);
+          const value =
+            Number.parseFloat(
+              formatUnits(token.claimed, token.token.decimals)
+            ) * (token.token.price ?? 0);
 
           return sum + value;
         }, 0);
 
-        return { earned: earned + valueEarned, unclaimed: unclaimed + valueUnclaimed };
+        return {
+          earned: earned + valueEarned,
+          unclaimed: unclaimed + valueUnclaimed,
+        };
       },
-      { earned: 0, unclaimed: 0 },
+      { earned: 0, unclaimed: 0 }
     );
   }, [rewards]);
 
@@ -95,9 +108,14 @@ export default function Index() {
           <Group>
             <Input state={[inputAddress, setInputAddress]} look="base" />
             <Button
-              onClick={() => (inputAddress ? navigate(`/users/${inputAddress}`) : setIsEditingAddress(false))}
+              onClick={() =>
+                inputAddress
+                  ? navigate(`/users/${inputAddress}`)
+                  : setIsEditingAddress(false)
+              }
               size="xl"
-              look="soft">
+              look="soft"
+            >
               <Icon remix="RiCornerDownRightLine" />
             </Button>
           </Group>
@@ -107,13 +125,15 @@ export default function Index() {
         {
           label: (
             <>
-              <Icon size="sm" remix="RiGift2Fill" />
+              <Icon remix="RiGift2Fill" />
               Rewards
             </>
           ),
           link: `/users/${address}`,
+          key: crypto.randomUUID(),
         },
-      ]}>
+      ]}
+    >
       <Outlet />
     </Hero>
   );

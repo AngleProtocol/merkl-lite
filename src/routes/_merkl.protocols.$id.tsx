@@ -1,4 +1,8 @@
-import { type LoaderFunctionArgs, type MetaFunction, json } from "@remix-run/node";
+import {
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  json,
+} from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { ProtocolService } from "src/api/services/protocol.service";
 import Hero from "src/components/composite/Hero";
@@ -31,8 +35,10 @@ export default function Index() {
         {
           label: "Opportunities",
           link: `/protocols/${protocol.name?.toLowerCase()}`,
+          key: crypto.randomUUID(),
         },
-      ]}>
+      ]}
+    >
       <Outlet />
     </Hero>
   );

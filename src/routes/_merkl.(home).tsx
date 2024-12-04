@@ -10,9 +10,13 @@ export default function Index() {
   return (
     <Hero
       icons={[{ remix: "RiPlanetFill" }]}
-      navigation={{ label: "Back to opportunities", link: "/" }}
+      navigation={{
+        label: "Back to opportunities",
+        link: "/",
+      }}
       title={"Opportunities"}
-      description={"Lorem ipsum something cool"}>
+      description={"Lorem ipsum something cool"}
+    >
       <Outlet />
     </Hero>
   );
