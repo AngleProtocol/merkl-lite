@@ -9,12 +9,12 @@ import { formatUnits, parseUnits } from "viem";
 export default function useCampaign(campaign?: Campaign) {
   if (!campaign)
     return {
-      amount: "",
-      time: "",
-      profile: "",
-      dailyRewards: BigInt(0),
-      progressBar: "",
-      active: false,
+      amount: undefined,
+      time: undefined,
+      profile: undefined,
+      dailyRewards: undefined,
+      progressBar: undefined,
+      active: undefined,
     };
 
   // ─── Campaign Amount Prices ──────────────────────────────────
@@ -86,8 +86,7 @@ export default function useCampaign(campaign?: Campaign) {
         );
       },
     };
-
-    return reducer[campaign.type]?.(campaign) ?? <Text>NONE</Text>;
+    return reducer[campaign.type]?.(campaign);
   }, [campaign]);
 
   const progressBar = useMemo(() => {

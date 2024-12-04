@@ -1,6 +1,7 @@
 import type { Campaign, Chain as ChainType } from "@merkl/api";
 import {
   type Component,
+  Divider,
   Dropdown,
   Group,
   Hash,
@@ -12,7 +13,6 @@ import {
   mergeClass,
 } from "dappkit";
 import moment from "moment";
-import Tooltip from "packages/dappkit/src/components/primitives/Tooltip";
 import { useCallback, useState } from "react";
 import useCampaign from "src/hooks/resources/useCampaign";
 import Chain from "../chain/Chain";
@@ -42,7 +42,7 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
       dailyRewardsColumn={
         <Group className="align-middle items-center">
           <OverrideTheme accent={"good"}>
-            <Icon className={active ? "text-accent-10" : "text-main-10"} remix="RiCircleFill" size="xs" />
+            <Icon className={active ? "text-accent-10" : "text-main-10"} remix="RiCircleFill" />
           </OverrideTheme>
           <Token token={campaign.rewardToken} amount={dailyRewards} campaign={campaign} />
         </Group>
@@ -55,7 +55,7 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
       arrowColumn={<Icon remix={!isOpen ? "RiArrowDownSLine" : "RiArrowUpSLine"} />}>
       {isOpen && (
         <div className="animate-drop">
-          <Group className="flex-nowrap" size="lg">
+          <Group className="flex-nowrap p-lg" size="lg">
             <Group className="justify-between flex-col size-full">
               <Text size="md">Campaign information</Text>
               <div className="flex justify-between">
@@ -73,10 +73,13 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
               <div className="flex justify-between">
                 <Text size="sm">Dates</Text>
                 <span className="flex">
-                  <Text size="sm">
-                    {moment.unix(Number(campaign.startTimestamp)).format("DD MMMM YYYY")}-
-                    {moment.unix(Number(campaign.endTimestamp)).format("DD MMMM YYYY")}
-                  </Text>
+                  <Dropdown content={<CampaignTooltipDates campaign={campaign} />}>
+                    <Text size="sm" className="flex">
+                      {moment.unix(Number(campaign.startTimestamp)).format("DD MMMM YYYY")}
+                      <Icon remix="RiArrowRightLine" />
+                      {moment.unix(Number(campaign.endTimestamp)).format("DD MMMM YYYY")}
+                    </Text>
+                  </Dropdown>
                 </span>
               </div>
               {/* <div className="flex justify-between">
@@ -96,38 +99,31 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
                 </Hash>
               </div>
             </Group>
+            <Divider vertical />
             <Group className="justify-between flex-col size-full">
-              <Text size={"md"}>Conditions</Text>
               <Group className="flex justify-between item-center">
                 <Text size="sm">Incentivized Liquidity</Text>
                 {profile}
               </Group>
-              <span className="flex justify-between">
-                <Text size="sm">Blacklisted for</Text>
-                <Tooltip
-                  helper={
-                    <div>
-                      {campaign.params.blacklist.length > 0
-                        ? campaign.params.blacklist.map((blacklist: string) => blacklist)
-                        : "No address"}
-                    </div>
-                  }>
-                  <Text size="sm">{campaign.params.blacklist.length} address</Text>
-                </Tooltip>
-              </span>
-              <span className="flex justify-between">
-                <Text size="sm">Whitelisted for</Text>
-                <Tooltip
-                  helper={
-                    <div>
-                      {campaign.params.whitelist.length > 0
-                        ? campaign.params.whitelist.map((blacklist: string) => blacklist)
-                        : "No address"}
-                    </div>
-                  }>
-                  <Text size="sm">{campaign.params.whitelist.length} address</Text>
-                </Tooltip>
-              </span>
+              <Group>
+                {campaign.params.blacklist.length > 0 && (
+                  <Dropdown
+                    content={campaign.params.blacklist.map((address: string) => <Text key={address}>{address}</Text>)}>
+                    <PrimitiveTag look="soft" size="sm">
+                      Blacklist ({campaign.params.blacklist.length} address)
+                    </PrimitiveTag>
+                  </Dropdown>
+                )}
+
+                {campaign.params.whitelist.length > 0 && (
+                  <Dropdown
+                    content={campaign.params.whitelist.map((address: string) => <Text key={address}>{address}</Text>)}>
+                    <PrimitiveTag look="soft" size="sm">
+                      Whitelist ({campaign.params.whitelist.length} address)
+                    </PrimitiveTag>
+                  </Dropdown>
+                )}
+              </Group>
             </Group>
           </Group>
         </div>
