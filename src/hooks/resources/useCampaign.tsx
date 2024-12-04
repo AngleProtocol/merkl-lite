@@ -4,11 +4,20 @@ import moment from "moment";
 import { Group, Text, Value } from "packages/dappkit/src";
 import Time from "packages/dappkit/src/components/primitives/Time";
 import { type ReactNode, useMemo } from "react";
-import { formatUnits } from "viem";
+import { formatUnits, parseUnits } from "viem";
 
-export default function useCampaign(campaign: Campaign) {
+export default function useCampaign(campaign?: Campaign) {
+  if (!campaign)
+    return {
+      amount: "",
+      time: "",
+      profile: "",
+      dailyRewards: 0,
+      progressBar: "",
+      active: false,
+    };
   const amount = useMemo(() => {
-    return Number.parseFloat(formatUnits(BigInt(campaign.amount), campaign.rewardToken.decimals));
+    return formatUnits(parseUnits(campaign.amount, 0), campaign.rewardToken.decimals);
   }, [campaign?.amount, campaign?.rewardToken?.decimals]);
 
   const time = useMemo(() => {
@@ -16,7 +25,9 @@ export default function useCampaign(campaign: Campaign) {
   }, [campaign.endTimestamp]);
 
   const profile = useMemo(() => {
-    type ProfileReducer = { [C in Opportunity["type"]]?: (_campaign: Campaign<C>) => ReactNode };
+    type ProfileReducer = {
+      [C in Opportunity["type"]]?: (_campaign: Campaign<C>) => ReactNode;
+    };
 
     const reducer: ProfileReducer = {
       CLAMM: ({ params }) => {
@@ -24,8 +35,14 @@ export default function useCampaign(campaign: Campaign) {
           <Group size="xl" className="flex-nowrap [&>*]:flex-col [&>*]:justify-center">
             {[
               { label: "Fees", value: params.weightFees / 10000 },
-              { label: params.symbolToken0, value: params.weightToken0 / 10000 },
-              { label: params.symbolToken1, value: params.weightToken1 / 10000 },
+              {
+                label: params.symbolToken0,
+                value: params.weightToken0 / 10000,
+              },
+              {
+                label: params.symbolToken1,
+                value: params.weightToken1 / 10000,
+              },
             ].map(({ label, value }) => {
               return (
                 <Group key={`${label}:${value}`} size="sm" className="justify-center gap-0">
