@@ -48,8 +48,6 @@ export default createConfig({
       base: createColoring(
         ["#2A35BD", "#F5F9FF", "#FFFFFF"],
         ["#2A35BD", "#F5F9FF", "#FFFFFF"]
-        // ["#F5F9FF", "#2A35BD", "#FFFFFF"],
-        // ["#F5F9FF", "#2A35BD", "#FFFFFF"]
       ),
       info: createColoring(
         ["#2ABDFF", "#2ABDFF", "#131620"],
@@ -105,10 +103,10 @@ export default createConfig({
     },
   },
   socials: {
-    discord: "",
-    telegram: "https://t.me/+2T0RNabX2ANkMzAx",
-    x: "https://x.com/zksyncignite",
-    github: "",
+    discord: "https://discord.com/invite/pufferfi",
+    telegram: "https://t.me/puffer_fi",
+    x: "https://twitter.com/Puffer_Finance",
+    github: "https://github.com/PufferFinance",
   },
   links: {
     merkl: "https://merkl.xyz/",
