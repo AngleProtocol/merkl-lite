@@ -15,7 +15,7 @@ export default function Index() {
         link: "/",
       }}
       title={"Opportunities"}
-      description={"Lorem ipsum something cool"}
+      description={"Compare campaigns, find the best opportunities and earn tokens"}
     >
       <Outlet />
     </Hero>

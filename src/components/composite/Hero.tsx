@@ -1,20 +1,18 @@
 import type { Opportunity } from "@merkl/api";
 import { useLocation } from "@remix-run/react";
 import {
-  Box,
   Container,
   Divider,
   Group,
   Icon,
   type IconProps,
   Icons,
-  Space,
+  Tabs,
   Text,
   Title,
 } from "dappkit";
 import { Button } from "dappkit";
 import config from "merkl.config";
-import Tabs from "packages/dappkit/src/components/primitives/Tabs";
 import type { PropsWithChildren, ReactNode } from "react";
 
 export type HeroProps = PropsWithChildren<{
@@ -149,7 +147,7 @@ export default function Hero({
       <Container>
         {!!tabs && (
           <Group size="xl" className="my-lg">
-            <Tabs tabs={tabs} look="hype" />
+            <Tabs tabs={tabs} look="base" size="lg" />
           </Group>
         )}
       </Container>
