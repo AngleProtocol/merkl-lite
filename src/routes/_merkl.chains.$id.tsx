@@ -1,4 +1,8 @@
-import { type LoaderFunctionArgs, type MetaFunction, json } from "@remix-run/node";
+import {
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  json,
+} from "@remix-run/node";
 import { Outlet, useLoaderData, useRouteError } from "@remix-run/react";
 import { Group, Title } from "dappkit";
 import { ChainService } from "src/api/services/chain.service";
@@ -29,16 +33,23 @@ export default function Index() {
       title={chain.name}
       description={"Lorem ipsum something cool about the chain"}
       tabs={[
-        { label: "Opportunities", link: `/chains/${label?.toLowerCase()}` },
+        {
+          label: "Opportunities",
+          link: `/chains/${label?.toLowerCase()}`,
+          key: crypto.randomUUID(),
+        },
         {
           label: "Leaderboard",
           link: `/chains/${label?.toLowerCase()}/leaderboard`,
+          key: crypto.randomUUID(),
         },
         {
           label: "Analytics",
           link: `/chains/${label?.toLowerCase()}/analytics`,
+          key: crypto.randomUUID(),
         },
-      ]}>
+      ]}
+    >
       <Outlet />
     </Hero>
   );

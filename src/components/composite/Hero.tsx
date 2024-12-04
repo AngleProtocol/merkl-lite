@@ -1,6 +1,16 @@
 import type { Opportunity } from "@merkl/api";
 import { useLocation } from "@remix-run/react";
-import { Box, Container, Divider, Group, Icon, type IconProps, Icons, Text, Title } from "dappkit";
+import {
+  Container,
+  Divider,
+  Group,
+  Icon,
+  type IconProps,
+  Icons,
+  Tabs,
+  Text,
+  Title,
+} from "dappkit";
 import { Button } from "dappkit";
 import config from "merkl.config";
 import type { PropsWithChildren, ReactNode } from "react";
@@ -12,18 +22,28 @@ export type HeroProps = PropsWithChildren<{
   navigation?: { label: ReactNode; link: string };
   description: ReactNode;
   tags?: ReactNode[];
-  tabs?: { label: ReactNode; link: string }[];
+  tabs?: { label: ReactNode; link: string; key: string }[];
   opportunity?: Opportunity;
 }>;
 
-export default function Hero({ navigation, breadcrumbs, icons, title, description, tags, tabs, children }: HeroProps) {
+export default function Hero({
+  navigation,
+  breadcrumbs,
+  icons,
+  title,
+  description,
+  tags,
+  tabs,
+  children,
+}: HeroProps) {
   const location = useLocation();
 
   return (
     <>
       <Group
         className="flex-row justify-between aspect-[1440/440] bg-cover bg-no-repeat xl:aspect-auto xl:min-h-[400px]"
-        style={{ backgroundImage: `url('${config.images.hero}')` }}>
+        style={{ backgroundImage: `url('${config.images.hero}')` }}
+      >
         <Container>
           <Group className="flex-col h-full py-xl gap-xl lg:gap-xs">
             <Group className="items-center">
@@ -32,10 +52,15 @@ export default function Hero({ navigation, breadcrumbs, icons, title, descriptio
               <Button to={navigation?.link} look="soft" size="xs">
                 Home
               </Button>
-              {breadcrumbs?.map(breadcrumb => {
+              {breadcrumbs?.map((breadcrumb) => {
                 if (breadcrumb.component) return breadcrumb.component;
                 return (
-                  <Button key={breadcrumb.link} to={breadcrumb.link} look="soft" size="xs">
+                  <Button
+                    key={breadcrumb.link}
+                    to={breadcrumb.link}
+                    look="soft"
+                    size="xs"
+                  >
                     <Icon remix="RiArrowRightSLine" />
                     {breadcrumb.name}
                   </Button>
@@ -49,14 +74,14 @@ export default function Hero({ navigation, breadcrumbs, icons, title, descriptio
                     {!!icons && (
                       <Icons size="lg">
                         {icons?.length > 1
-                          ? icons?.map(icon => (
+                          ? icons?.map((icon) => (
                               <Icon
                                 className="hidden md:block text-main-12 !w-lg*4 !h-lg*4"
                                 key={`${Object.values(icon)}`}
                                 {...icon}
                               />
                             ))
-                          : icons?.map(icon => (
+                          : icons?.map((icon) => (
                               <Icon
                                 className="hidden md:block text-main-12 !w-xl*4 !h-xl*4"
                                 key={`${Object.values(icon)}`}
@@ -121,16 +146,9 @@ export default function Hero({ navigation, breadcrumbs, icons, title, descriptio
       </Group>
       <Container>
         {!!tabs && (
-          <Box size="sm" look="base" className="flex-row mt-md w-min">
-            {tabs?.map(tab => (
-              <Button
-                look={location.pathname === tab.link ? "hype" : "base"}
-                to={tab.link}
-                key={`${tab.label}-${tab.link}`}>
-                {tab.label}
-              </Button>
-            ))}
-          </Box>
+          <Group size="xl" className="my-lg">
+            <Tabs tabs={tabs} look="base" size="lg" />
+          </Group>
         )}
       </Container>
       <div>{children}</div>
