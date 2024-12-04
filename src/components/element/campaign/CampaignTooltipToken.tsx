@@ -7,7 +7,7 @@ export type IProps = {
 };
 
 export default function CampaignTooltipToken({ campaign }: IProps) {
-  const { amount } = useCampaign(campaign);
+  const { amount, amountUsd } = useCampaign(campaign);
 
   return (
     <>
@@ -15,13 +15,18 @@ export default function CampaignTooltipToken({ campaign }: IProps) {
         <Group>
           <Icon remix={"RiMoneyDollarCircleLine"} />
           <Text look="bold">Total rewards</Text>
-          <Value look={"base"} format="$0,0.#">
-            {amount}
-          </Value>
+          <Group>
+            <Icon src={campaign.rewardToken.icon} />
+            <Value look={"base"} format="0,0a">
+              {amount}
+            </Value>
+            <Value look={"base"} format="$0,0.#">
+              {amountUsd}
+            </Value>
+          </Group>
         </Group>
       </Group>
       <Divider look="soft" horizontal />
-      {/* <Text size="xs">{token?.description}</Text> */}
       <Group className="flex-col" size="sm">
         <Button to={`/token/${campaign.rewardToken.symbol}`} size="sm" look="bold">
           {campaign.rewardToken.symbol} on Merkl

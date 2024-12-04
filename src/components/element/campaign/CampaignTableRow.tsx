@@ -27,7 +27,7 @@ export type CampaignTableRowProps = Component<{
 }>;
 
 export default function CampaignTableRow({ campaign, startsOpen, className, ...props }: CampaignTableRowProps) {
-  const { time, profile, dailyRewards, active, amount } = useCampaign(campaign);
+  const { time, profile, dailyRewards, active, amount, amountUsd } = useCampaign(campaign);
   const [isOpen, setIsOpen] = useState(startsOpen);
 
   const toggleIsOpen = useCallback(() => setIsOpen(o => !o), []);
@@ -35,7 +35,7 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
   return (
     <CampaignRow
       {...props}
-      className={mergeClass("cursor-pointer", className)}
+      className={mergeClass("cursor-pointer py-4", className)}
       onClick={toggleIsOpen}
       chainColumn={<Chain chain={campaign.chain as ChainType} />}
       restrictionsColumn={<RestrictionsCollumn campaign={campaign} />}
@@ -60,9 +60,15 @@ export default function CampaignTableRow({ campaign, startsOpen, className, ...p
               <Text size="md">Campaign information</Text>
               <div className="flex justify-between">
                 <Text size="sm">Total</Text>
-                <Value className="text-right" look={amount === "0" ? "soft" : "base"} format="$0,0.#">
-                  {amount}
-                </Value>
+                <Group>
+                  <Icon src={campaign.rewardToken.icon} />
+                  <Value className="text-right" look={amount === "0" ? "soft" : "base"} format="0,0a">
+                    {amount}
+                  </Value>
+                  <Value className="text-right" look={amount === "0" ? "soft" : "base"} format="$0,0.#">
+                    {amountUsd}
+                  </Value>
+                </Group>
               </div>
               <div className="flex justify-between">
                 <Text size="sm">Dates</Text>
