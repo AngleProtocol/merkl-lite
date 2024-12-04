@@ -2,7 +2,7 @@ import { useOutletContext } from "@remix-run/react";
 import { Container, Space } from "packages/dappkit/src";
 import CampaignLibrary from "src/components/element/campaign/CampaignLibrary";
 import { ErrorContent } from "src/components/layout/ErrorContent";
-import type { OutletContextOpportunity } from "./_merkl.opportunity.$chain.$type.$id";
+import type { OutletContextOpportunity } from "./_merkl.opportunities.$chain.$type.$id";
 
 export default function Index() {
   const { opportunity } = useOutletContext<OutletContextOpportunity>();
