@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Outlet, json, useLoaderData, useNavigate } from "@remix-run/react";
-import { Button, Group, Hash, Icon, Input, Text, Value } from "dappkit";
-import { useMemo, useState } from "react";
+import { Outlet, json, useLoaderData } from "@remix-run/react";
+import { Button, Group, Icon, Text, Value } from "dappkit";
+import { useMemo } from "react";
 import { RewardService } from "src/api/services/reward.service";
 import Hero from "src/components/composite/Hero";
 import { formatUnits } from "viem";
@@ -19,29 +19,32 @@ export const meta: MetaFunction<typeof loader> = ({ data, error }) => {
   if (error) return [{ title: error }];
   return [
     {
-      title: `${data?.address?.substring(0, 6)}…${data?.address.substring(data?.address.length - 4)} on Merkl`,
+      title: `${data?.address?.substring(0, 6)}…${data?.address.substring(
+        data?.address.length - 4
+      )} on Merkl`,
     },
   ];
 };
 
 export default function Index() {
   const { rewards, address } = useLoaderData<typeof loader>();
-  const [inputAddress, setInputAddress] = useState<string>();
-  const [_isEditingAddress, setIsEditingAddress] = useState(false);
-  const navigate = useNavigate();
 
   const { earned, unclaimed } = useMemo(() => {
     return rewards.reduce(
       ({ earned, unclaimed }, chain) => {
         const valueUnclaimed = chain.rewards.reduce((sum, token) => {
           const value =
-            Number.parseFloat(formatUnits(token.amount - token.claimed, token.token.decimals)) *
-            (token.token.price ?? 0);
+            Number.parseFloat(
+              formatUnits(token.amount - token.claimed, token.token.decimals)
+            ) * (token.token.price ?? 0);
 
           return sum + value;
         }, 0);
         const valueEarned = chain.rewards.reduce((sum, token) => {
-          const value = Number.parseFloat(formatUnits(token.claimed, token.token.decimals)) * (token.token.price ?? 0);
+          const value =
+            Number.parseFloat(
+              formatUnits(token.claimed, token.token.decimals)
+            ) * (token.token.price ?? 0);
 
           return sum + value;
         }, 0);
@@ -51,7 +54,7 @@ export default function Index() {
           unclaimed: unclaimed + valueUnclaimed,
         };
       },
-      { earned: 0, unclaimed: 0 },
+      { earned: 0, unclaimed: 0 }
     );
   }, [rewards]);
 
@@ -89,26 +92,7 @@ export default function Index() {
         </Group>
       }
       description={
-        !_isEditingAddress && address !== "" ? (
-          <Group>
-            <Hash size={4} bold className="text-main-12" format="short" copy>
-              {address}
-            </Hash>
-            <Button look="soft" onClick={() => setIsEditingAddress(true)}>
-              <Icon remix="RiEdit2Line" />
-            </Button>
-          </Group>
-        ) : (
-          <Group>
-            <Input state={[inputAddress, setInputAddress]} look="base" />
-            <Button
-              onClick={() => (inputAddress ? navigate(`/users/${inputAddress}`) : setIsEditingAddress(false))}
-              size="xl"
-              look="soft">
-              <Icon remix="RiCornerDownRightLine" />
-            </Button>
-          </Group>
-        )
+        "Earn rewards by providing liquidity to this pool on Ethereum"
       }
       tabs={[
         {
@@ -121,7 +105,8 @@ export default function Index() {
           link: `/users/${address}`,
           key: crypto.randomUUID(),
         },
-      ]}>
+      ]}
+    >
       <Outlet />
     </Hero>
   );

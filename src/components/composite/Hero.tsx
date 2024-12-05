@@ -1,9 +1,23 @@
 import type { Opportunity } from "@merkl/api";
-import { useLocation } from "@remix-run/react";
-import { Container, Divider, Group, Icon, type IconProps, Icons, Tabs, Text, Title } from "dappkit";
+import { useLoaderData, useLocation, useNavigate } from "@remix-run/react";
+import {
+  Container,
+  Divider,
+  Dropdown,
+  Group,
+  Hash,
+  Icon,
+  type IconProps,
+  Icons,
+  Input,
+  Tabs,
+  Text,
+  Title,
+} from "dappkit";
 import { Button } from "dappkit";
 import config from "merkl.config";
-import type { PropsWithChildren, ReactNode } from "react";
+import { useState, type PropsWithChildren, type ReactNode } from "react";
+import type { loader } from "src/routes/_merkl.users.$address";
 
 export type HeroProps = PropsWithChildren<{
   icons?: IconProps[];
@@ -12,18 +26,37 @@ export type HeroProps = PropsWithChildren<{
   navigation?: { label: ReactNode; link: string };
   description: ReactNode;
   tags?: ReactNode[];
+  sideDatas?: { data: ReactNode; label: string; key: string }[];
   tabs?: { label: ReactNode; link: string; key: string }[];
   opportunity?: Opportunity;
 }>;
 
-export default function Hero({ navigation, breadcrumbs, icons, title, description, tags, tabs, children }: HeroProps) {
+export default function Hero({
+  navigation,
+  breadcrumbs,
+  icons,
+  title,
+  description,
+  tags,
+  sideDatas,
+  tabs,
+  children,
+}: HeroProps) {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const [inputAddress, setInputAddress] = useState<string>();
+  const [_isEditingAddress, setIsEditingAddress] = useState(false);
+  const { address } = useLoaderData<typeof loader>();
 
   return (
     <>
+      {/* TODO: Align lines & descriptions on all pages  */}
+      {/* TODO: On sub-pages (all pages except Opportunities): Replace the banner by a color  */}
       <Group
         className="flex-row justify-between aspect-[1440/440] bg-cover bg-no-repeat xl:aspect-auto xl:min-h-[400px]"
-        style={{ backgroundImage: `url('${config.images.hero}')` }}>
+        style={{ backgroundImage: `url('${config.images.hero}')` }}
+      >
         <Container>
           <Group className="flex-col h-full py-xl gap-xl lg:gap-xs">
             <Group className="items-center">
@@ -32,15 +65,53 @@ export default function Hero({ navigation, breadcrumbs, icons, title, descriptio
               <Button to={navigation?.link} look="soft" size="xs">
                 Home
               </Button>
-              {breadcrumbs?.map(breadcrumb => {
+              {breadcrumbs?.map((breadcrumb) => {
                 if (breadcrumb.component) return breadcrumb.component;
                 return (
-                  <Button key={breadcrumb.link} to={breadcrumb.link} look="soft" size="xs">
+                  <Button
+                    key={breadcrumb.link}
+                    to={breadcrumb.link}
+                    look="soft"
+                    size="xs"
+                    aria-label="Edit address"
+                  >
                     <Icon remix="RiArrowRightSLine" />
                     {breadcrumb.name}
                   </Button>
                 );
               })}
+              {location?.pathname.includes("users") && address !== "" && (
+                <Dropdown
+                  size="md"
+                  padding="xs"
+                  content={
+                    <Group size="sm">
+                      <Input
+                        state={[inputAddress, setInputAddress]}
+                        look="bold"
+                        aria-label="Enter address"
+                        size="xs"
+                      />
+                      <Button
+                        onClick={() =>
+                          inputAddress
+                            ? navigate(`/users/${inputAddress}`)
+                            : setIsEditingAddress(false)
+                        }
+                        size="sm"
+                        look="soft"
+                        aria-label="Submit address"
+                      >
+                        <Icon remix="RiCornerDownRightLine" />
+                      </Button>
+                    </Group>
+                  }
+                >
+                  <Button look="soft" size="xs">
+                    <Icon remix="RiEdit2Line" />
+                  </Button>
+                </Dropdown>
+              )}
             </Group>
             <Group className="grow items-center justify-between gap-xl lg:gap-xl*4">
               <Group className="flex-col flex-1 gap-xl lg:!gap-lg*2">
@@ -49,14 +120,14 @@ export default function Hero({ navigation, breadcrumbs, icons, title, descriptio
                     {!!icons && (
                       <Icons size="lg">
                         {icons?.length > 1
-                          ? icons?.map(icon => (
+                          ? icons?.map((icon) => (
                               <Icon
                                 className="hidden md:block text-main-12 !w-lg*4 !h-lg*4"
                                 key={`${Object.values(icon)}`}
                                 {...icon}
                               />
                             ))
-                          : icons?.map(icon => (
+                          : icons?.map((icon) => (
                               <Icon
                                 className="hidden md:block text-main-12 !w-xl*4 !h-xl*4"
                                 key={`${Object.values(icon)}`}
@@ -69,52 +140,31 @@ export default function Hero({ navigation, breadcrumbs, icons, title, descriptio
                       {title}
                     </Title>
                   </Group>
-                  {tags && (
-                    <Text size="xl" bold>
-                      {description}
-                    </Text>
-                  )}
                 </Group>
                 <Divider look="base" />
-                {tags && <Group className="mb-lg">{tags}</Group>}
-                {!tags && (
+                {!!description && (
                   <Text size="xl" bold>
                     {description}
                   </Text>
                 )}
+                {!!tags && <Group className="mb-lg">{tags}</Group>}
               </Group>
-              {/* TODO: Move this outside the Hero component */}
-              {/* {!location?.pathname.includes("user") && (
-                <Group className="w-full lg:w-auto lg:flex-col mr-xl*2" size="xl">
-                  <Group className="flex-col">
-                    <Text size={3}>
-                      <Value look={totalRewards === "0" ? "soft" : "base"} format="$0,0" size={"md"}>
-                        {totalRewards}
-                      </Value>
-                    </Text>
+              {!!sideDatas && (
+                <Group
+                  className="w-full lg:w-auto lg:flex-col mr-xl*2"
+                  size="xl"
+                >
+                  {sideDatas.map((data) => (
+                    <Group key={data.key} className="flex-col">
+                      <Text size={3}>{data.data}</Text>
 
-                    <Text size="xl" className="font-bold">
-                      Daily rewards
-                    </Text>
-                  </Group>
-                  <Group className="flex-col">
-                    <Text size={3}>
-                      <Value value format="0a%">
-                        {(opportunity?.apr ?? 0) / 100}
-                      </Value>
-                    </Text>
-                    <Text size={"xl"} className="font-bold">
-                      APR
-                    </Text>
-                  </Group>
-                  <Group className="flex-col">
-                    <Text size={3}>{filteredCampaigns?.length}</Text>
-                    <Text size={"xl"} className="font-bold">
-                      Active campaigns
-                    </Text>
-                  </Group>
+                      <Text size="xl" className="font-bold">
+                        {data.label}
+                      </Text>
+                    </Group>
+                  ))}
                 </Group>
-              )} */}
+              )}
             </Group>
           </Group>
         </Container>

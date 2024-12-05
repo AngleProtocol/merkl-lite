@@ -40,7 +40,7 @@ export default function Footer() {
             </Group>
 
             <Button to={config.links.merkl} external look="soft">
-              <Image className="w-[130px]" alt="Merkl Footer logo" src={mode !== "dark" ? merklDarkLogo : merklLogo} />
+              <Image className="w-[80px]" alt="Merkl Footer logo" src={mode !== "dark" ? merklDarkLogo : merklLogo} />
             </Button>
           </Group>
         </Group>
