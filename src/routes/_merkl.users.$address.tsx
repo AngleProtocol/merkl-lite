@@ -79,7 +79,7 @@ export default function Index() {
       navigation={{ label: "Back to opportunities", link: "/" }}
       title={
         <Group className="w-full gap-xl md:gap-xl*4 items-center">
-          {/* TODO: Make it dynamic this */}
+          {/* TODO: Make it dynamic */}
           <Group className="flex-col">
             <Value format="$0,0.0a" size={2} className="text-main-12">
               {earned}

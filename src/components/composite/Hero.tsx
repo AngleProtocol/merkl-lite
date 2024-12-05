@@ -42,17 +42,29 @@ export default function Hero({
   tabs,
   children,
 }: HeroProps) {
+  console.log(location?.pathname);
   return (
     <>
       {/* TODO: Align lines & descriptions on all pages  */}
       {/* TODO: On sub-pages (all pages except Opportunities): Replace the banner by a color  */}
       <Group
-        className="flex-row justify-between aspect-[1440/440] bg-cover bg-no-repeat xl:aspect-auto xl:min-h-[400px]"
-        style={{ backgroundImage: `url('${config.images.hero}')` }}
+        className={`${
+          location?.pathname === "/" ||
+          location?.pathname.includes("opportunities")
+            ? "bg-cover"
+            : "bg-main-6"
+        } flex-row justify-between bg-no-repeat xl:aspect-auto xl:min-h-[350px] aspect-[1440/350]`}
+        style={{
+          backgroundImage:
+            location?.pathname === "/" ||
+            location?.pathname.includes("opportunities")
+              ? `url('${config.images.hero}')`
+              : "none",
+        }}
       >
         <Container>
           <Group className="flex-col h-full py-xl gap-xl lg:gap-xs">
-            <Group className="items-center">
+            <Group className="items-center" size="sm">
               {/* TODO: Build dynamic breadcrumbs */}
               <Button to={navigation?.link} look="soft" size="xs">
                 Home
