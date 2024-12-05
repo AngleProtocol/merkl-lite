@@ -20,9 +20,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, error }) => {
   if (error) return [{ title: error }];
   return [
     {
-      title: `${data?.address?.substring(0, 6)}…${data?.address.substring(
-        data?.address.length - 4
-      )} on Merkl`,
+      title: `${data?.address?.substring(0, 6)}…${data?.address.substring(data?.address.length - 4)} on Merkl`,
     },
   ];
 };
@@ -35,17 +33,13 @@ export default function Index() {
       ({ earned, unclaimed }, chain) => {
         const valueUnclaimed = chain.rewards.reduce((sum, token) => {
           const value =
-            Number.parseFloat(
-              formatUnits(token.amount - token.claimed, token.token.decimals)
-            ) * (token.token.price ?? 0);
+            Number.parseFloat(formatUnits(token.amount - token.claimed, token.token.decimals)) *
+            (token.token.price ?? 0);
 
           return sum + value;
         }, 0);
         const valueEarned = chain.rewards.reduce((sum, token) => {
-          const value =
-            Number.parseFloat(
-              formatUnits(token.claimed, token.token.decimals)
-            ) * (token.token.price ?? 0);
+          const value = Number.parseFloat(formatUnits(token.claimed, token.token.decimals)) * (token.token.price ?? 0);
 
           return sum + value;
         }, 0);
@@ -55,7 +49,7 @@ export default function Index() {
           unclaimed: unclaimed + valueUnclaimed,
         };
       },
-      { earned: 0, unclaimed: 0 }
+      { earned: 0, unclaimed: 0 },
     );
   }, [rewards]);
 
@@ -103,9 +97,7 @@ export default function Index() {
           </Group>
         </Group>
       }
-      description={
-        "Earn rewards by providing liquidity to this pool on Ethereum"
-      }
+      description={"Earn rewards by providing liquidity to this pool on Ethereum"}
       tabs={[
         {
           label: (
@@ -117,8 +109,7 @@ export default function Index() {
           link: `/users/${address}`,
           key: crypto.randomUUID(),
         },
-      ]}
-    >
+      ]}>
       <Outlet />
     </Hero>
   );

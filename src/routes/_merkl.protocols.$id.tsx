@@ -1,8 +1,4 @@
-import {
-  type LoaderFunctionArgs,
-  type MetaFunction,
-  json,
-} from "@remix-run/node";
+import { type LoaderFunctionArgs, type MetaFunction, json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { Button, Group, Icon } from "dappkit";
 import { ProtocolService } from "src/api/services/protocol.service";
@@ -46,8 +42,7 @@ export default function Index() {
           link: `/protocols/${protocol.name?.toLowerCase()}`,
           key: crypto.randomUUID(),
         },
-      ]}
-    >
+      ]}>
       <Outlet />
     </Hero>
   );

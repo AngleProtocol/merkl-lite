@@ -1,5 +1,5 @@
 import { useNavigate } from "@remix-run/react";
-import { Group, Button, Icon, Input } from "packages/dappkit/src";
+import { Button, Group, Icon, Input } from "packages/dappkit/src";
 import { useState } from "react";
 
 export default function AddressEdit() {
@@ -9,22 +9,12 @@ export default function AddressEdit() {
 
   return (
     <Group size="sm">
-      <Input
-        state={[inputAddress, setInputAddress]}
-        look="bold"
-        aria-label="Enter address"
-        size="xs"
-      />
+      <Input state={[inputAddress, setInputAddress]} look="bold" aria-label="Enter address" size="xs" />
       <Button
-        onClick={() =>
-          inputAddress
-            ? navigate(`/users/${inputAddress}`)
-            : setIsEditingAddress(false)
-        }
+        onClick={() => (inputAddress ? navigate(`/users/${inputAddress}`) : setIsEditingAddress(false))}
         size="sm"
         look="soft"
-        aria-label="Submit address"
-      >
+        aria-label="Submit address">
         <Icon remix="RiCornerDownRightLine" />
       </Button>
     </Group>

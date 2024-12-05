@@ -16,8 +16,7 @@ export default function Index() {
       sideDatas={[
         { data: "8%", label: "Total opportunities", key: crypto.randomUUID() },
         { data: "99.999", label: "Price", key: crypto.randomUUID() },
-      ]}
-    >
+      ]}>
       <Outlet />
     </Hero>
   );
