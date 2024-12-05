@@ -1,9 +1,10 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Outlet, json, useLoaderData } from "@remix-run/react";
-import { Button, Group, Icon, Text, Value } from "dappkit";
+import { Button, Dropdown, Group, Icon, Text, Value } from "dappkit";
 import { useMemo } from "react";
 import { RewardService } from "src/api/services/reward.service";
 import Hero from "src/components/composite/Hero";
+import AddressEdit from "src/components/element/AddressEdit";
 import { formatUnits } from "viem";
 
 export async function loader({ params: { address } }: LoaderFunctionArgs) {
@@ -62,7 +63,18 @@ export default function Index() {
     <Hero
       breadcrumbs={[
         { link: "/", name: "Users" },
-        { link: `/users/${address ?? ""}`, name: address ?? "" },
+        {
+          link: `/users/${address ?? ""}`,
+          component: (
+            <Dropdown size="md" padding="xs" content={<AddressEdit />}>
+              <Button look="soft" size="xs" aria-label="Edit address">
+                <Icon remix="RiArrowRightSLine" />
+                {address}
+                <Icon remix="RiEdit2Line" />
+              </Button>
+            </Dropdown>
+          ),
+        },
       ]}
       navigation={{ label: "Back to opportunities", link: "/" }}
       title={

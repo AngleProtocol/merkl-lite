@@ -22,7 +22,7 @@ import type { loader } from "src/routes/_merkl.users.$address";
 export type HeroProps = PropsWithChildren<{
   icons?: IconProps[];
   title: ReactNode;
-  breadcrumbs?: { name: string; link: string; component?: ReactNode }[];
+  breadcrumbs?: { name?: string; link: string; component?: ReactNode }[];
   navigation?: { label: ReactNode; link: string };
   description: ReactNode;
   tags?: ReactNode[];
@@ -42,13 +42,6 @@ export default function Hero({
   tabs,
   children,
 }: HeroProps) {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const [inputAddress, setInputAddress] = useState<string>();
-  const [_isEditingAddress, setIsEditingAddress] = useState(false);
-  const { address } = useLoaderData<typeof loader>();
-
   return (
     <>
       {/* TODO: Align lines & descriptions on all pages  */}
@@ -61,7 +54,6 @@ export default function Hero({
           <Group className="flex-col h-full py-xl gap-xl lg:gap-xs">
             <Group className="items-center">
               {/* TODO: Build dynamic breadcrumbs */}
-              {/** Disabled and set invisible when undefined to preserve layout height */}
               <Button to={navigation?.link} look="soft" size="xs">
                 Home
               </Button>
@@ -73,45 +65,12 @@ export default function Hero({
                     to={breadcrumb.link}
                     look="soft"
                     size="xs"
-                    aria-label="Edit address"
                   >
                     <Icon remix="RiArrowRightSLine" />
                     {breadcrumb.name}
                   </Button>
                 );
               })}
-              {location?.pathname.includes("users") && address !== "" && (
-                <Dropdown
-                  size="md"
-                  padding="xs"
-                  content={
-                    <Group size="sm">
-                      <Input
-                        state={[inputAddress, setInputAddress]}
-                        look="bold"
-                        aria-label="Enter address"
-                        size="xs"
-                      />
-                      <Button
-                        onClick={() =>
-                          inputAddress
-                            ? navigate(`/users/${inputAddress}`)
-                            : setIsEditingAddress(false)
-                        }
-                        size="sm"
-                        look="soft"
-                        aria-label="Submit address"
-                      >
-                        <Icon remix="RiCornerDownRightLine" />
-                      </Button>
-                    </Group>
-                  }
-                >
-                  <Button look="soft" size="xs">
-                    <Icon remix="RiEdit2Line" />
-                  </Button>
-                </Dropdown>
-              )}
             </Group>
             <Group className="grow items-center justify-between gap-xl lg:gap-xl*4">
               <Group className="flex-col flex-1 gap-xl lg:!gap-lg*2">
