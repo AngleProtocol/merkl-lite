@@ -46,8 +46,10 @@ export default createConfig({
   themes: {
     merkl: {
       base: createColoring(
-        ["#1F2333", "#B8AAFD", "#131620"],
-        ["#FCF8F5", "#B8AAFD", "white"]
+        // ["#1F2333", "#B8AAFD", "#131620"],
+        // ["#FCF8F5", "#B8AAFD", "white"]
+        ["#1755F4", "#FF7900", "#0D1530"],
+        ["#1755F4", "#FF7900", "#FFFFFF"]
       ),
       info: createColoring(
         ["#2ABDFF", "#2ABDFF", "#131620"],
@@ -91,16 +93,16 @@ export default createConfig({
     //   route: "/protocols",
     //   key: crypto.randomUUID(),
     // },
-    terms: {
-      icon: "RiCompassesLine",
-      route: "/terms",
-      key: crypto.randomUUID(),
-    },
-    privacy: {
-      icon: "RiInformationFill",
-      route: "/privacy",
-      key: crypto.randomUUID(),
-    },
+    // terms: {
+    //   icon: "RiCompassesLine",
+    //   route: "/terms",
+    //   key: crypto.randomUUID(),
+    // },
+    // privacy: {
+    //   icon: "RiInformationFill",
+    //   route: "/privacy",
+    //   key: crypto.randomUUID(),
+    // },
   },
   socials: {
     discord: "",

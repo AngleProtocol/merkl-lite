@@ -1,23 +1,19 @@
 import type { Opportunity } from "@merkl/api";
-import { useLoaderData, useLocation, useNavigate } from "@remix-run/react";
+import { useLocation } from "@remix-run/react";
 import {
   Container,
   Divider,
-  Dropdown,
   Group,
-  Hash,
   Icon,
   type IconProps,
   Icons,
-  Input,
   Tabs,
   Text,
   Title,
 } from "dappkit";
 import { Button } from "dappkit";
 import config from "merkl.config";
-import { useState, type PropsWithChildren, type ReactNode } from "react";
-import type { loader } from "src/routes/_merkl.users.$address";
+import type { PropsWithChildren, ReactNode } from "react";
 
 export type HeroProps = PropsWithChildren<{
   icons?: IconProps[];
@@ -42,7 +38,7 @@ export default function Hero({
   tabs,
   children,
 }: HeroProps) {
-  console.log(location?.pathname);
+  const location = useLocation();
   return (
     <>
       {/* TODO: Align lines & descriptions on all pages  */}
@@ -66,7 +62,7 @@ export default function Hero({
           <Group className="flex-col h-full py-xl gap-xl lg:gap-xs">
             <Group className="items-center" size="sm">
               {/* TODO: Build dynamic breadcrumbs */}
-              <Button to={navigation?.link} look="soft" size="xs">
+              <Button to={navigation?.link} look="soft" bold size="xs">
                 Home
               </Button>
               {breadcrumbs?.map((breadcrumb) => {
@@ -129,7 +125,7 @@ export default function Hero({
                     <Group key={data.key} className="flex-col">
                       <Text size={3}>{data.data}</Text>
 
-                      <Text size="xl" className="font-bold">
+                      <Text size="xl" className="font-bold not-italic">
                         {data.label}
                       </Text>
                     </Group>

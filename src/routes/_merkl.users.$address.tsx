@@ -84,7 +84,7 @@ export default function Index() {
             <Value format="$0,0.0a" size={2} className="text-main-12">
               {earned}
             </Value>
-            <Text size="xl" bold>
+            <Text size="xl" bold className="not-italic">
               Total earned
             </Text>
           </Group>
@@ -92,7 +92,7 @@ export default function Index() {
             <Value format="$0,0.0a" size={2} className="text-main-12">
               {unclaimed}
             </Value>
-            <Text size={"xl"} bold>
+            <Text size={"xl"} bold className="not-italic">
               Claimable
             </Text>
           </Group>

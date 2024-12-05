@@ -1,4 +1,12 @@
-import { Button, Container, Dropdown, Group, Icon, WalletButton, useTheme } from "dappkit";
+import {
+  Button,
+  Container,
+  Dropdown,
+  Group,
+  Icon,
+  WalletButton,
+  useTheme,
+} from "dappkit";
 import { Image } from "dappkit";
 import customerDarkLogo from "src/customer/assets/images/customer-dark-logo.svg";
 import customerLogo from "src/customer/assets/images/customer-logo.svg";
@@ -46,7 +54,7 @@ export default function Header() {
           key: crypto.randomUUID(),
         },
       },
-      rest,
+      rest
     );
   }, [user]);
 
@@ -55,7 +63,8 @@ export default function Header() {
       variants={container}
       initial="hidden"
       whileInView="visible"
-      className="w-full sticky left-0 top-0 z-20 backdrop-blur">
+      className="w-full sticky left-0 top-0 z-20 backdrop-blur"
+    >
       <Container className="py-xl">
         <Group className="justify-between items-center">
           <motion.div variants={item}>
@@ -64,7 +73,8 @@ export default function Header() {
               padding="xs"
               open={open}
               content={<LayerMenu nav={routes} setOpen={setOpen} />}
-              className="lg:hidden flex gap-sm md:gap-lg items-center">
+              className="lg:hidden flex gap-sm md:gap-lg items-center"
+            >
               <Image
                 className="w-[140px] md:w-[200px]"
                 alt={`${config.appName} logo`}
@@ -73,7 +83,12 @@ export default function Header() {
               <Icon className="text-main-12" remix="RiArrowDownSLine" />
             </Dropdown>
 
-            <Button className="hidden lg:flex" size="lg" to={routes.homepage.route} look="soft">
+            <Button
+              className="hidden lg:flex"
+              size="lg"
+              to={routes.homepage.route}
+              look="soft"
+            >
               <Image
                 className="w-[200px]"
                 alt={`${config.appName} logo`}
@@ -86,10 +101,16 @@ export default function Header() {
             <Group className="items-center" size="xl">
               <Group className="hidden lg:flex items-center" size="xl">
                 {Object.entries(routes)
-                  .filter(([key]) => !["homepage", "privacy", "terms"].includes(key))
+                  .filter(([key]) => !["homepage"].includes(key))
                   .map(([key, { route }]) => {
                     return (
-                      <Button className="capitalize" look="soft" size="lg" key={`${key}-link`} to={route}>
+                      <Button
+                        className="capitalize"
+                        look="soft"
+                        size="lg"
+                        key={`${key}-link`}
+                        to={route}
+                      >
                         {key}
                       </Button>
                     );
