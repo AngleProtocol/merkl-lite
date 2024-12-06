@@ -1,4 +1,8 @@
-import { type LoaderFunctionArgs, type MetaFunction, json } from "@remix-run/node";
+import {
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  json,
+} from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { useMemo } from "react";
 import { ChainService } from "src/api/services/chain.service";
@@ -7,6 +11,7 @@ import Hero from "src/components/composite/Hero";
 import Tag, { type TagType } from "src/components/element/Tag";
 import { chainIdOrder } from "src/constants/chain";
 import config from "../../merkl.config";
+import { Text } from "dappkit";
 
 export async function loader({ params: { symbol } }: LoaderFunctionArgs) {
   const tokens = await TokenService.getSymbol(symbol);
@@ -38,11 +43,11 @@ export default function Index() {
         return order.indexOf(b) - order.indexOf(a);
       })
       .map(
-        t =>
+        (t) =>
           ({
             type: "tokenChain",
-            value: { ...t, chain: chains?.find(c => c.id === t.chainId) },
-          }) satisfies TagType<"tokenChain">,
+            value: { ...t, chain: chains?.find((c) => c.id === t.chainId) },
+          } satisfies TagType<"tokenChain">)
       );
   }, [tokens, chains]);
 
@@ -52,11 +57,11 @@ export default function Index() {
         { link: "/tokens", name: "Tokens" },
         { link: `/tokens/${tokens?.[0]?.symbol}`, name: tokens?.[0]?.symbol },
       ]}
-      icons={[{ src: tokens.find(t => t.icon && t.icon !== "")?.icon }]}
+      icons={[{ src: tokens.find((t) => t.icon && t.icon !== "")?.icon }]}
       navigation={{ label: "Back to opportunities", link: "/" }}
       title={
         <>
-          {token.name} <span className="font-mono text-main-8">({token.symbol})</span>
+          {token.name} <span className="text-2xl">({token.symbol})</span>
         </>
       }
       description={`Deposit or earn ${token.symbol} on ${config.appName}.`}
@@ -67,7 +72,14 @@ export default function Index() {
           key: crypto.randomUUID(),
         },
       ]}
-      tags={tags.map(tag => <Tag key={`${tag.type}_${tag.value?.address ?? tag.value}`} {...tag} size="lg" />)}>
+      tags={tags.map((tag) => (
+        <Tag
+          key={`${tag.type}_${tag.value?.address ?? tag.value}`}
+          {...tag}
+          size="lg"
+        />
+      ))}
+    >
       <Outlet />
     </Hero>
   );

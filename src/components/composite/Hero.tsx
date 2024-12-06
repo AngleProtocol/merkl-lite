@@ -100,7 +100,7 @@ export default function Hero({
                 <Group className="w-full lg:w-auto lg:flex-col mr-xl*2" size="xl">
                   {sideDatas.map(data => (
                     <Group key={data.key} className="flex-col">
-                      <Text size={3}>{data.data}</Text>
+                      <Text look="bold" size={3}>{data.data}</Text>
 
                       <Text size="xl" className="font-bold not-italic">
                         {data.label}
