@@ -66,33 +66,16 @@ export default function Index() {
   }, [selectedCampaign]);
 
   // --------------- Campaign utils ---------------
-  const amount = useCallback((campaign: Campaign) => {
-    return formatUnits(parseUnits(campaign.amount, 0), campaign.rewardToken.decimals);
+
+  const dailyRewards = useCallback((campaign: Campaign) => {
+    const duration = campaign.endTimestamp - campaign.startTimestamp;
+    const oneDayInSeconds = BigInt(3600 * 24);
+    const dayspan = BigInt(duration) / BigInt(oneDayInSeconds) || BigInt(1);
+    const amountInUnits = parseUnits(campaign.amount, 0);
+    const dailyReward = amountInUnits / dayspan;
+
+    return dailyReward;
   }, []);
-
-  const dailyRewards = useCallback(
-    (campaign: Campaign) => {
-      const duration = campaign.endTimestamp - campaign.startTimestamp;
-      const oneDayInSeconds = BigInt(3600 * 24);
-      const dayspan = BigInt(duration) / BigInt(oneDayInSeconds) || BigInt(1);
-      const amountInUnits = parseUnits(amount(campaign).toString(), 0);
-      const dailyReward = amountInUnits / dayspan;
-
-      return dailyReward;
-    },
-    [amount],
-  );
-
-  const dailyRewardsUsd = useCallback(
-    (campaign: Campaign) => {
-      return formatUnits(
-        parseUnits(dailyRewards(campaign).toString(), 0) *
-          parseUnits(campaign.rewardToken.price?.toString() ?? "0", 18),
-        18,
-      );
-    },
-    [dailyRewards],
-  );
 
   // -------------------------------------------
 
@@ -107,16 +90,7 @@ export default function Index() {
           <Hash format="short">{campaign.campaignId}</Hash>
 
           <Group>
-            <Value
-              className="text-right"
-              look={dailyRewards(campaign).toString() === "0" ? "soft" : "base"}
-              format="0,0a">
-              {dailyRewards(campaign).toString()}
-            </Value>
-            <Token token={campaign.rewardToken} />
-            <Value className="text-right" look={dailyRewardsUsd(campaign) === "0" ? "soft" : "base"} format="$0,0.#">
-              {dailyRewardsUsd(campaign)}
-            </Value>
+            <Token token={campaign.rewardToken} amount={dailyRewards(campaign)} format="amount_price" value />
           </Group>
         </Group>
       );

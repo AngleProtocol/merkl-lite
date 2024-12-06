@@ -38,18 +38,14 @@ export type ITotalRewards = {
 }[];
 
 export abstract class RewardService {
-  static async #fetch<
-    R,
-    T extends { data: R; status: number; response: Response }
-  >(
+  static async #fetch<R, T extends { data: R; status: number; response: Response }>(
     call: () => Promise<T>,
-    resource = "Reward"
+    resource = "Reward",
   ): Promise<NonNullable<T["data"]>> {
     const { data, status } = await fetchWithLogs(call);
 
     if (status === 404) throw new Response(`${resource} not found`, { status });
-    if (status === 500)
-      throw new Response(`${resource} unavailable`, { status });
+    if (status === 500) throw new Response(`${resource} unavailable`, { status });
     if (data == null) throw new Response(`${resource} unavailable`, { status });
     return data;
   }
@@ -60,10 +56,7 @@ export abstract class RewardService {
    * @param override params for which to override value
    * @returns query
    */
-  static #getQueryFromRequest(
-    request: Request,
-    override?: Parameters<typeof api.v4.rewards.index.get>[0]["query"]
-  ) {
+  static #getQueryFromRequest(request: Request, override?: Parameters<typeof api.v4.rewards.index.get>[0]["query"]) {
     const campaignId = new URL(request.url).searchParams.get("campaignId");
     const page = new URL(request.url).searchParams.get("page");
     const items = new URL(request.url).searchParams.get("items");
@@ -75,22 +68,19 @@ export abstract class RewardService {
         page,
       },
       override ?? {},
-      page !== null && { page: Number(page) - 1 }
+      page !== null && { page: Number(page) - 1 },
     );
 
     const query = Object.entries(filters).reduce(
-      (_query, [key, filter]) =>
-        Object.assign(_query, filter == null ? {} : { [key]: filter }),
-      {}
+      (_query, [key, filter]) => Object.assign(_query, filter == null ? {} : { [key]: filter }),
+      {},
     );
 
     return query;
   }
 
   static async getForUser(address: string): Promise<Reward[]> {
-    const rewards = await RewardService.#fetch(async () =>
-      api.v4.users({ address }).rewards.full.get()
-    );
+    const rewards = await RewardService.#fetch(async () => api.v4.users({ address }).rewards.full.get());
 
     //TODO: add some cache here
     return rewards;
@@ -98,28 +88,19 @@ export abstract class RewardService {
 
   static async getManyFromRequest(
     request: Request,
-    overrides?: Parameters<typeof api.v4.rewards.index.get>[0]["query"]
+    overrides?: Parameters<typeof api.v4.rewards.index.get>[0]["query"],
   ) {
-    return RewardService.getByParams(
-      Object.assign(
-        RewardService.#getQueryFromRequest(request),
-        overrides ?? {}
-      )
-    );
+    return RewardService.getByParams(Object.assign(RewardService.#getQueryFromRequest(request), overrides ?? {}));
   }
 
-  static async getByParams(
-    query: Parameters<typeof api.v4.rewards.index.get>[0]["query"]
-  ) {
+  static async getByParams(query: Parameters<typeof api.v4.rewards.index.get>[0]["query"]) {
     const rewards = await RewardService.#fetch(async () =>
       api.v4.rewards.index.get({
         query,
-      })
+      }),
     );
 
-    const count = await RewardService.#fetch(async () =>
-      api.v4.rewards.count.get({ query })
-    );
+    const count = await RewardService.#fetch(async () => api.v4.rewards.count.get({ query }));
 
     return { count, rewards };
   }
@@ -134,7 +115,7 @@ export abstract class RewardService {
           ...query,
           campaignId: query.campaignId,
         },
-      })
+      }),
     );
 
     return total as ITotalRewards;
