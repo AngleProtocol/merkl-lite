@@ -1,4 +1,6 @@
+import { ecsstatic } from "@acab/ecsstatic/vite";
 import { vitePlugin as remix } from "@remix-run/dev";
+import svgr from "@svgr/rollup";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { ecsstatic } from '@acab/ecsstatic/vite';
@@ -18,6 +20,6 @@ export default defineConfig({
       
     }),
     tsconfigPaths(),
-    ecsstatic()
+    ecsstatic(),
   ],
 });

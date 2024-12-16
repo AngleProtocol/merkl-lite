@@ -1,5 +1,6 @@
 import { createColoring } from "dappkit";
 import { createConfig } from "src/config/type";
+<<<<<<< HEAD
 import { createClient, custom, http } from "viem";
 import {
   mainnet,
@@ -65,6 +66,82 @@ export default createConfig({
         ["#d22e14", "#d22e14", "#131620"],
         ["#FFFFFF", "#40B66B", "white"]
       ),
+=======
+import hero from "src/customer/assets/images/hero.jpg?url";
+import { http, createClient, custom } from "viem";
+import {
+  arbitrum,
+  astar,
+  astarZkEVM,
+  avalanche,
+  base,
+  blast,
+  bob,
+  bsc,
+  coreDao,
+  etherlink,
+  fantom,
+  filecoin,
+  fraxtal,
+  fuse,
+  gnosis,
+  immutableZkEvm,
+  linea,
+  lisk,
+  mainnet,
+  manta,
+  mantle,
+  mode,
+  moonbeam,
+  optimism,
+  polygon,
+  polygonZkEvm,
+  rootstock,
+  scroll,
+  sei,
+  taiko,
+  thunderCore,
+  worldchain,
+  xLayer,
+  zksync,
+} from "viem/chains";
+import { eip712WalletActions } from "viem/zksync";
+import { coinbaseWallet, walletConnect } from "wagmi/connectors";
+
+export default createConfig({
+  appName: "Merkl",
+  modes: ["dark", "light"],
+  defaultTheme: "ignite",
+  deposit: false,
+  themes: {
+    ignite: {
+      base: createColoring(["#1755F4", "#FF7900", "#0D1530"], ["#1755F4", "#FF7900", "#FFFFFF"]),
+      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+    },
+    merkl: {
+      base: createColoring(["#1755F4", "#FF7900", "#0D1530"], ["#1755F4", "#FF7900", "#FFFFFF"]),
+      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+    },
+    backoffice: {
+      base: createColoring(["#8B8D98", "#9984D2", "#000000"], ["#8B8D98", "#9984D2", "#FFFFFF"]),
+      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+    },
+    puffer: {
+      base: createColoring(["#2A35BD", "#3D3D3D", "#0E1035"], ["#2A35BD", "#F5F9FF", "#FFFFFF"]),
+      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
+>>>>>>> merkl-lite/main
     },
   },
   sizing: {
@@ -91,6 +168,7 @@ export default createConfig({
     //   route: "/protocols",
     //   key: crypto.randomUUID(),
     // },
+<<<<<<< HEAD
     terms: {
       icon: "RiCompassesLine",
       route: "/terms",
@@ -111,12 +189,41 @@ export default createConfig({
   links: {
     merkl: "https://merkl.xyz/",
   },
+=======
+    // terms: {
+    //   icon: "RiCompassesLine",
+    //   route: "/terms",
+    //   key: crypto.randomUUID(),
+    // },
+    // privacy: {
+    //   icon: "RiInformationFill",
+    //   route: "/privacy",
+    //   key: crypto.randomUUID(),
+    // },
+  },
+  socials: {
+    discord: "",
+    telegram: "https://t.me/+2T0RNabX2ANkMzAx",
+    x: "https://x.com/zksyncignite",
+    github: "",
+  },
+  links: {
+    merkl: "https://merkl.xyz/",
+    merklTermsConditions: "https://app.merkl.xyz/merklTerms.pdf",
+    merklPrivacy: "https://privacy.angle.money",
+  },
+  footerLinks: [],
+>>>>>>> merkl-lite/main
   wagmi: {
     chains: [
       mainnet,
       optimism,
       rootstock,
       bsc,
+<<<<<<< HEAD
+=======
+      lisk,
+>>>>>>> merkl-lite/main
       gnosis,
       thunderCore,
       fuse,
@@ -126,6 +233,10 @@ export default createConfig({
       fantom,
       fraxtal,
       filecoin,
+<<<<<<< HEAD
+=======
+      etherlink,
+>>>>>>> merkl-lite/main
       zksync,
       worldchain,
       astar,
@@ -161,8 +272,13 @@ export default createConfig({
         customStoragePrefix: "wagmi",
         projectId: "26c912aadd2132cd869a5edc00aeea0f",
         metadata: {
+<<<<<<< HEAD
           name: "Puffer",
           description: "Puffer",
+=======
+          name: "Merkl Lite",
+          description: "Merkl Lite",
+>>>>>>> merkl-lite/main
           url: "https://app.merkl.xyz.com",
           icons: [],
         },
