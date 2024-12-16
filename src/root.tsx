@@ -1,11 +1,4 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-<<<<<<< HEAD
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, json, useLoaderData, useRouteError } from "@remix-run/react";
-import { DAppProvider, Group, Icon, Title } from "dappkit";
-import config from "../merkl.config";
-import dappkitStyles from "../packages/dappkit/src/style.css?url";
-import { ChainService } from "./api/services/chain.service";
-=======
 import {
   Links,
   Meta,
@@ -25,7 +18,6 @@ import dappkitStyles from "../packages/dappkit/src/style.css?url";
 import { Cache } from "./api/services/cache.service";
 import { ChainService } from "./api/services/chain.service";
 import LoadingIndicator from "./components/layout/LoadingIndicator";
->>>>>>> merkl-lite/main
 import styles from "./index.css?url";
 
 export const links: LinksFunction = () => [
@@ -49,25 +41,16 @@ export async function loader(_args: LoaderFunctionArgs) {
   return json({ ENV: { API_URL: process.env.API_URL }, chains });
 }
 
-<<<<<<< HEAD
-=======
 export const clientLoader = Cache.wrap("root", 300);
 
->>>>>>> merkl-lite/main
 export default function App() {
   const data = useLoaderData<typeof loader>();
 
-  return (
-    <DAppProvider
       chains={data.chains}
       modes={config.modes}
-      themes={config.themes}
       sizing={config.sizing}
       config={config.wagmi}>
-<<<<<<< HEAD
-=======
       <LoadingIndicator />
->>>>>>> merkl-lite/main
       <Outlet />
       <script
         // biome-ignore lint/security/noDangerouslySetInnerHtml: needed for browser ENV
@@ -99,17 +82,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export function ErrorBoundary() {
   const error = useRouteError();
-<<<<<<< HEAD
-  console.error(error);
-
-  return (
-    <DAppProvider chains={[]} modes={config.modes} themes={config.themes} sizing={config.sizing} config={config.wagmi}>
-      <Group className="h-full flex-col justify-center m-auto w-min">
-        <Icon size="xl" className="!w-[100px] h-[100px]" remix="RiAlertFill" />
-        <Title h={1} className="text-nowrap">
-          Service unavailable
-        </Title>
-=======
   const navigate = useNavigate();
   const notARoute = isRouteErrorResponse(error) && error.status === 404;
   console.error(error);
@@ -143,7 +115,6 @@ export function ErrorBoundary() {
           An Error occured
         </Title>
         <Text className="text-center">Please wait until the issue is resolved</Text>
->>>>>>> merkl-lite/main
       </Group>
     </DAppProvider>
   );
