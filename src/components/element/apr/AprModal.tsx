@@ -23,7 +23,10 @@ export default function AprModal(props: IProps) {
           </Value>
         </PrimitiveTag>
       </Group>
-      <Divider look="hype" className="-mx-xl w-[calc(100%+2*var(--spacing-xl))]" />
+      <Divider
+        look="hype"
+        className="-mx-xl w-[calc(100%+2*var(--spacing-xl))]"
+      />
       <Group className="flex-col" size="lg">
         <TvlRowAllocation opportunity={opportunity} />
         <AprSection opportunity={opportunity} />
