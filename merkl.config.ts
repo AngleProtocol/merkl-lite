@@ -44,10 +44,13 @@ import { eip712WalletActions } from "viem/zksync";
 import { walletConnect } from "wagmi/connectors";
 
 export default createConfig({
-  appName: "Merkl",
-  modes: ["dark", "light"],
-  defaultTheme: "ignite",
-  opportunityNavigationMode: "supply",
+  appName: "Puffer",
+  modes: ["light"],
+  defaultTheme: "puffer",
+  deposit: false,
+  tags: ["puffer"],
+  opportunityNavigationMode: "direct",
+  rewardsNavigationMode: "chain",
   tokenSymbolPriority: ["ZK", "USDC", "USDC.e", "ETH", "WETH", "WBTC", "wstETH", "USDT", "USDe", "weETH", "DAI"],
   rewardsNavigationMode: "chain",
   opportunityLibrary: {
@@ -112,7 +115,7 @@ export default createConfig({
   },
   themes: {
     ignite: {
-      base: createColoring(["#1755F4", "#FF7900", "#0D1530"], ["#1755F4", "#FF7900", "#FFFFFF"]),
+      base: createColoring(["#2A35BD", "#BFFF37", "#FFFFFF"], ["#2A35BD", "#BFFF37", "#FFFFFF"]),
       info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
@@ -133,7 +136,7 @@ export default createConfig({
       harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
     },
     puffer: {
-      base: createColoring(["#2A35BD", "#BFFF38", "#FFFFFF"], ["#2A35BD", "#BFFF38", "#FFFFFF"]),
+      base: createColoring(["#2A35BD", "#BFFF37", "#FFFFFF"], ["#2A35BD", "#BFFF37", "#FFFFFF"]),
       info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
@@ -205,13 +208,12 @@ export default createConfig({
     },
   },
   socials: {
-    discord: "",
-    telegram: "https://t.me/+2T0RNabX2ANkMzAx",
-    x: "https://x.com/zksyncignite",
-    github: "",
+    discord: "https://discord.com/invite/pufferfi",
+    telegram: "https://t.me/puffer_fi",
+    x: "https://x.com/puffer_finance",
+    github: "https://github.com/PufferFinance",
   },
   links: {
-    docs: "https://docs.merkl.xyz/",
     merkl: "https://merkl.xyz/",
     merklTermsConditions: "https://app.merkl.xyz/merklTerms.pdf",
     merklPrivacy: "https://privacy.angle.money",
@@ -268,9 +270,9 @@ export default createConfig({
         customStoragePrefix: "wagmi",
         projectId: "26c912aadd2132cd869a5edc00aeea0f",
         metadata: {
-          name: "Merkl Lite",
-          description: "Merkl Lite",
-          url: "https://app.merkl.xyz",
+          name: "Puffer",
+          description: "Puffer",
+          url: "https://app.merkl.xyz.com",
           icons: [],
         },
       }),
