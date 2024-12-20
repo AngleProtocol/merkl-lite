@@ -11,8 +11,8 @@ export default function Index() {
     <Hero
       icons={[{ remix: "RiPlanetFill" }]}
       navigation={{ label: "Back to opportunities", link: "/" }}
-      title={"Explore opportunities"}
-      description={"Browse opportunities, compare rewards, and earn tokens"}>
+      title={"Bridge"}
+      description={"Bridge funds to your desired chain"}>
       <Outlet />
     </Hero>
   );
