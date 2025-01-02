@@ -13,6 +13,18 @@ export abstract class ProtocolService {
     );
   }
 
+  // ─── Get First Protocol ──────────────────────────────────────────────
+
+  static async getById(id: string) {
+    return await ProtocolService.#fetch(async () =>
+      api.v4
+        .protocols({
+          id,
+        })
+        .get(),
+    );
+  }
+
   // ─── Get Many Protocols from request ──────────────────────────────────
 
   static async getManyFromRequest(request: Request) {
@@ -20,12 +32,12 @@ export abstract class ProtocolService {
       ProtocolService.#getQueryFromRequest(request);
     const protocols = await ProtocolService.#fetch(async () =>
       api.v4.protocols.index.get({
-        query: Object.assign({ ...query }, config.tags?.[0] ? { tags: config.tags?.[0] } : {}),
+        query: Object.assign({ ...query }, config.tags?.[0] ? { opportunityTag: config.tags?.[0] } : {}),
       }),
     );
     const count = await ProtocolService.#fetch(async () =>
       api.v4.protocols.count.get({
-        query: Object.assign({ ...query }, config.tags?.[0] ? { tags: config.tags?.[0] } : {}),
+        query: Object.assign({ ...query }, config.tags?.[0] ? { opportunityTag: config.tags?.[0] } : {}),
       }),
     );
 

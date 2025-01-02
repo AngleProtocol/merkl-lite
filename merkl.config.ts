@@ -47,10 +47,30 @@ export default createConfig({
   appName: "Merkl",
   modes: ["dark", "light"],
   defaultTheme: "ignite",
-  tags: [],
-  opportunityNavigationMode: "direct",
+  opportunityNavigationMode: "supply",
+  opportunityCellHideTags: ["token", "action"],
   rewardsNavigationMode: "chain",
+  opportunityLibraryDefaultView: "cells",
+  opprtunityPercentage: true,
+  hideLayerMenuHomePage: false,
   deposit: true,
+  walletOptions: {
+    sponsorTransactions: true,
+    client(c) {
+      if (c.chain?.id === zksync.id) return c.extend(eip712WalletActions());
+    },
+  },
+  chains: [],
+  tags: [],
+  opportunity: {
+    featured: {
+      enabled: false,
+      length: 6,
+    },
+  },
+  bridge: {
+    helperLink: "",
+  },
   themes: {
     ignite: {
       base: createColoring(["#1755F4", "#FF7900", "#0D1530"], ["#1755F4", "#FF7900", "#FFFFFF"]),
@@ -95,21 +115,16 @@ export default createConfig({
       route: "/",
       key: uuidv4(),
     },
-    opportunities: {
-      icon: "RiPlanetFill",
-      route: "/opportunities",
+    protocols: {
+      icon: "RiVipCrown2Fill",
+      route: "/protocols",
       key: uuidv4(),
     },
-    // protocols: {
-    //   icon: "RiVipCrown2Fill",
-    //   route: "/protocols",
-    //   key: uuidv4(),
-    // },
-    // bridge: {
-    //   icon: "RiCompassesLine",
-    //   route: "/bridge",
-    //   key: uuidv4(),
-    // },
+    bridge: {
+      icon: "RiCompassesLine",
+      route: "/bridge",
+      key: uuidv4(),
+    },
     docs: {
       icon: "RiFile4Fill",
       external: true,
@@ -120,6 +135,21 @@ export default createConfig({
       icon: "RiQuestionFill",
       route: "/faq",
       key: uuidv4(),
+    },
+    // terms: {
+    //   icon: "RiCompassesLine",
+    //   route: "/terms",
+    //   key: uuidv4(),
+    // },
+    // privacy: {
+    //   icon: "RiInformationFill",
+    //   route: "/privacy",
+    //   key: uuidv4(),
+    // },
+  },
+  header: {
+    searchbar: {
+      enabled: true,
     },
     // terms: {
     //   icon: "RiCompassesLine",
