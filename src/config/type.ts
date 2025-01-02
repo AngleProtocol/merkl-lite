@@ -1,7 +1,10 @@
 import type * as RemixIcon from "@remixicon/react";
 import type { Mode, Themes, sizeScale } from "dappkit";
+import type { WalletOptions } from "packages/dappkit/src/hooks/useWalletState";
+import type { TagTypes } from "src/components/element/Tag";
+import type { Chain } from "viem";
 import { createConfig as createWagmiConfig } from "wagmi";
-import type { OpportunityNavigationMode } from "./opportunity";
+import type { OpportunityNavigationMode, OpportunityView } from "./opportunity";
 import type { RewardsNavigationMode } from "./rewards";
 
 export type routesType = {
@@ -13,6 +16,7 @@ export type routesType = {
   };
 };
 
+// TODO: groups by entity
 export type MerklConfig<T extends Themes> = {
   themes: T;
   sizing: {
@@ -23,13 +27,33 @@ export type MerklConfig<T extends Themes> = {
   tags?: string[];
   defaultTheme: keyof T;
   deposit?: boolean;
+  chains?: Chain[];
+  walletOptions?: WalletOptions;
   opportunityNavigationMode?: OpportunityNavigationMode;
+  opportunityLibraryDefaultView?: OpportunityView;
+  opportunityCellHideTags?: (keyof TagTypes)[];
   rewardsNavigationMode?: RewardsNavigationMode;
+  opprtunityPercentage: boolean;
+  hideLayerMenuHomePage: boolean;
   modes: Mode[];
   wagmi: Parameters<typeof createWagmiConfig>["0"];
   appName: string;
   fonts?: { title: string[]; text: string[]; mono: string[] };
   routes: routesType;
+  opportunity: {
+    featured: {
+      enabled: boolean;
+      length: number;
+    };
+  };
+  bridge: {
+    helperLink?: string;
+  };
+  header: {
+    searchbar: {
+      enabled: boolean;
+    };
+  };
   images: {
     [name: string]: string;
   };

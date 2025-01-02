@@ -1,6 +1,7 @@
 import type { Reward } from "@merkl/api";
-import { Button, type Component, Divider, type GetSet, Group } from "dappkit";
+import { Button, type Component, Divider, type GetSet } from "dappkit";
 import OpportuntiyButton from "../../opportunity/OpportunityButton";
+import OpportunityParticipateModal from "../../opportunity/OpportunityParticipateModal";
 import Token from "../../token/Token";
 import { ClaimRewardsByOpportunityRow } from "./ClaimRewardsTableByOpportunity";
 
@@ -33,21 +34,16 @@ export default function ClaimRewardsTokenTableRowByOpportunity({
         // actionColumn={
         //   !!breakdown.opportunity?.action && <Tag type="action" value={breakdown.opportunity?.action} size="xs" />
         // }
-        claimedColumn={<Token token={token} amount={breakdown.claimed} format="amount_price" size="xs" />}
+        claimedColumn={<Token token={token} amount={breakdown.claimed} format="amount_price" />}
         unclaimedColumn={
-          !!unclaimed && (
-            <Token token={token} amount={breakdown.amount - breakdown.claimed} format="amount_price" size="xs" />
-          )
+          !!unclaimed && <Token token={token} amount={breakdown.amount - breakdown.claimed} format="amount_price" />
         }
         buttonColumn={
-          <Group size="sm">
+          <OpportunityParticipateModal opportunity={breakdown.opportunity}>
             <Button look="hype" size="sm">
               Supply
             </Button>
-            <Button look="base" size="sm">
-              Withdraw
-            </Button>
-          </Group>
+          </OpportunityParticipateModal>
         }
       />
     </>

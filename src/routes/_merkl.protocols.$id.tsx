@@ -8,7 +8,9 @@ import { ProtocolService } from "src/api/services/protocol.service";
 import Hero, { defaultHeroSideDatas } from "src/components/composite/Hero";
 
 export async function loader({ params: { id }, request }: LoaderFunctionArgs) {
-  const protocol = (await ProtocolService.get({ id: id ?? undefined }))?.[0];
+  if (!id) throw new Error("Protocol not found");
+  const protocol = await ProtocolService.getById(id);
+
   const { opportunities, count } = await OpportunityService.getManyFromRequest(request, { mainProtocolId: id });
 
   const { opportunities: opportunitiesByApr, count: liveCount } = await OpportunityService.getMany({
@@ -18,7 +20,7 @@ export async function loader({ params: { id }, request }: LoaderFunctionArgs) {
     order: "desc",
   });
 
-  const { sum } = await OpportunityService.getAggregate({ mainProtocolId: id }, "dailyRewards");
+  const { sum } = await OpportunityService.getAggregate({ id }, "dailyRewards");
 
   return json({
     opportunities,
@@ -40,6 +42,7 @@ export type OutletContextProtocol = {
 export default function Index() {
   const { opportunities, count, protocol, liveOpportunityCount, maxApr, dailyRewards } = useLoaderData<typeof loader>();
 
+  console.log({ protocol });
   return (
     <Hero
       icons={[{ src: protocol?.icon }]}

@@ -1,6 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Outlet, json, useLoaderData } from "@remix-run/react";
-import { Button, Dropdown, Group, Icon, Text, Value } from "dappkit";
+import { Button, Dropdown, Group, Hash, Icon, Text, Value } from "dappkit";
+import config from "merkl.config";
 import TransactionButton from "packages/dappkit/src/components/dapp/TransactionButton";
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
 import { useMemo } from "react";
@@ -35,6 +36,8 @@ export default function Index() {
   const { rewards: raw, address } = useLoaderData<typeof loader>();
   const rewards = useRewards(raw);
 
+  const isSingleChain = config?.chains?.length === 1;
+
   const { chainId, chains, address: user } = useWalletContext();
   const chain = useMemo(() => chains?.find(c => c.id === chainId), [chainId, chains]);
   const reward = useMemo(() => raw.find(({ chain: { id } }) => id === chainId), [chainId, raw]);
@@ -53,13 +56,17 @@ export default function Index() {
         {
           link: `/users/${address ?? ""}`,
           component: (
-            <Dropdown size="md" padding="xs" content={<AddressEdit />}>
-              <Button look="soft" size="xs" aria-label="Edit address">
-                <Icon remix="RiArrowRightSLine" />
+            <>
+              <Icon remix="RiArrowRightSLine" className="text-main-12" />
+              <Hash copy format="full" size="xs" className="text-main-12">
                 {address}
-                <Icon remix="RiEdit2Line" />
-              </Button>
-            </Dropdown>
+              </Hash>
+              <Dropdown size="md" padding="xs" content={<AddressEdit />}>
+                <Button look="soft" size="xs" aria-label="Edit address">
+                  <Icon remix="RiEdit2Line" />
+                </Button>
+              </Dropdown>
+            </>
           ),
         },
       ]}
@@ -86,7 +93,7 @@ export default function Index() {
           <Group className="flex-col">
             {isAbleToClaim && (
               <TransactionButton disabled={!claimTransaction} look="hype" size="lg" tx={claimTransaction}>
-                Claim on {chain?.name}
+                {isSingleChain ? "Claim" : `Claim on ${chain?.name}`}
               </TransactionButton>
             )}
           </Group>
@@ -111,7 +118,7 @@ export default function Index() {
               Liquidity
             </>
           ),
-          link: `/users/${address}/${chainId}/liquidity`,
+          link: `/users/${address}/liquidity?chainId=${chainId}`,
           key: crypto.randomUUID(),
         },
         {
