@@ -42,21 +42,4 @@ export default function ClaimRewardsLibrary({ from, rewards }: ClaimRewardsLibra
       {rewards?.length > 0 ? renderRewards : <Text>No reward detected</Text>}
     </Group>
   );
-
-  const renderRewards = useMemo(() => {
-    switch (config.rewardsNavigationMode) {
-      case "opportunity":
-        return <ClaimRewardsByOpportunity from={from} rewards={flatenedRewards} />;
-      default:
-        return (
-          <ClaimRewardsChainTable dividerClassName={index => (index === 1 ? "bg-accent-10" : "bg-main-7")}>
-            {rewards?.map((reward, index) => (
-              <ClaimRewardsChainTableRow {...{ from, reward }} key={reward.chain?.id ?? index} />
-            ))}
-          </ClaimRewardsChainTable>
-        );
-    }
-  }, [rewards, flatenedRewards, from]);
-
-  return <Group className="flex-row w-full [&>*]:flex-grow">{renderRewards}</Group>;
 }
