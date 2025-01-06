@@ -167,12 +167,20 @@ export default createConfig({
     protocols: {
       icon: "RiVipCrown2Fill",
       route: "/protocols",
+<<<<<<< HEAD
       key: uuidv4(),
+=======
+      key: crypto.randomUUID(),
+>>>>>>> 85e15ff (Merge remote-tracking branch 'merkl-app/main' (#4))
     },
     bridge: {
       icon: "RiCompassesLine",
       route: "/bridge",
+<<<<<<< HEAD
       key: uuidv4(),
+=======
+      key: crypto.randomUUID(),
+>>>>>>> 85e15ff (Merge remote-tracking branch 'merkl-app/main' (#4))
     },
     docs: {
       icon: "RiFile4Fill",
@@ -207,6 +215,17 @@ export default createConfig({
       enabled: true,
     },
   },
+  header: {
+    searchbar: {
+      enabled: true,
+    },
+    opportunities: {
+      enabled: false,
+    },
+    bridge: {
+      enabled: true,
+    },
+  },
   socials: {
     discord: "https://discord.com/invite/pufferfi",
     telegram: "https://t.me/puffer_fi",
@@ -214,6 +233,7 @@ export default createConfig({
     github: "https://github.com/PufferFinance",
   },
   links: {
+    docs: "https://docs.merkl.xyz/",
     merkl: "https://merkl.xyz/",
     merklTermsConditions: "https://app.merkl.xyz/merklTerms.pdf",
     merklPrivacy: "https://privacy.angle.money",
