@@ -223,7 +223,7 @@ export default createConfig({
       enabled: false,
     },
     bridge: {
-      enabled: true,
+      enabled: false,
     },
   },
   socials: {
