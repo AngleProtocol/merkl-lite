@@ -167,20 +167,12 @@ export default createConfig({
     protocols: {
       icon: "RiVipCrown2Fill",
       route: "/protocols",
-<<<<<<< HEAD
       key: uuidv4(),
-=======
-      key: crypto.randomUUID(),
->>>>>>> 85e15ff (Merge remote-tracking branch 'merkl-app/main' (#4))
     },
     bridge: {
       icon: "RiCompassesLine",
       route: "/bridge",
-<<<<<<< HEAD
       key: uuidv4(),
-=======
-      key: crypto.randomUUID(),
->>>>>>> 85e15ff (Merge remote-tracking branch 'merkl-app/main' (#4))
     },
     docs: {
       icon: "RiFile4Fill",
