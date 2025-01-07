@@ -50,30 +50,31 @@ export default createConfig({
   deposit: false,
   tags: ["puffer"],
   opportunityNavigationMode: "direct",
-  rewardsNavigationMode: "chain",
   tokenSymbolPriority: ["ZK", "USDC", "USDC.e", "ETH", "WETH", "WBTC", "wstETH", "USDT", "USDe", "weETH", "DAI"],
   rewardsNavigationMode: "chain",
+  opportunityPercentage: true,
+  opportunityCellHideTags: ["token", "action"],
+  // opportunityLibraryExcludeFilters: ["protocol","action"],
+  opprtunityPercentage: true,
+  hideLayerMenuHomePage: false,
   opportunityLibrary: {
-    defaultView: "cells",
-    // views: ["table"], // If you want only one view, this is where you can specify it.
+    defaultView: "table",
+    views: ["table"], // If you want only one view, this is where you can specify it.
     cells: {
       hideTags: ["token", "action"],
     },
     excludeFilters: ["protocol", "tvl"],
   },
-  opportunityPercentage: true,
-  hideLayerMenuHomePage: false,
   supplyCredits: [],
   hero: {
     bannerOnAllPages: false, // show banner on all pages
-    invertColors: false, // Light mode: light text on dark background (instead of dark text on light background)
+    invertColors: true, // Light mode: light text on dark background (instead of dark text on light background)
   },
   opportunityFilters: {
     minimumTVL: false,
     protocols: false,
     displaySelector: false,
   },
-  deposit: true,
   walletOptions: {
     hideInjectedWallets: ["phantom", "coinbase wallet"],
     sponsorTransactions: true,
@@ -115,7 +116,7 @@ export default createConfig({
   },
   themes: {
     ignite: {
-      base: createColoring(["#2A35BD", "#BFFF37", "#FFFFFF"], ["#2A35BD", "#BFFF37", "#FFFFFF"]),
+      base: createColoring(["#1755F4", "#FF7900", "#0D1530"], ["#1755F4", "#FF7900", "#FFFFFF"]),
       info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
@@ -167,45 +168,34 @@ export default createConfig({
     protocols: {
       icon: "RiVipCrown2Fill",
       route: "/protocols",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     bridge: {
       icon: "RiCompassesLine",
       route: "/bridge",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     docs: {
       icon: "RiFile4Fill",
       external: true,
       route: "https://docs.merkl.xyz/",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     faq: {
       icon: "RiQuestionFill",
       route: "/faq",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     // terms: {
     //   icon: "RiCompassesLine",
     //   route: "/terms",
-    //   key: uuidv4(),
+    //   key: crypto.randomUUID(),
     // },
     // privacy: {
     //   icon: "RiInformationFill",
     //   route: "/privacy",
     //   key: uuidv4(),
     // },
-  },
-  header: {
-    searchbar: {
-      enabled: true,
-    },
-    opportunities: {
-      enabled: false,
-    },
-    bridge: {
-      enabled: true,
-    },
   },
   header: {
     searchbar: {
