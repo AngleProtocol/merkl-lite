@@ -44,33 +44,37 @@ import { eip712WalletActions } from "viem/zksync";
 import { walletConnect } from "wagmi/connectors";
 
 export default createConfig({
-  appName: "Merkl",
-  modes: ["dark", "light"],
-  defaultTheme: "ignite",
-  opportunityNavigationMode: "supply",
+  appName: "Puffer",
+  modes: ["light"],
+  defaultTheme: "puffer",
+  deposit: false,
+  tags: ["puffer"],
+  opportunityNavigationMode: "direct",
   tokenSymbolPriority: ["ZK", "USDC", "USDC.e", "ETH", "WETH", "WBTC", "wstETH", "USDT", "USDe", "weETH", "DAI"],
   rewardsNavigationMode: "chain",
+  opportunityPercentage: true,
+  opportunityCellHideTags: ["token", "action"],
+  // opportunityLibraryExcludeFilters: ["protocol","action"],
+  opprtunityPercentage: true,
+  hideLayerMenuHomePage: false,
   opportunityLibrary: {
-    defaultView: "cells",
-    // views: ["table"], // If you want only one view, this is where you can specify it.
+    defaultView: "table",
+    views: ["table"], // If you want only one view, this is where you can specify it.
     cells: {
       hideTags: ["token", "action"],
     },
     excludeFilters: ["protocol", "tvl"],
   },
-  opportunityPercentage: true,
-  hideLayerMenuHomePage: false,
   supplyCredits: [],
   hero: {
     bannerOnAllPages: false, // show banner on all pages
-    invertColors: false, // Light mode: light text on dark background (instead of dark text on light background)
+    invertColors: true, // Light mode: light text on dark background (instead of dark text on light background)
   },
   opportunityFilters: {
     minimumTVL: false,
     protocols: false,
     displaySelector: false,
   },
-  deposit: true,
   walletOptions: {
     hideInjectedWallets: ["phantom", "coinbase wallet"],
     sponsorTransactions: true,
@@ -111,29 +115,8 @@ export default createConfig({
     dollar: "$0,0.##a",
   },
   themes: {
-    ignite: {
-      base: createColoring(["#1755F4", "#FF7900", "#0D1530"], ["#1755F4", "#FF7900", "#FFFFFF"]),
-      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-    },
-    merkl: {
-      base: createColoring(["#1755F4", "#FF7900", "#0D1530"], ["#1755F4", "#FF7900", "#FFFFFF"]),
-      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-    },
-    backoffice: {
-      base: createColoring(["#8B8D98", "#9984D2", "#000000"], ["#8B8D98", "#9984D2", "#FFFFFF"]),
-      info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-      harm: createColoring(["#d22e14", "#d22e14", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
-    },
     puffer: {
-      base: createColoring(["#2A35BD", "#BFFF38", "#FFFFFF"], ["#2A35BD", "#BFFF38", "#FFFFFF"]),
+      base: createColoring(["#2A35BD", "#BFFF37", "#FFFFFF"], ["#2A35BD", "#BFFF37", "#FFFFFF"]),
       info: createColoring(["#2ABDFF", "#2ABDFF", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       good: createColoring(["#40B66B", "#40B66B", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
       warn: createColoring(["#ff9600", "#ff9600", "#131620"], ["#FFFFFF", "#40B66B", "white"]),
@@ -164,28 +147,28 @@ export default createConfig({
     protocols: {
       icon: "RiVipCrown2Fill",
       route: "/protocols",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     bridge: {
       icon: "RiCompassesLine",
       route: "/bridge",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     docs: {
       icon: "RiFile4Fill",
       external: true,
       route: "https://docs.merkl.xyz/",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     faq: {
       icon: "RiQuestionFill",
       route: "/faq",
-      key: uuidv4(),
+      key: crypto.randomUUID(),
     },
     // terms: {
     //   icon: "RiCompassesLine",
     //   route: "/terms",
-    //   key: uuidv4(),
+    //   key: crypto.randomUUID(),
     // },
     // privacy: {
     //   icon: "RiInformationFill",
@@ -201,14 +184,14 @@ export default createConfig({
       enabled: false,
     },
     bridge: {
-      enabled: true,
+      enabled: false,
     },
   },
   socials: {
-    discord: "",
-    telegram: "https://t.me/+2T0RNabX2ANkMzAx",
-    x: "https://x.com/zksyncignite",
-    github: "",
+    discord: "https://discord.com/invite/pufferfi",
+    telegram: "https://t.me/puffer_fi",
+    x: "https://x.com/puffer_finance",
+    github: "https://github.com/PufferFinance",
   },
   links: {
     docs: "https://docs.merkl.xyz/",
@@ -268,9 +251,9 @@ export default createConfig({
         customStoragePrefix: "wagmi",
         projectId: "26c912aadd2132cd869a5edc00aeea0f",
         metadata: {
-          name: "Merkl Lite",
-          description: "Merkl Lite",
-          url: "https://app.merkl.xyz",
+          name: "Puffer",
+          description: "Puffer",
+          url: "https://app.merkl.xyz.com",
           icons: [],
         },
       }),
