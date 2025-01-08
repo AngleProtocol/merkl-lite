@@ -41,18 +41,23 @@ export default function Header() {
     return chains?.find(c => c.id === chainId);
   }, [chains, chainId]);
 
+  // Dynamically filter routes based on the config
   const routes = useMemo(() => {
-    const { home, ...rest } = config.routes;
+    const { home, opportunities, protocols, bridge, ...rest } = config.routes;
 
     return Object.assign(
       { home },
       {
-        dashboard: {
+        [!!config.dashboardPageName ? config.dashboardPageName : "dashboard"]: {
           icon: "RiDashboardFill",
           route: user ? `/users/${user}` : "/users",
           key: uuidv4(),
         },
       },
+      config.header.opportunities.enabled ? { opportunities } : {},
+      { protocols },
+      // Include bridge route only if enabled in config
+      config.header.bridge.enabled ? { bridge } : {},
       rest,
     );
   }, [user]);
@@ -60,7 +65,9 @@ export default function Header() {
   const navigate = useNavigate();
   const navigateToHomepage = useCallback(() => navigate("/"), [navigate]);
 
-  const media = useMediaQuery({ query: `(min-width: ${SCREEN_BREAKDOWNS.LG}px)` });
+  const media = useMediaQuery({
+    query: `(min-width: ${SCREEN_BREAKDOWNS.LG}px)`,
+  });
 
   const {
     singleChain,
@@ -135,7 +142,7 @@ export default function Header() {
               </Group>
 
               <Group className="flex">
-                <WalletButton select={chainSwitcher}>
+                <WalletButton select={chainSwitcher} hideSpyMode={config.hideSpyMode}>
                   <Button to={`/users/${user}`} size="sm" look="soft">
                     <Icon remix="RiArrowRightLine" /> Check claims
                   </Button>

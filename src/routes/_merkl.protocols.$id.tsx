@@ -20,7 +20,7 @@ export async function loader({ params: { id }, request }: LoaderFunctionArgs) {
     order: "desc",
   });
 
-  const { sum } = await OpportunityService.getAggregate({ id }, "dailyRewards");
+  const { sum } = await OpportunityService.getAggregate({ mainProtocolId: id }, "dailyRewards");
 
   return json({
     opportunities,
@@ -42,7 +42,6 @@ export type OutletContextProtocol = {
 export default function Index() {
   const { opportunities, count, protocol, liveOpportunityCount, maxApr, dailyRewards } = useLoaderData<typeof loader>();
 
-  console.log({ protocol });
   return (
     <Hero
       icons={[{ src: protocol?.icon }]}
@@ -55,7 +54,7 @@ export default function Index() {
         (protocol?.description !== "" && protocol?.description) ||
         `Earn rewards by supplying liquidity on ${protocol?.name}`
       }
-      sideDatas={defaultHeroSideDatas(liveOpportunityCount, maxApr, dailyRewards)}>
+      sideDatas={defaultHeroSideDatas(liveOpportunityCount, maxApr, Number.parseFloat(dailyRewards))}>
       <Outlet context={{ opportunities, count }} />
     </Hero>
   );

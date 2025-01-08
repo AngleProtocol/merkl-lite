@@ -1,11 +1,34 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
-import { api } from "src/api/";
+import { type ActionFunctionArgs, json } from "@remix-run/node";
+import { api } from "src/api/index.server";
 import { ZyfiService } from "src/api/services/zyfi.service";
+import { encodeFunctionData, parseAbi } from "viem";
+
+BigInt.prototype.toJSON = function () {
+  return this.toString();
+};
 
 export const action = async ({ params: { name }, request }: ActionFunctionArgs) => {
   const payload = await request.json();
 
   switch (name) {
+    case "claim": {
+      const abi = parseAbi(["function claim(address[],address[],uint256[],bytes32[][]) view returns (uint256)"]);
+      const tx = {
+        to: payload.distributor,
+        from: payload.userAddress,
+        data: encodeFunctionData({
+          abi,
+          functionName: "claim",
+          args: payload.args,
+        }),
+      };
+      if (payload.sponsor) {
+        const sponsoredTx = await ZyfiService.wrapAndPrepareTx(tx);
+
+        return json(sponsoredTx);
+      }
+      return json(tx);
+    }
     case "supply": {
       try {
         const { data: tx } = await api.v4.interaction.transaction.get({
@@ -26,9 +49,11 @@ export const action = async ({ params: { name }, request }: ActionFunctionArgs) 
           });
         }
 
-        return tx;
-      } catch {
-        return new Response("An error occured", { status: 500 });
+        return json(tx);
+      } catch (err) {
+        console.error(err);
+
+        return new Response("Failed to prepare transaction", { status: 500 });
       }
     }
   }

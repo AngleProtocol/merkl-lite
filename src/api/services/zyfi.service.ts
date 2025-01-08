@@ -89,16 +89,24 @@ export abstract class ZyfiService {
     return res;
   }
 
-  static async wrapAndPrepareTx({ data, from, to }: ZyfiApi["erc20_sponsored_paymaster/v1"]["payload"]["txData"]) {
+  static async wrapAndPrepareTx({
+    data,
+    from,
+    to,
+    value,
+  }: ZyfiApi["erc20_sponsored_paymaster/v1"]["payload"]["txData"]) {
     const check = await ZyfiService.wrapTx({
       data,
       from,
       to,
+      value,
     });
+
+    if (!check.txData) return null;
 
     return {
       account: from,
-      to: check.txData.to,
+      to: check.txData?.to,
       value: BigInt(check.txData.value!),
       chain: zksync,
       gas: BigInt(check.txData.gasLimit),

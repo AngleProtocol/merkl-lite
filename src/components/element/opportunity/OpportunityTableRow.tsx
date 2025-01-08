@@ -7,6 +7,7 @@ import EventBlocker from "packages/dappkit/src/components/primitives/EventBlocke
 import { useOverflowingRef } from "packages/dappkit/src/hooks/events/useOverflowing";
 import { useMemo } from "react";
 import type { Opportunity } from "src/api/services/opportunity/opportunity.model";
+import { actions } from "src/config/actions";
 import type { OpportunityNavigationMode } from "src/config/opportunity";
 import useOpportunity from "src/hooks/resources/useOpportunity";
 import Tag, { type TagTypes } from "../Tag";
@@ -23,12 +24,12 @@ export type OpportunityTableRowProps = {
 
 export default function OpportunityTableRow({
   hideTags,
-  opportunity,
+  opportunity: opportunityRaw,
   className,
   navigationMode,
   ...props
 }: OpportunityTableRowProps) {
-  const { tags, link, icons, rewardsBreakdown } = useOpportunity(opportunity);
+  const { tags, link, icons, rewardsBreakdown, opportunity } = useOpportunity(opportunityRaw);
 
   const { ref, overflowing } = useOverflowingRef<HTMLHeadingElement>();
 
@@ -52,7 +53,7 @@ export default function OpportunityTableRow({
       <EventBlocker>
         <Dropdown size="xl" content={<AprModal opportunity={opportunity} />}>
           <PrimitiveTag look="base" className="font-mono">
-            <Value value format="$0,0.0a">
+            <Value value format={config.decimalFormat.dollar}>
               {opportunity.tvl ?? 0}
             </Value>
           </PrimitiveTag>
@@ -81,7 +82,7 @@ export default function OpportunityTableRow({
             />
           }>
           <PrimitiveTag look="base" className="font-mono">
-            <Value value format="$0,0.0a">
+            <Value value format={config.decimalFormat.dollar}>
               {opportunity.dailyRewards ?? 0}
             </Value>
             <Icons>
@@ -107,6 +108,12 @@ export default function OpportunityTableRow({
         aprColumn={aprColumn}
         tvlColumn={tvlColumn}
         rewardsColumn={rewardsColumn}
+        actionColumn={
+          <Group>
+            <Icon remix={actions[opportunity.action].icon.remix} />
+            {actions[opportunity.action].label}
+          </Group>
+        }
         opportunityColumn={
           <Group className="flex-col w-full">
             <Group className="min-w-0 flex-nowrap overflow-hidden max-w-full">
@@ -121,29 +128,26 @@ export default function OpportunityTableRow({
                   className={mergeClass(
                     overflowing && "hover:overflow-visible hover:animate-textScroll hover:text-clip",
                   )}>
-                  {config.opprtunityPercentage
+                  {config.opportunityPercentage
                     ? opportunity.name
                     : opportunity.name.replace(/\s*\d+(\.\d+)?%$/, "").trim()}
                 </Title>
               </Group>
             </Group>
 
-            {tags?.filter(a => a !== undefined)?.filter(({ type }) => !hideTags || !hideTags.includes(type)).length >
-              0 && (
-              <Group>
-                {tags
-                  ?.filter(a => a !== undefined)
-                  ?.filter(({ type }) => !hideTags || !hideTags.includes(type))
-                  .map(tag => (
-                    <Tag filter key={`${tag.type}_${tag.value?.address ?? tag.value}`} {...tag} size="xs" />
-                  ))}
-              </Group>
-            )}
+            <Group className="items-center">
+              {tags
+                ?.filter(a => a !== undefined)
+                ?.filter(({ type }) => !hideTags || !hideTags.includes(type))
+                .map(tag => (
+                  <Tag filter key={`${tag.type}_${tag.value?.address ?? tag.value}`} {...tag} size="sm" />
+                ))}
+            </Group>
           </Group>
         }
       />
     ),
-    [opportunity, aprColumn, tvlColumn, hideTags, className, rewardsColumn, icons, overflowing, ref],
+    [opportunity, aprColumn, tvlColumn, hideTags, className, rewardsColumn, icons, overflowing, ref, tags],
   );
 
   if (navigationMode === "supply")

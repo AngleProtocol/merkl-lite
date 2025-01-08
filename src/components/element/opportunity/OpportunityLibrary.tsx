@@ -1,16 +1,15 @@
 import type { Chain } from "@merkl/api";
-import { Box, Group, Icon, type Order, Text, Title } from "dappkit";
+import { Box, Group, type Order, Title } from "dappkit";
 import merklConfig from "merkl.config";
 import { useCallback, useMemo, useState } from "react";
-import { I18n } from "src/I18n";
 import type { Opportunity } from "src/api/services/opportunity/opportunity.model";
 import type { OpportunityView } from "src/config/opportunity";
 import useSearchParamState from "src/hooks/filtering/useSearchParamState";
 import OpportunityCell from "./OpportunityCell";
 import OpportunityFilters, { type OpportunityFilterProps } from "./OpportunityFilters";
-import OpportunityPagination from "./OpportunityPagination";
 import { OpportunityTable, type opportunityColumns } from "./OpportunityTable";
 import OpportunityTableRow from "./OpportunityTableRow";
+import Pagination from "./Pagination";
 
 export type Displays = "grid" | "list";
 
@@ -26,13 +25,23 @@ export default function OpportunityLibrary({
   opportunities,
   count,
   only,
-  exclude,
+  exclude = [],
   chains,
   protocols,
   hideFilters,
   forceView,
 }: OpportunityLibrary) {
   const sortable = ["apr", "tvl", "rewards"] as const satisfies typeof opportunityColumns;
+
+  // Merge global and local exclusions
+  const mergedExclusions = useMemo(() => {
+    // Get global exclusions from config
+    const globalExclusions = merklConfig?.opportunityLibrary.excludeFilters || [];
+    // Combine global and local exclusions
+    const combinedExclusions = [...globalExclusions, ...exclude];
+    // Remove duplicates
+    return Array.from(new Set(combinedExclusions));
+  }, [exclude]);
 
   const [sortIdAndOrder, setSortIdAndOrder] = useSearchParamState<[id: (typeof sortable)[number], order: Order]>(
     "sort",
@@ -49,7 +58,7 @@ export default function OpportunityLibrary({
     [sortable, setSortIdAndOrder],
   );
 
-  const [view, setView] = useState<OpportunityView>(forceView ?? merklConfig.opportunityLibraryDefaultView ?? "table");
+  const [view, setView] = useState<OpportunityView>(forceView ?? merklConfig.opportunityLibrary.defaultView ?? "table");
 
   const display = useMemo(() => {
     switch (view) {
@@ -66,9 +75,10 @@ export default function OpportunityLibrary({
             order={(sortIdAndOrder ?? [])?.[1]}
             sort={(sortIdAndOrder ?? [])?.[0] ?? "rewards"}
             onSort={onSort}
-            footer={count !== undefined && <OpportunityPagination count={count} />}>
+            footer={count !== undefined && <Pagination count={count} />}>
             {opportunities?.map(o => (
               <OpportunityTableRow
+                hideTags={merklConfig.opportunityLibrary.cells.hideTags}
                 navigationMode={merklConfig.opportunityNavigationMode}
                 key={`${o.chainId}_${o.type}_${o.identifier}`}
                 opportunity={o}
@@ -83,18 +93,17 @@ export default function OpportunityLibrary({
               {opportunities?.map(o => (
                 <OpportunityCell
                   navigationMode={merklConfig.opportunityNavigationMode}
-                  hideTags={merklConfig.opportunityCellHideTags}
+                  hideTags={merklConfig.opportunityLibrary.cells.hideTags}
                   key={`${o.chainId}_${o.type}_${o.identifier}`}
                   opportunity={o}
                 />
               ))}
-
-              {count !== undefined && (
-                <Box content="sm">
-                  <OpportunityPagination count={count} />
-                </Box>
-              )}
             </Group>
+            {count !== undefined && (
+              <Box content="sm" className="w-full">
+                <Pagination count={count} />
+              </Box>
+            )}
           </Group>
         );
     }
@@ -102,17 +111,12 @@ export default function OpportunityLibrary({
 
   return (
     <Group className="flex-col w-full">
-      {!!I18n.trad.get.pages.home.depositInformation && (
-        <Group className="border-1 rounded-lg p-lg border-accent-8 flex-wrap items-center">
-          <Text look="bold">
-            <Icon remix="RiInformation2Fill" className="inline mr-md text-2xl text-accent-11" />
-            {I18n.trad.get.pages.home.depositInformation}
-          </Text>
-        </Group>
-      )}
       {!hideFilters && (
         <Box content="sm" className="justify-between w-full overflow-x-scroll">
-          <OpportunityFilters {...{ only, exclude, chains, protocols, view, setView }} />
+          <OpportunityFilters
+            {...{ only, chains, protocols, view, setView }}
+            exclude={mergedExclusions} // Pass merged exclusions
+          />
         </Box>
       )}
       {display}

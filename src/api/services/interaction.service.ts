@@ -1,4 +1,4 @@
-import { api as clientApi } from "src/api";
+import { api as clientApi } from "src/api/index.client";
 import { fetchWithLogs } from "../utils";
 import { ZyfiService } from "./zyfi.service";
 

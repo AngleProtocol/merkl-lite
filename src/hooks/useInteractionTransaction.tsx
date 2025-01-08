@@ -3,7 +3,7 @@ import type { Token } from "@merkl/api";
 import type { InteractionTarget } from "@merkl/api/dist/src/modules/v4/interaction/interaction.model";
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { api as clientApi } from "src/api";
+import type { api as clientApi } from "src/api/index.client";
 import { InteractionService } from "src/api/services/interaction.service";
 
 type Payload = Parameters<typeof clientApi.v4.interaction.transaction.get>[0]["query"];

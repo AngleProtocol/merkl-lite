@@ -1,4 +1,4 @@
-import { api } from "../";
+import { api } from "../index.server";
 import { fetchWithLogs } from "../utils";
 
 export abstract class LiquidityService {
