@@ -1,6 +1,6 @@
 import type { Opportunity } from "@merkl/api";
 import config from "merkl.config";
-import { api } from "../../index.server";
+import { api } from "../../";
 import { fetchWithLogs } from "../../utils";
 
 export abstract class OpportunityService {

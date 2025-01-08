@@ -1,6 +1,6 @@
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { api as clientApi } from "src/api/index.client";
+import type { api as clientApi } from "src/api";
 import { InteractionService } from "src/api/services/interaction.service";
 import { create } from "zustand";
 

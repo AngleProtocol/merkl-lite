@@ -1,7 +1,7 @@
 import { Box, Button, Group, Hash, Icon, Input, Select, Title } from "packages/dappkit/src";
 import TransactionButton from "packages/dappkit/src/components/dapp/TransactionButton";
 import { Suspense, useMemo, useState } from "react";
-import type { api as clientApi } from "src/api/index.client";
+import type { api as clientApi } from "src/api";
 import useParticipate from "src/hooks/useParticipate";
 import { formatUnits } from "viem";
 import Token from "../token/Token";
