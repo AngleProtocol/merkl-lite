@@ -1,6 +1,6 @@
 import config from "merkl.config";
 import { DEFAULT_ITEMS_PER_PAGE } from "src/constants/pagination";
-import { api } from "../index.server";
+import { api } from "..";
 import { fetchWithLogs } from "../utils";
 
 export abstract class ProtocolService {

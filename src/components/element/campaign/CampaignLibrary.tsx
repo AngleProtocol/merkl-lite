@@ -6,12 +6,12 @@ import type { OpportunityWithCampaigns } from "src/api/services/opportunity/oppo
 import { CampaignTable } from "./CampaignTable";
 import CampaignTableRow from "./CampaignTableRow";
 
-export type IProps = {
+export type CampaignLibraryProps = {
   opportunity: OpportunityWithCampaigns;
   chain: Chain;
 };
 
-export default function CampaignLibrary({ opportunity, chain }: IProps) {
+export default function CampaignLibrary({ opportunity, chain }: CampaignLibraryProps) {
   const [showInactive, setShowInactive] = useState(false);
 
   const rows = useMemo(() => {

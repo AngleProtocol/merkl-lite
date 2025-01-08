@@ -1,5 +1,5 @@
 import { type ActionFunctionArgs, json } from "@remix-run/node";
-import { api } from "src/api/index.server";
+import { api } from "src/api";
 import { ZyfiService } from "src/api/services/zyfi.service";
 import { encodeFunctionData, parseAbi } from "viem";
 

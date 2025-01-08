@@ -8,14 +8,14 @@ import Token from "../token/Token";
 import User from "../user/User";
 import { LeaderboardRow } from "./LeaderboardTable";
 
-export type CampaignTableRowProps = Component<{
+export type LeaderboardTableRowProps = Component<{
   row: Awaited<ReturnType<typeof RewardService.getManyFromRequest>>["rewards"][0];
   total: bigint;
   rank: number;
   campaign: Campaign;
 }>;
 
-export default function LeaderboardTableRow({ row, rank, total, className, ...props }: CampaignTableRowProps) {
+export default function LeaderboardTableRow({ row, rank, total, className, ...props }: LeaderboardTableRowProps) {
   const { campaign } = props;
   const { chains } = useWalletContext();
 

@@ -7,13 +7,13 @@ import useSearchParamState from "src/hooks/filtering/useSearchParamState";
 const filters = ["search"] as const;
 type ProtocolFilter = (typeof filters)[number];
 
-export type OpportunityFilterProps = {
+export type ProtocolOpportunityFilterProps = {
   only?: ProtocolFilter[];
   chains?: Chain[];
   exclude?: ProtocolFilter[];
 };
 
-export default function ProtocolFilters(_props: OpportunityFilterProps) {
+export default function ProtocolFilters(_props: ProtocolOpportunityFilterProps) {
   const [search, setSearch] = useSearchParamState<string>(
     "search",
     v => v,

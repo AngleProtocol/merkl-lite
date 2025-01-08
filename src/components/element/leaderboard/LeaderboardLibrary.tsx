@@ -8,14 +8,14 @@ import Pagination from "../opportunity/Pagination";
 import { LeaderboardTable } from "./LeaderboardTable";
 import LeaderboardTableRow from "./LeaderboardTableRow";
 
-export type IProps = {
+export type LeaderboardLibraryProps = {
   leaderboard: Awaited<ReturnType<(typeof RewardService)["getManyFromRequest"]>>["rewards"];
   count?: number;
   total?: bigint;
   campaign: Campaign;
 };
 
-export default function LeaderboardLibrary(props: IProps) {
+export default function LeaderboardLibrary(props: LeaderboardLibraryProps) {
   const { leaderboard, count, total, campaign } = props;
   const [searchParams] = useSearchParams();
 

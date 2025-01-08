@@ -2,11 +2,11 @@ import type { Campaign } from "@merkl/api";
 import { Button, Divider, Group, Icon, Text, Value } from "packages/dappkit/src";
 import useCampaign from "src/hooks/resources/useCampaign";
 
-export type IProps = {
+export type CampaignTooltipTokenProps = {
   campaign: Campaign;
 };
 
-export default function CampaignTooltipToken({ campaign }: IProps) {
+export default function CampaignTooltipToken({ campaign }: CampaignTooltipTokenProps) {
   const { amount, amountUsd } = useCampaign(campaign);
 
   return (

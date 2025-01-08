@@ -95,7 +95,7 @@ export default function Participate({
                           size="sm"
                           look="bold"
                           format="0,0.###a">
-                          {Fmt.toNumber(inputToken?.balance, inputToken.decimals)}
+                          {Fmt.toNumber(inputToken?.balance, inputToken.decimals).toString()}
                         </Value>{" "}
                         {inputToken?.symbol}
                       </PrimitiveTag>

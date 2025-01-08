@@ -5,11 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 import HistoricalClaimsTableRow from "./HistoricalClaimsRow";
 import { HistoricalClaimsTable } from "./HistoricalClaimsTable";
 
-export type IProps = {
+export type HistoricalClaimsLibraryProps = {
   claims: Awaited<ReturnType<typeof ClaimsService.getForUser>>;
 };
 
-export default function HistoricalClaimsLibrary(props: IProps) {
+export default function HistoricalClaimsLibrary(props: HistoricalClaimsLibraryProps) {
   const { claims } = props;
 
   const rows = useMemo(() => {

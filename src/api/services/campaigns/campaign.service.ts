@@ -1,7 +1,7 @@
 import type { Campaign } from "@merkl/api";
 import config from "merkl.config";
 import { fetchWithLogs } from "src/api/utils";
-import { api } from "../../index.server";
+import { api } from "../..";
 
 export abstract class CampaignService {
   static async #fetch<R, T extends { data: R; status: number; response: Response }>(

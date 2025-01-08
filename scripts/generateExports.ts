@@ -33,7 +33,7 @@ async function listAllExports() {
       );
 
       return [
-        `/**\n*${dir}\n*/`,
+        `/**\n * ${dir}\n */`,
         dirFiles
           .map(([dir, filename, content]) => {
             const name = filename.split(".").slice(0, -1).join(".");

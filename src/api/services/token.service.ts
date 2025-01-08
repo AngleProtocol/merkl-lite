@@ -1,5 +1,5 @@
 import type { Token } from "@merkl/api";
-import { api } from "../index.server";
+import { api } from "..";
 import { fetchWithLogs } from "../utils";
 
 export abstract class TokenService {

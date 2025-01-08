@@ -21,7 +21,7 @@ export default function OpportunityParticipateModal({ opportunity, children }: O
             displayLinks
             displayOpportunity
             displayMode="deposit"
-            hideInteractor={config?.hideInteractor ? config.hideInteractor : true}
+            hideInteractor={!config?.deposit}
           />
           {!!config.supplyCredits && config.supplyCredits.length > 0 && (
             <Text look="bold" className="flex gap-md items-center mx-auto">

@@ -12,7 +12,7 @@ import Tag, { type TagTypes } from "../Tag";
 import AprModal from "../apr/AprModal";
 import OpportunityParticipateModal from "./OpportunityParticipateModal";
 
-export type OpportunityTableRowProps = {
+export type OpportunityCellProps = {
   hideTags?: (keyof TagTypes)[];
   opportunity: Opportunity;
 
@@ -23,7 +23,7 @@ export default function OpportunityCell({
   opportunity: opportunityRaw,
   hideTags,
   navigationMode,
-}: OpportunityTableRowProps) {
+}: OpportunityCellProps) {
   const { tags, link, icons, rewardsBreakdown, opportunity } = useOpportunity(opportunityRaw);
 
   const { ref, overflowing } = useOverflowingRef<HTMLHeadingElement>();
