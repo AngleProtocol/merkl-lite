@@ -2,7 +2,7 @@ import { Button, type Component, Icon, mergeClass } from "dappkit";
 import Time from "packages/dappkit/src/components/primitives/Time";
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
 import { useMemo } from "react";
-import type { ClaimsService } from "src/api/services/claims.service";
+import type { ClaimsService } from "src/modules/claim/claims.service";
 import Chain from "../chain/Chain";
 import Token from "../token/Token";
 import { HistoricalClaimsRow } from "./HistoricalClaimsTable";

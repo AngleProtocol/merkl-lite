@@ -20,9 +20,9 @@ import Collapsible from "packages/dappkit/src/components/primitives/Collapsible"
 import Time from "packages/dappkit/src/components/primitives/Time";
 import Tooltip from "packages/dappkit/src/components/primitives/Tooltip";
 import { type ReactNode, useCallback, useMemo, useState } from "react";
-import type { Opportunity } from "src/api/services/opportunity/opportunity.model";
 import EtherScan from "src/assets/images/etherscan.svg";
 import useCampaign from "src/hooks/resources/useCampaign";
+import type { Opportunity } from "src/modules/opportunity/opportunity.model";
 import { v4 as uuidv4 } from "uuid";
 import Tag from "../Tag";
 import Token from "../token/Token";

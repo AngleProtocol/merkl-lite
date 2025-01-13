@@ -2,7 +2,7 @@ import type { Campaign } from "@merkl/api";
 import { type Component, Group, PrimitiveTag, Text, Value, mergeClass } from "dappkit";
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
 import { useMemo } from "react";
-import type { RewardService } from "src/api/services/reward.service";
+import type { RewardService } from "src/modules/reward/reward.service";
 import { formatUnits, parseUnits } from "viem";
 import Token from "../token/Token";
 import User from "../user/User";

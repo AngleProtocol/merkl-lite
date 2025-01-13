@@ -1,6 +1,6 @@
 import { Group, Text, Title } from "dappkit";
 import { useMemo } from "react";
-import type { ClaimsService } from "src/api/services/claims.service";
+import type { ClaimsService } from "src/modules/claim/claims.service";
 import { v4 as uuidv4 } from "uuid";
 import HistoricalClaimsTableRow from "./HistoricalClaimsRow";
 import { HistoricalClaimsTable } from "./HistoricalClaimsTable";

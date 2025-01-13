@@ -5,9 +5,9 @@ import { Button, Divider, Dropdown, EventBlocker, Group, Hash, Icon, PrimitiveTa
 import type { Component, PrimitiveTagProps } from "dappkit";
 import merklConfig from "merkl.config";
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
-import type { Opportunity } from "src/api/services/opportunity/opportunity.model";
 import { actions } from "src/config/actions";
 import { statuses } from "src/config/status";
+import type { Opportunity } from "src/modules/opportunity/opportunity.model";
 
 export type TagTypes = {
   chain: Opportunity["chain"];

@@ -4,10 +4,10 @@ import moment from "moment";
 import { Group, Text, Value } from "packages/dappkit/src";
 import Time from "packages/dappkit/src/components/primitives/Time";
 import { type ReactNode, useMemo } from "react";
-import type { Campaign } from "src/api/services/campaigns/campaign.model";
-import type { Opportunity } from "src/api/services/opportunity/opportunity.model";
 import type { RuleType } from "src/components/element/campaign/rules/Rule";
 import Token from "src/components/element/token/Token";
+import type { Campaign } from "src/modules/campaigns/campaign.model";
+import type { Opportunity } from "src/modules/opportunity/opportunity.model";
 import { parseUnits } from "viem";
 
 export default function useCampaign(campaign: CampaignFromApi, opportunity?: Opportunity) {

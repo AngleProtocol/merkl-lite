@@ -1,8 +1,8 @@
 import config from "merkl.config";
 import { Box, Button, Group, Icon, Icons, Text, Title, Value } from "packages/dappkit/src";
 import { useMemo } from "react";
-import type { Opportunity } from "src/api/services/opportunity/opportunity.model";
 import useOpportunity from "src/hooks/resources/useOpportunity";
+import type { Opportunity } from "src/modules/opportunity/opportunity.model";
 import Tag from "../Tag";
 
 export type OpportunityShortCardProps = { opportunity: Opportunity; displayLinks?: boolean };

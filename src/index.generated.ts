@@ -104,17 +104,17 @@ export * from "./components/layout/ErrorContent";
 export * from "./components/layout/ErrorHeading";
 
 /**
- * api/services
+ * modules
  */
-export * from "./api/services/protocol.service";
-export * from "./api/services/interaction.service";
-export * from "./api/services/claims.service";
-export * from "./api/services/chain.service";
-export * from "./api/services/zyfi.service";
-export * from "./api/services/liquidity.service";
-export * from "./api/services/cache.service";
-export * from "./api/services/token.service";
-export * from "./api/services/reward.service";
+export * from "./modules/protocol/protocol.service";
+export * from "./modules/interaction/interaction.service";
+export * from "./modules/claim/claims.service";
+export * from "./modules/chain/chain.service";
+export * from "./modules/zyfi/zyfi.service";
+export * from "./modules/liquidity/liquidity.service";
+export * from "./modules/cache/cache.service";
+export * from "./modules/token/token.service";
+export * from "./modules/reward/reward.service";
 
 /**
  * components/element/opportunity
@@ -248,10 +248,10 @@ export { default as TokenTableRow } from "./components/element/token/TokenTableR
 export * from "./components/element/token/TokenTable";
 
 /**
- * api/services/campaigns
+ * modules/campaigns
  */
-export * from "./api/services/campaigns/campaign.model";
-export * from "./api/services/campaigns/campaign.service";
+export * from "./modules/campaigns/campaign.model";
+export * from "./modules/campaigns/campaign.service";
 
 /**
  * components/element/protocol
@@ -264,10 +264,10 @@ export * from "./components/element/protocol/ProtocolFilters";
 export { default as ProtocolFilters } from "./components/element/protocol/ProtocolFilters";
 
 /**
- * api/services/opportunity
+ * modules/opportunity
  */
-export * from "./api/services/opportunity/opportunity.model";
-export * from "./api/services/opportunity/opportunity.service";
+export * from "./modules/opportunity/opportunity.model";
+export * from "./modules/opportunity/opportunity.service";
 
 /**
  * components/element/campaign

@@ -4,7 +4,7 @@ import type { InteractionTarget } from "@merkl/api/dist/src/modules/v4/interacti
 import { useWalletContext } from "packages/dappkit/src/context/Wallet.context";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { api as clientApi } from "src/api";
-import { InteractionService } from "src/api/services/interaction.service";
+import { InteractionService } from "src/modules/interaction/interaction.service";
 
 type Payload = Parameters<typeof clientApi.v4.interaction.transaction.get>[0]["query"];
 type Transaction = Awaited<ReturnType<typeof clientApi.v4.interaction.transaction.get>>["data"];

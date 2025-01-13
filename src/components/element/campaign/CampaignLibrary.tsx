@@ -2,7 +2,7 @@ import type { Chain } from "@merkl/api";
 import { Box, Button, Group, Icon, Text, Title } from "dappkit";
 import moment from "moment";
 import { useMemo, useState } from "react";
-import type { OpportunityWithCampaigns } from "src/api/services/opportunity/opportunity.model";
+import type { OpportunityWithCampaigns } from "src/modules/opportunity/opportunity.model";
 import { CampaignTable } from "./CampaignTable";
 import CampaignTableRow from "./CampaignTableRow";
 

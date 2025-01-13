@@ -1,6 +1,6 @@
 import config from "merkl.config";
 import { useMemo } from "react";
-import type { Opportunity } from "src/api/services/opportunity/opportunity.model";
+import type { Opportunity } from "src/modules/opportunity/opportunity.model";
 import OpportunityCell from "./OpportunityCell";
 
 type IProps = {

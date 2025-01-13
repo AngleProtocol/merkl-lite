@@ -2,7 +2,7 @@ import type { Campaign } from "@merkl/api";
 import { useSearchParams } from "@remix-run/react";
 import { Group, Text, Title } from "dappkit";
 import { useMemo } from "react";
-import type { RewardService } from "src/api/services/reward.service";
+import type { RewardService } from "src/modules/reward/reward.service";
 import { v4 as uuidv4 } from "uuid";
 import Pagination from "../opportunity/Pagination";
 import { LeaderboardTable } from "./LeaderboardTable";
