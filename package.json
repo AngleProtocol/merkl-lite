@@ -1,10 +1,12 @@
 {
-  "name": "merkl-lite",
-  "private": true,
+  "name": "merkl-app",
+  "private": false,
   "sideEffects": false,
   "type": "module",
+  "main": "src/index.generated.ts",
   "scripts": {
     "start": "bun run scripts/start.ts",
+    "generate:exports": "bun run scripts/generateExports.ts",
     "build": "remix vite:build",
     "dev": "remix vite:dev --host",
     "lint": "biome check --fix ./src ./*.ts",
